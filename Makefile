@@ -18,7 +18,7 @@ OBJECT = $(SRC:%.cpp=%.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADERS = 
+HEADERS = vector.hpp
 
 all: $(NAME)
 
