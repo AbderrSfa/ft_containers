@@ -1,6 +1,4 @@
-stack
-vector
-map
+docs/*
 
 # Prerequisites
 *.d
