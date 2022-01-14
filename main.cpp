@@ -3,6 +3,9 @@
 #include <iostream>
 
 int     main() {
-	ft::iterator<int, std::forward_iterator_tag>	it;
-	(void)it;
+	std::vector<int>::iterator	tis;
+	std::vector<int>::iterator	tis2;
+	tis++;
+	ft::vectorIter<ft::iterator<std::forward_iterator_tag, int> >	g;
+	(void)g;
 }
