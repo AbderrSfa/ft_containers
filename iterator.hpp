@@ -63,9 +63,9 @@ namespace ft
 			reference	operator*() const 					{ return *this->_m_ptr; }
 			pointer		operator->() const 					{ return this->_m_ptr; }
 			vectorIter&	operator++() 						{ ++this->_m_ptr; return *this; }
-			vectorIter	operator++(int) 					{ vectorIter tmp(*this); ++(*this); return tmp; }
+			vectorIter	operator++(int) 					{ return vectorIter(this->_m_ptr++); }
 			vectorIter&	operator--() 						{ --this->_m_ptr; return *this; }
-			vectorIter	operator--(int) 					{ vectorIter tmp(*this); --(*this); return tmp; }
+			vectorIter	operator--(int) 					{ return vectorIter(this->_m_ptr--); }
 			vectorIter	operator+(difference_type n) const	{ return vectorIter(this->_m_ptr + n); }
 			vectorIter	operator-(difference_type n) const	{ return vectorIter(this->_m_ptr - n); }
 			vectorIter&	operator+=(difference_type n) 		{ this->_m_ptr += n; return *this; }
