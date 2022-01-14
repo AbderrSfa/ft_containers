@@ -26,7 +26,7 @@ $(NAME): $(OBJECT)
 	clang++ $(OBJECT) -o $(NAME)
 
 %.o:%.cpp $(HEADERS)
-	clang++ $(FLAGS) -std=c++98 -c $<
+	clang++ -std=c++98 -c $<
 
 clean:
 	/bin/rm -f $(OBJECT)
