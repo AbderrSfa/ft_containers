@@ -1,11 +1,12 @@
 #include "iterator.hpp"
+#include "vector.hpp"
 #include <vector>
 #include <iostream>
 
 int     main() {
-	std::vector<int>::iterator	tis;
-	std::vector<int>::iterator	tis2;
-	tis++;
-	ft::vectorIter<ft::iterator<std::forward_iterator_tag, int> >	g;
+    ft::vector<int> f;
+	ft::VectorIt<ft::iterator<std::forward_iterator_tag, int> >	g;
+    ft::vector<float>::iterator it;
+    ft::vector<float>::iterator ite;
 	(void)g;
 }

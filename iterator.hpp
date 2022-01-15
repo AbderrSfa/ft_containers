@@ -51,7 +51,7 @@ namespace ft
 	};
 
 	template <class T>
-	class vectorIter : public iterator<std::random_access_iterator_tag, T> {
+	class VectorIt : public iterator<std::random_access_iterator_tag, T> {
 		public:
 			typedef T    											iterator_type;
 			typedef typename iterator_traits<T>::difference_type	difference_type;
@@ -60,28 +60,44 @@ namespace ft
 			typedef typename iterator_traits<T>::reference			reference;
 			typedef typename iterator_traits<T>::iterator_category	iterator_category;
 
-			vectorIter() : _m_ptr() {};
-			explicit vectorIter(const iterator_type& _i) : _m_ptr(_i) {};
+			VectorIt() : _m_ptr() {};
+			explicit VectorIt(const iterator_type& _i) : _m_ptr(_i) {};
 			template <typename Iter>
-			vectorIter(const vectorIter<Iter>& _i) : _m_ptr(_i.base()) {};
+			VectorIt(const VectorIt<Iter>& _i) : _m_ptr(_i.base()) {};
 
 			const iterator_type&	base() const						{ return this->_m_ptr; };
 			reference				operator*() const 					{ return *this->_m_ptr; };
 			pointer					operator->() const 					{ return this->_m_ptr; };
-			vectorIter&				operator++() 						{ ++this->_m_ptr; return *this; };
-			vectorIter				operator++(int) 					{ return vectorIter(this->_m_ptr++); };
-			vectorIter&				operator--() 						{ --this->_m_ptr; return *this; };
-			vectorIter				operator--(int) 					{ return vectorIter(this->_m_ptr--); };
-			vectorIter				operator+(difference_type n) const	{ return vectorIter(this->_m_ptr + n); };
-			vectorIter				operator-(difference_type n) const	{ return vectorIter(this->_m_ptr - n); };
-			vectorIter&				operator+=(difference_type n) 		{ this->_m_ptr += n; return *this; };
-			vectorIter&				operator-=(difference_type n) 		{ this->_m_ptr -= n; return *this; };
+			VectorIt&				operator++() 						{ ++this->_m_ptr; return *this; };
+			VectorIt				operator++(int) 					{ return VectorIt(this->_m_ptr++); };
+			VectorIt&				operator--() 						{ --this->_m_ptr; return *this; };
+			VectorIt				operator--(int) 					{ return VectorIt(this->_m_ptr--); };
+			VectorIt				operator+(difference_type n) const	{ return VectorIt(this->_m_ptr + n); };
+			VectorIt				operator-(difference_type n) const	{ return VectorIt(this->_m_ptr - n); };
+			VectorIt&				operator+=(difference_type n) 		{ this->_m_ptr += n; return *this; };
+			VectorIt&				operator-=(difference_type n) 		{ this->_m_ptr -= n; return *this; };
 			reference				operator[](difference_type n) const	{ return this->_m_ptr[n]; };
 
 		private:
 			iterator_type	_m_ptr;
-
 	};
+
+    template <class Iterator>
+    bool    operator==(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() == rhs.base()); };
+    template <class Iterator>
+    bool    operator!=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() != rhs.base()); };
+    template <class Iterator>
+    bool    operator<(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() < rhs.base()); };
+    template <class Iterator>
+    bool    operator>(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() > rhs.base()); };
+    template <class Iterator>
+    bool    operator<=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() <= rhs.base()); };
+    template <class Iterator>
+    bool    operator>=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() >= rhs.base()); };
+    template <class Iterator>
+    VectorIt<Iterator>  operator+(typename VectorIt<Iterator>::difference_type n, const VectorIt<Iterator>& i) { return VectorIt<Iterator>(i.base() + n); };
+    template <class Iterator>
+    typename VectorIt<Iterator>::difference_type    operator-(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() - rhs.base()); };
 }
 
 #endif
