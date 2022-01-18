@@ -1,8 +1,8 @@
 #include "iterator.hpp"
+#include "reverse_iterator.hpp"
 #include "vector.hpp"
 #include <vector>
 #include <iostream>
-#include <typeinfo>
 
 int     main() {
     ft::vector<int>   f;
@@ -13,4 +13,5 @@ int     main() {
     std::cout << "capacity:\t" << f.capacity() << std::endl;
     std::cout << "max_size:\t" << f.max_size() << std::endl;
     std::cout << "empty:\t\t" << f.empty() << std::endl;
+    ft::vector<int>::reverse_iterator   lol;
 }

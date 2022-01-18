@@ -32,6 +32,8 @@ namespace ft
             typedef typename allocator_type::size_type				size_type;
             typedef VectorIt<pointer>		                        iterator;
             typedef VectorIt<const_pointer>	                        const_iterator;
+            typedef VectorRevIt<iterator>                           reverse_iterator;
+            typedef VectorRevIt<const_iterator>                     const_reverse_iterator;
 
         private:
             value_type* _m_data;

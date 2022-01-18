@@ -60,9 +60,13 @@ namespace ft
 			typedef typename iterator_traits<T>::reference			reference;
 			typedef typename iterator_traits<T>::iterator_category	iterator_category;
 
+		private:
+			iterator_type	_m_ptr;
+
+        public:
 			VectorIt() : _m_ptr() {};
 			explicit VectorIt(const iterator_type& _i) : _m_ptr(_i) {};
-			template <typename Iter>
+			template <class Iter>
 			VectorIt(const VectorIt<Iter>& _i) : _m_ptr(_i.base()) {};
 
 			const iterator_type&	base() const						{ return this->_m_ptr; };
@@ -77,9 +81,6 @@ namespace ft
 			VectorIt&				operator+=(difference_type n) 		{ this->_m_ptr += n; return *this; };
 			VectorIt&				operator-=(difference_type n) 		{ this->_m_ptr -= n; return *this; };
 			reference				operator[](difference_type n) const	{ return this->_m_ptr[n]; };
-
-		private:
-			iterator_type	_m_ptr;
 	};
 
     template <class Iterator>
