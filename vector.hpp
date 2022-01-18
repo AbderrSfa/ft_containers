@@ -33,7 +33,32 @@ namespace ft
             typedef VectorIt<pointer>		                        iterator;
             typedef VectorIt<const_pointer>	                        const_iterator;
 
+        private:
+            value_type* _m_data;
+            size_type   _size;
+            size_type   _capacity;
 
+        public:
+            /* Constructors */
+            vector(): _m_data(), _size(0), _capacity(0) {};
+
+            /* Iterators */
+            iterator        begin() { return iterator(this->_m_data); };
+            const_iterator  begin() const { return const_iterator(this->_m_data); };
+            iterator        end() { return iterator(this->_m_data + this->_size); };
+            const_iterator  end() const { return const_iterator(this->_m_data + this->_size); };
+            //reverse_iterator rbegin() {};
+            //const_reverse_iterator rbegin() const {};
+            //reverse_iterator rend();
+            //const_reverse_iterator rend() const;
+
+            /* Capacity */
+            size_type   size() const { return this->_size; };
+            size_type   max_size() const { return allocator_type().max_size(); };
+            //void resize (size_type n, value_type val = value_type());
+            size_type   capacity() const { return this->_capacity; };
+            bool        empty() const { return this->_size; };
+            //void reserve (size_type n);
     };
 }
 
