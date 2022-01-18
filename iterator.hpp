@@ -71,15 +71,15 @@ namespace ft
 
 			const iterator_type&	base() const						{ return this->_m_ptr; };
 			reference				operator*() const 					{ return *this->_m_ptr; };
-			pointer					operator->() const 					{ return this->_m_ptr; };
+			VectorIt				operator+(difference_type n) const	{ return VectorIt(this->_m_ptr + n); };
 			VectorIt&				operator++() 						{ ++this->_m_ptr; return *this; };
 			VectorIt				operator++(int) 					{ return VectorIt(this->_m_ptr++); };
+			VectorIt&				operator+=(difference_type n) 		{ this->_m_ptr += n; return *this; };
+			VectorIt				operator-(difference_type n) const	{ return VectorIt(this->_m_ptr - n); };
 			VectorIt&				operator--() 						{ --this->_m_ptr; return *this; };
 			VectorIt				operator--(int) 					{ return VectorIt(this->_m_ptr--); };
-			VectorIt				operator+(difference_type n) const	{ return VectorIt(this->_m_ptr + n); };
-			VectorIt				operator-(difference_type n) const	{ return VectorIt(this->_m_ptr - n); };
-			VectorIt&				operator+=(difference_type n) 		{ this->_m_ptr += n; return *this; };
 			VectorIt&				operator-=(difference_type n) 		{ this->_m_ptr -= n; return *this; };
+			pointer					operator->() const 					{ return this->_m_ptr; };
 			reference				operator[](difference_type n) const	{ return this->_m_ptr[n]; };
 	};
 
@@ -90,9 +90,9 @@ namespace ft
     template <class Iterator>
     bool    operator<(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() < rhs.base()); };
     template <class Iterator>
-    bool    operator>(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() > rhs.base()); };
-    template <class Iterator>
     bool    operator<=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() <= rhs.base()); };
+    template <class Iterator>
+    bool    operator>(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() > rhs.base()); };
     template <class Iterator>
     bool    operator>=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() >= rhs.base()); };
     template <class Iterator>
