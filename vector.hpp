@@ -49,10 +49,10 @@ namespace ft
             const_iterator  begin() const { return const_iterator(this->_m_data); };
             iterator        end() { return iterator(this->_m_data + this->_size); };
             const_iterator  end() const { return const_iterator(this->_m_data + this->_size); };
-            //reverse_iterator rbegin() {};
-            //const_reverse_iterator rbegin() const {};
-            //reverse_iterator rend();
-            //const_reverse_iterator rend() const;
+            reverse_iterator rbegin() { return reverse_iterator(this->end()); };
+            const_reverse_iterator rbegin() const { return const_reverse_iterator(this->end()); };
+            reverse_iterator rend() { return reverse_iterator(this->begin()); } ;
+            const_reverse_iterator rend() const { return const_reverse_iterator(this->begin()); };
 
             /* Capacity */
             size_type   size() const { return this->_size; };
