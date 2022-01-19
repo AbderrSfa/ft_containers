@@ -14,6 +14,8 @@
 # define VECTOR_HPP
 
 # include <iostream>
+# include <cstdlib>
+# include <string>
 # include "iterator.hpp"
 
 namespace ft
@@ -61,6 +63,32 @@ namespace ft
             size_type   capacity() const    { return this->_capacity; };
             bool        empty() const       { return this->_size; };
             //void reserve (size_type n);
+
+        protected:
+            void    _range_check(size_type n) const
+            {
+                if (n >= this->size()) {
+                    std::string exception = "vector::_M_range_check: n (which is ";
+                    exception.append(std::to_string(n));
+                    exception.append(") >= this->size() (which is ");
+                    exception.append(std::to_string(this->size()));
+                    exception.append(")");
+                    throw std::out_of_range(exception);
+                }
+            };
+
+        public:
+            /* Element access */
+            reference       operator[](size_type n)         { return *(this->_m_data + n); };
+            const_reference operator[](size_type n) const   { return *(this->_m_data + n); };
+            reference       at(size_type n)                 { _range_check(n); return (*this)[n]; };
+            const_reference at(size_type n) const           { _range_check(n); return (*this)[n]; };
+            reference       front()                         { return *this->begin(); };
+            const_reference front() const                   { return *this->begin(); };
+            reference       back()                          { return *(this->end() - 1); };
+            const_reference back() const                    { return *(this->end() - 1); };
+
+            /* Modifiers */
     };
 }
 
