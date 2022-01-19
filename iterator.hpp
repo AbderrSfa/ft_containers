@@ -84,21 +84,36 @@ namespace ft
 	};
 
     template <class Iterator>
-    bool    operator==(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() == rhs.base()); };
+    bool    operator==(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() == rhs.base()); };
+
     template <class Iterator>
-    bool    operator!=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() != rhs.base()); };
+    bool    operator!=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() != rhs.base()); };
+
     template <class Iterator>
-    bool    operator<(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() < rhs.base()); };
+    bool    operator<(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() < rhs.base()); };
+
     template <class Iterator>
-    bool    operator<=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() <= rhs.base()); };
+    bool    operator<=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() <= rhs.base()); };
+
     template <class Iterator>
-    bool    operator>(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() > rhs.base()); };
+    bool    operator>(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() > rhs.base()); };
+
     template <class Iterator>
-    bool    operator>=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() >= rhs.base()); };
+    bool    operator>=(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() >= rhs.base()); };
+
     template <class Iterator>
-    VectorIt<Iterator>  operator+(typename VectorIt<Iterator>::difference_type n, const VectorIt<Iterator>& i) { return VectorIt<Iterator>(i.base() + n); };
+    VectorIt<Iterator>  operator+(typename VectorIt<Iterator>::difference_type n, const VectorIt<Iterator>& i)
+        { return VectorIt<Iterator>(i.base() + n); };
+
     template <class Iterator>
-    typename VectorIt<Iterator>::difference_type    operator-(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs) { return (lhs.base() - rhs.base()); };
+    typename VectorIt<Iterator>::difference_type    operator-(const VectorIt<Iterator>& lhs, const VectorIt<Iterator>& rhs)
+        { return (lhs.base() - rhs.base()); };
 }
 
 #endif

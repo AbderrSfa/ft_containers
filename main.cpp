@@ -14,4 +14,8 @@ int     main() {
     std::cout << "max_size:\t" << f.max_size() << std::endl;
     std::cout << "empty:\t\t" << f.empty() << std::endl;
     ft::vector<int>::reverse_iterator   lol;
+
+    std::vector<int>    vec;
+
+    vec[0] = 5;
 }

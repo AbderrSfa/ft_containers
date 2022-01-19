@@ -42,7 +42,7 @@ namespace ft
 
         public:
             /* Constructors */
-            vector(): _m_data(), _size(0), _capacity(0) {};
+            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(0) {};
 
             /* Iterators */
             iterator                begin()         { return iterator(this->_m_data); };
