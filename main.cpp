@@ -5,15 +5,27 @@
 #include <iostream>
 
 int     main() {
-/*    ft::vector<int>   f;
+    ft::vector<int>   vec;
 
-    std::cout << "size:\t\t" << f.size() << std::endl;
-    std::cout << "capacity:\t" << f.capacity() << std::endl;
-    std::cout << "max_size:\t" << f.max_size() << std::endl;
-    std::cout << "empty:\t\t" << f.empty() << std::endl;
-*/
-    ft::vector<int>    vec;
+/*    std::cout << "size:\t\t" << vec.size() << std::endl;
+    std::cout << "capacity:\t" << vec.capacity() << std::endl;
+    std::cout << "max_size:\t" << vec.max_size() << std::endl;
+    std::cout << "empty:\t\t" << vec.empty() << std::endl;*/
 
-    std::cout << vec.back();
-    
+/*    std::cout << vec.size() << std::endl;
+    vec.push_back(5);
+    std::cout << vec.size() << std::endl;
+    vec.pop_back();
+    std::cout << vec.size() << std::endl;
+    std::cout << vec[0] << std::endl;*/
+
+    vec.push_back(5);
+    vec.push_back(10);
+    std::cout << vec[0] << std::endl;
+    std::cout << vec[1] << std::endl;
+    std::cout << vec.size() << std::endl;
+    vec.pop_back();
+    std::cout << vec[0] << std::endl;
+    std::cout << vec[1] << std::endl;
+    std::cout << vec.size() << std::endl;
 }

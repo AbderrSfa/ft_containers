@@ -43,8 +43,19 @@ namespace ft
             size_type   _capacity;
 
         public:
-            /* Constructors */
-            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(0) {};
+            /* Constructors - Destructor - Assignment operator */
+            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(10)
+            {
+                this->_m_data = allocator_type().allocate(this->capacity());
+            };
+            explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {};
+            template <class InputIterator>
+            vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
+            vector (const vector& x);
+
+            ~vector() {};
+
+            vector& operator=(const vector& x) {};
 
             /* Iterators */
             iterator                begin()         { return iterator(this->_m_data); };
@@ -89,6 +100,24 @@ namespace ft
             const_reference back() const                    { return *(this->end() - 1); };
 
             /* Modifiers */
+            void    push_back(const value_type& val)
+            {
+                if ((this->size() + 1) > this->capacity())
+                    std::cout << "Finawa ghadi" << std::endl;
+                else
+                {
+                    allocator_type().construct(this->_m_data + this->size(), val);
+                    this->_size++;
+                }
+            };
+            void    pop_back()
+            {
+                allocator_type().destroy(this->_m_data + (this->size() - 1));
+                this->_size--;
+            };
+
+            /* Allocator */
+            allocator_type  get_allocator() const { return allocator_type(); };
     };
 }
 
