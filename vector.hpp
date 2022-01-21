@@ -48,14 +48,14 @@ namespace ft
             {
                 this->_m_data = allocator_type().allocate(this->capacity());
             };
-            explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {};
-            template <class InputIterator>
-            vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
-            vector (const vector& x);
+            //explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {};
+            //template <class InputIterator>
+            //vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
+            //vector (const vector& x);
 
-            ~vector() {};
+            //~vector() {};
 
-            vector& operator=(const vector& x) {};
+            //vector& operator=(const vector& x) {};
 
             /* Iterators */
             iterator                begin()         { return iterator(this->_m_data); };
@@ -115,6 +115,14 @@ namespace ft
                 allocator_type().destroy(this->_m_data + (this->size() - 1));
                 this->_size--;
             };
+			void	clear()
+			{
+				for (size_t i = this->size(); i > 0; i--)
+				{
+					allocator_type().destroy(this->_m_data + (this->size() - 1));
+					this->_size--;
+				}
+			};
 
             /* Allocator */
             allocator_type  get_allocator() const { return allocator_type(); };
