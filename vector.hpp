@@ -44,9 +44,10 @@ namespace ft
 
         public:
             /* Constructors - Destructor - Assignment operator */
-            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(10)
+            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(0)
             {
-                this->_m_data = allocator_type().allocate(this->capacity());
+				if (this->capacity())
+                	this->_m_data = allocator_type().allocate(this->capacity());
             };
             //explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {};
             //template <class InputIterator>
@@ -75,17 +76,14 @@ namespace ft
             bool        empty() const       { return this->_size; };
             void reserve (size_type n)
 			{
+				//There's a memory leak in reserve
 				if (n > this->capacity())
 				{
 					value_type*	tmp = allocator_type().allocate(n);
 					for (size_t i = 0; i < this->size(); i++)
-					{
 						allocator_type().construct(tmp + i, this->_m_data[i]);
-					}
 					for (size_t i = 0; i < this->size(); i++)
-					{
 						allocator_type().destroy(this->_m_data + i);
-					}
 					allocator_type().deallocate(this->_m_data, this->capacity());
 					this->_capacity = n;
 					this->_m_data = tmp;
@@ -134,11 +132,9 @@ namespace ft
             };
 			void	clear()
 			{
-				for (size_t i = this->size(); i > 0; i--)
-				{
-					allocator_type().destroy(this->_m_data + (this->size() - 1));
-					this->_size--;
-				}
+				for (size_t i = 0; i < this->size(); i++)
+					allocator_type().destroy(this->_m_data + i);
+				this->_size = 0;
 			};
 
             /* Allocator */
