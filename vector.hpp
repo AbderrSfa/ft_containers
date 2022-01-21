@@ -44,17 +44,23 @@ namespace ft
 
         public:
             /* Constructors - Destructor - Assignment operator */
-            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(0)
+            explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(10)
             {
 				if (this->capacity())
-                	this->_m_data = allocator_type().allocate(this->capacity());
-            };
+					this->_m_data = allocator_type().allocate(this->capacity());
+			};
             //explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {};
             //template <class InputIterator>
             //vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
             //vector (const vector& x);
 
-            //~vector() {};
+            ~vector()
+			{
+				for (size_t i = 0; i < this->size(); i++)
+					allocator_type().destroy(this->_m_data + i);
+				if (this->capacity())
+					allocator_type().deallocate(this->_m_data, this->capacity());
+			};
 
             //vector& operator=(const vector& x) {};
 
