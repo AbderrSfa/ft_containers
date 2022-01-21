@@ -73,7 +73,24 @@ namespace ft
             //void resize (size_type n, value_type val = value_type());
             size_type   capacity() const    { return this->_capacity; };
             bool        empty() const       { return this->_size; };
-            //void reserve (size_type n);
+            void reserve (size_type n)
+			{
+				if (n > this->capacity())
+				{
+					value_type*	tmp = allocator_type().allocate(n);
+					for (size_t i = 0; i < this->size(); i++)
+					{
+						allocator_type().construct(tmp + i, this->_m_data[i]);
+					}
+					for (size_t i = 0; i < this->size(); i++)
+					{
+						allocator_type().destroy(this->_m_data + i);
+					}
+					allocator_type().deallocate(this->_m_data, this->capacity());
+					this->_capacity = n;
+					this->_m_data = tmp;
+				}
+			};
 
         protected:
             void    _range_check(size_type n) const

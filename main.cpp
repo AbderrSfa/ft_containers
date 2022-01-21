@@ -22,11 +22,20 @@ int main()
 
 	vec.push_back(5);
 	vec.push_back(10);
-	std::cout << vec.size() << std::endl;
+	vec.push_back(15);
+	vec.push_back(20);
 	std::cout << vec[0] << std::endl;
 	std::cout << vec[1] << std::endl;
-	vec.clear();
+	std::cout << vec[2] << std::endl;
+	std::cout << vec[3] << std::endl;
 	std::cout << vec.size() << std::endl;
+	std::cout << vec.capacity() << std::endl;
+	std::cout << "==================" << std::endl;
+	vec.reserve(20);
 	std::cout << vec[0] << std::endl;
 	std::cout << vec[1] << std::endl;
+	std::cout << vec[2] << std::endl;
+	std::cout << vec[3] << std::endl;
+	std::cout << vec.size() << std::endl;
+	std::cout << vec.capacity() << std::endl;
 }
