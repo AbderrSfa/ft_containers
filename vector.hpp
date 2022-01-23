@@ -75,15 +75,31 @@ namespace ft
 				for (size_t i = this->size(); i < n; i++)
 					allocator_type().construct(this->_m_data + i, val);
 			};
+			void	_fill_vector_elements(size_type n)
+			{
+				for (size_t i = 0; i < n; i++)
+					allocator_type().construct(this->_m_data + i, val);
+			};
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit vector(const allocator_type& alloc = allocator_type()): _m_data(), _size(0), _capacity(0)
+			explicit vector(const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0)
 			{
 				if (this->capacity())
 					this->_m_data = allocator_type().allocate(this->capacity());
 			};
-			//explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) {};
+			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+			{
+				if (n > this->max_size())
+					throw std::length_error("cannot create ft::vector larger than max_size()");
+				if (n)
+				{
+					this->_m_data = allocator_type().allocate(n);
+					_fill_vector_elements(n);
+				}
+				this->_size = n;
+				this->_capacity = n;
+			};
 			//template <class InputIterator>
 			//vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
 			//vector (const vector& x);
