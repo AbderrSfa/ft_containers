@@ -65,6 +65,16 @@ namespace ft
 				allocator_type().deallocate(this->_m_data, this->capacity());
 				return tmp;
 			};
+			void	_erase_end_elements(size_type n)
+			{
+				for (size_t i = n; i < this->size(); i++)
+					allocator_type().destroy(this->_m_data + i);
+			};
+			void	_append_elements(size_type n, value_type val)
+			{
+				for (size_t i = this->size(); i < n; i++)
+					allocator_type().construct(this->_m_data + i, val);
+			};
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
@@ -101,7 +111,18 @@ namespace ft
 			/* Capacity */
 			size_type   size() const        { return this->_size; };
 			size_type   max_size() const    { return allocator_type().max_size(); };
-			//void resize (size_type n, value_type val = value_type());
+			void resize (size_type n, value_type val = value_type())
+			{
+				if (n < this->size())
+					_erase_end_elements(n);
+				if (n > this->size())
+				{
+					if (n > this->capacity())
+						this->reserve(n);
+					_append_elements(n, val);
+				}
+				this->_size = n;
+			};
 			size_type   capacity() const    { return this->_capacity; };
 			bool        empty() const       { return this->_size; };
 			void		reserve(size_type n)

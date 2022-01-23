@@ -6,35 +6,37 @@
 
 int main()
 {
-	std::cout << "========== OG ==========" << std::endl;
-	std::vector<int> std_vec;
+	{
+		std::cout << "========== OG ==========" << std::endl;
+		std::vector<int> vec;
+		vec.push_back(1);
+		vec.push_back(2);
+		vec.push_back(3);
+		vec.push_back(4);
+		vec.push_back(5);
+		vec.resize(10, 8);
 
-	std_vec.reserve(3);
-	std_vec.push_back(1);
-	std::cout << "size: " << std_vec.size() << " capacity: " << std_vec.capacity() << std::endl;
-	std_vec.push_back(2);
-	std::cout << "size: " << std_vec.size() << " capacity: " << std_vec.capacity() << std::endl;
-	std_vec.push_back(2);
-	std_vec.push_back(2);
-	std::cout << "size: " << std_vec.size() << " capacity: " << std_vec.capacity() << std::endl;
-	std_vec.push_back(2);
-	std::cout << "size: " << std_vec.size() << " capacity: " << std_vec.capacity() << std::endl;
-	for (size_t i = 0; i < 7; i++)
-		std::cout << std_vec[i] << std::endl;
+		for (size_t i = 0; i < vec.size(); i++)
+		{
+			std::cout << vec[i] << std::endl;
+		}
+		std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
+	}
 
-	std::cout << "========== MINE ==========" << std::endl;
-	ft::vector<int> ft_vec;
+	{
+		std::cout << "========== MINE ==========" << std::endl;
+		ft::vector<int> vec;
+		vec.push_back(1);
+		vec.push_back(2);
+		vec.push_back(3);
+		vec.push_back(4);
+		vec.push_back(5);
+		vec.resize(10);
 
-	ft_vec.reserve(3);
-	ft_vec.push_back(1);
-	std::cout << "size: " << ft_vec.size() << " capacity: " << ft_vec.capacity() << std::endl;
-	ft_vec.push_back(2);
-	std::cout << "size: " << ft_vec.size() << " capacity: " << ft_vec.capacity() << std::endl;
-	ft_vec.push_back(2);
-	ft_vec.push_back(2);
-	std::cout << "size: " << ft_vec.size() << " capacity: " << ft_vec.capacity() << std::endl;
-	ft_vec.push_back(2);
-	std::cout << "size: " << ft_vec.size() << " capacity: " << ft_vec.capacity() << std::endl;
-	for (size_t i = 0; i < 7; i++)
-		std::cout << ft_vec[i] << std::endl;
+		for (size_t i = 0; i < vec.size(); i++)
+		{
+			std::cout << vec[i] << std::endl;
+		}
+		std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
+	}
 }
