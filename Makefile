@@ -18,6 +18,8 @@ OBJECT = $(SRC:%.cpp=%.o)
 
 FLAGS = -Wall -Wextra -Werror
 
+CPP_STANDARD = -std=c++98
+
 HEADERS = iterator.hpp reverse_iterator.hpp vector.hpp
 
 all: $(NAME)
@@ -33,5 +35,6 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(NAME)
+	/bin/rm -rf .vscode
 
 re: fclean all

@@ -62,7 +62,8 @@ namespace ft
 					allocator_type().construct(tmp + i, this->_m_data[i]);
 				for (size_t i = 0; i < this->size(); i++)
 					allocator_type().destroy(this->_m_data + i);
-				allocator_type().deallocate(this->_m_data, this->capacity());
+				if (this->_m_data)
+					allocator_type().deallocate(this->_m_data, this->capacity());
 				return tmp;
 			};
 			void	_erase_end_elements(size_type n)
@@ -83,12 +84,12 @@ namespace ft
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit vector(const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0)
+			explicit vector(const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
 			{
 				if (this->capacity())
 					this->_m_data = allocator_type().allocate(this->capacity());
 			};
-			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _m_data(), _size(n), _capacity(n)
 			{
 				if (n > this->max_size())
 					throw std::length_error("cannot create ft::vector larger than max_size()");
@@ -97,8 +98,6 @@ namespace ft
 					this->_m_data = allocator_type().allocate(n);
 					_fill_vector_elements(n, val);
 				}
-				this->_size = n;
-				this->_capacity = n;
 			};
 			//template <class InputIterator>
 			//vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
@@ -134,7 +133,7 @@ namespace ft
 				if (n > this->size())
 				{
 					if (n > this->capacity())
-						this->reserve(n);
+						(n < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(n);
 					_append_elements(n, val);
 				}
 				this->_size = n;
@@ -143,6 +142,8 @@ namespace ft
 			bool        empty() const       { return this->_size; };
 			void		reserve(size_type n)
 			{
+				if (n > this->max_size())
+					throw std::length_error("cannot create ft::vector larger than max_size()");
 				if (n > this->capacity())
 				{
 					this->_m_data = _reallocate(n);
@@ -161,11 +162,18 @@ namespace ft
 			const_reference back() const                    { return *(this->end() - 1); };
 
 			/* Modifiers */
-			//template <class InputIterator>
-			//void	assign(InputIterator first, InputIterator last) {};
+			template <class InputIterator>
+			void	assign(InputIterator first, InputIterator last)
+			{
+				
+			};
 			void	assign(size_type n, const value_type &val)
 			{
-
+				this->clear();
+				if (n > this->capacity())
+					this->reserve(n);
+				_fill_vector_elements(n, val);
+				this->_size = n;
 			};
 			void    push_back(const value_type& val)
 			{
