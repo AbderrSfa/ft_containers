@@ -75,7 +75,7 @@ namespace ft
 				for (size_t i = this->size(); i < n; i++)
 					allocator_type().construct(this->_m_data + i, val);
 			};
-			void	_fill_vector_elements(size_type n)
+			void	_fill_vector_elements(size_type n, value_type val)
 			{
 				for (size_t i = 0; i < n; i++)
 					allocator_type().construct(this->_m_data + i, val);
@@ -95,7 +95,7 @@ namespace ft
 				if (n)
 				{
 					this->_m_data = allocator_type().allocate(n);
-					_fill_vector_elements(n);
+					_fill_vector_elements(n, val);
 				}
 				this->_size = n;
 				this->_capacity = n;
@@ -150,8 +150,6 @@ namespace ft
 				}
 			};
 
-
-		public:
 			/* Element access */
 			reference       operator[](size_type n)         { return *(this->_m_data + n); };
 			const_reference operator[](size_type n) const   { return *(this->_m_data + n); };
@@ -163,6 +161,12 @@ namespace ft
 			const_reference back() const                    { return *(this->end() - 1); };
 
 			/* Modifiers */
+			//template <class InputIterator>
+			//void	assign(InputIterator first, InputIterator last) {};
+			void	assign(size_type n, const value_type &val)
+			{
+
+			};
 			void    push_back(const value_type& val)
 			{
 				if ((this->size() + 1) > this->capacity())
