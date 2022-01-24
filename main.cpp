@@ -16,9 +16,8 @@ int main()
 			vec2.push_back(3);
 			vec2.push_back(4);
 			vec2.push_back(5);
-			std::vector<int> vec;
+			std::vector<int> vec(vec2.begin(), vec2.end());
 
-			vec.assign(vec2.begin(), vec2.end());
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec[i] << std::endl;
 			std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
@@ -39,9 +38,8 @@ int main()
 			vec2.push_back(3);
 			vec2.push_back(4);
 			vec2.push_back(5);
-			ft::vector<int> vec;
+			ft::vector<int> vec(vec2.begin(), vec2.end());
 
-			vec.assign(vec2.begin(), vec2.end());
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec[i] << std::endl;
 			std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;

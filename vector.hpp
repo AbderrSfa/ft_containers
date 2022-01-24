@@ -91,11 +91,7 @@ namespace ft
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit vector(const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
-			{
-				if (this->capacity())
-					this->_m_data = allocator_type().allocate(this->capacity());
-			};
+			explicit vector(const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0) {};
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _m_data(), _size(n), _capacity(n)
 			{
 				if (n > this->max_size())
@@ -106,9 +102,16 @@ namespace ft
 					_fill_vector_elements(n, val);
 				}
 			};
-			//template <class InputIterator>
-			//vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) {};
-			//vector (const vector& x);
+			template <class InputIterator>
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
+			{
+				int n = std::distance(first, last);
+				this->_m_data = allocator_type().allocate(n);
+				_fill_vector_elements(first, last);
+				this->_size = n;
+				this->_capacity = n;
+			};
+			vector (const vector& x) : _m_data(), _size(0), _capacity(0) { *this = x; };
 
 			~vector()
 			{
@@ -118,7 +121,19 @@ namespace ft
 					allocator_type().deallocate(this->_m_data, this->capacity());
 			};
 
-			//vector& operator=(const vector& x) {};
+			vector& operator=(const vector& x)
+			{
+				if (this == &x)
+					return (*this);
+				this->clear();
+				if (x.size() > this->capacity())
+					this->reserve(x.size());
+				int i = 0;
+				for (size_t i = 0; i < x.size(); i++)
+					allocator_type().construct(this->_m_data + i, x[i]);
+				this->_size = x.size();
+				return (*this);
+			};
 
 			/* Iterators */
 			iterator                begin()         { return iterator(this->_m_data); };
