@@ -81,6 +81,13 @@ namespace ft
 				for (size_t i = 0; i < n; i++)
 					allocator_type().construct(this->_m_data + i, val);
 			};
+			template <class InputIterator>
+			void	_fill_vector_elements(InputIterator first, InputIterator last)
+			{
+				int i = 0;
+				for (InputIterator it = first; it != last; it++)
+					allocator_type().construct(this->_m_data + i++, *it);
+			};
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
@@ -165,7 +172,12 @@ namespace ft
 			template <class InputIterator>
 			void	assign(InputIterator first, InputIterator last)
 			{
-				
+				int n = std::distance(first, last);
+				this->clear();
+				if (n > this->capacity())
+					this->reserve(n);
+				_fill_vector_elements(first, last);
+				this->_size = n;
 			};
 			void	assign(size_type n, const value_type &val)
 			{

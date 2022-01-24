@@ -35,6 +35,5 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(NAME)
-	/bin/rm -rf .vscode
 
 re: fclean all
