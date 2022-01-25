@@ -10,13 +10,14 @@ int main()
 		try
 		{
 			std::cout << "========== OG ==========" << std::endl;
-			std::vector<int> vec2;
-			vec2.push_back(1);
-			vec2.push_back(2);
-			vec2.push_back(3);
-			vec2.push_back(4);
-			vec2.push_back(5);
-			std::vector<int> vec(vec2.begin(), vec2.end());
+			std::vector<int> vec2(5, 0);
+			std::vector<int> vec;
+			vec.push_back(1);
+			vec.push_back(2);
+			vec.push_back(3);
+			vec.push_back(4);
+			vec.push_back(5);
+			vec.insert(vec.begin(), -1);
 
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec[i] << std::endl;
@@ -32,13 +33,14 @@ int main()
 		try
 		{
 			std::cout << "========== MINE ==========" << std::endl;
-			ft::vector<int> vec2;
-			vec2.push_back(1);
-			vec2.push_back(2);
-			vec2.push_back(3);
-			vec2.push_back(4);
-			vec2.push_back(5);
-			ft::vector<int> vec(vec2.begin(), vec2.end());
+			ft::vector<int> vec2(5, 0);
+			ft::vector<int> vec;
+			vec.push_back(1);
+			vec.push_back(2);
+			vec.push_back(3);
+			vec.push_back(4);
+			vec.push_back(5);
+			vec.insert(vec.begin(), -1);
 
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec[i] << std::endl;

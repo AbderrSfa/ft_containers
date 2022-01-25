@@ -92,7 +92,7 @@ namespace ft
 		public:
 			/* Constructors - Destructor - Assignment operator */
 			explicit vector(const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0) {};
-			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _m_data(), _size(n), _capacity(n)
+			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _m_data(), _size(n), _capacity(n)
 			{
 				if (n > this->max_size())
 					throw std::length_error("cannot create ft::vector larger than max_size()");
@@ -102,16 +102,16 @@ namespace ft
 					_fill_vector_elements(n, val);
 				}
 			};
-			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
+/*			template <class InputIterator>
+			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
 			{
 				int n = std::distance(first, last);
 				this->_m_data = allocator_type().allocate(n);
 				_fill_vector_elements(first, last);
 				this->_size = n;
 				this->_capacity = n;
-			};
-			vector (const vector& x) : _m_data(), _size(0), _capacity(0) { *this = x; };
+			};*/
+			vector(const vector& x) : _m_data(), _size(0), _capacity(0) { *this = x; };
 
 			~vector()
 			{
@@ -148,7 +148,7 @@ namespace ft
 			/* Capacity */
 			size_type   size() const        { return this->_size; };
 			size_type   max_size() const    { return allocator_type().max_size(); };
-			void resize (size_type n, value_type val = value_type())
+			void		resize (size_type n, value_type val = value_type())
 			{
 				if (n < this->size())
 					_erase_end_elements(n);
@@ -185,7 +185,7 @@ namespace ft
 
 			/* Modifiers */
 			template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last)
+			void		assign(InputIterator first, InputIterator last)
 			{
 				int n = std::distance(first, last);
 				this->clear();
@@ -194,7 +194,7 @@ namespace ft
 				_fill_vector_elements(first, last);
 				this->_size = n;
 			};
-			void	assign(size_type n, const value_type &val)
+			void		assign(size_type n, const value_type &val)
 			{
 				this->clear();
 				if (n > this->capacity())
@@ -202,7 +202,7 @@ namespace ft
 				_fill_vector_elements(n, val);
 				this->_size = n;
 			};
-			void    push_back(const value_type& val)
+			void    	push_back(const value_type& val)
 			{
 				if ((this->size() + 1) > this->capacity())
 				{
@@ -214,12 +214,35 @@ namespace ft
 				allocator_type().construct(this->_m_data + this->size(), val);
 				this->_size++;
 			};
-			void    pop_back()
+			void    	pop_back()
 			{
 				allocator_type().destroy(this->_m_data + (this->size() - 1));
 				this->_size--;
 			};
-			void	clear()
+			iterator	insert(iterator position, const value_type &val)
+			{
+				if ((this->size() + 1) > this->capacity())
+					reserve(this->capacity() * 2);
+				iterator	it = this->end();
+				while (it != position)
+				{
+					*it = *(it - 1);
+					it--;
+				}
+				*it = val;
+				this->_size++;
+				return it;
+			};
+			void		insert(iterator position, size_type n, const value_type &val)
+			{
+				
+			};
+			//template <class InputIterator>
+			//void		insert(iterator position, InputIterator first, InputIterator last);
+			//iterator	erase(iterator position);
+			//iterator	erase(iterator first, iterator last);
+			//void		swap(vector &x);
+			void		clear()
 			{
 				for (size_t i = 0; i < this->size(); i++)
 					allocator_type().destroy(this->_m_data + i);
