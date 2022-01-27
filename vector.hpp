@@ -18,6 +18,16 @@
 # include <string>
 # include "iterator.hpp"
 
+# define RESET "\033[0m"
+# define BLACK "\033[30m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+# define WHITE "\033[37m"
+
 namespace ft
 {
 	template < typename T, class Alloc = std::allocator<T> >
@@ -205,12 +215,7 @@ namespace ft
 			void    	push_back(const value_type& val)
 			{
 				if ((this->size() + 1) > this->capacity())
-				{
-					if (this->capacity() > 0)
-						this->reserve(this->capacity() * 2);
-					else if (this->capacity() == 0)
-						this->reserve(1);
-				}
+					(this->capacity() > 0) ? this->reserve(this->capacity() * 2) : this->reserve(1);
 				allocator_type().construct(this->_m_data + this->size(), val);
 				this->_size++;
 			};
@@ -219,26 +224,97 @@ namespace ft
 				allocator_type().destroy(this->_m_data + (this->size() - 1));
 				this->_size--;
 			};
+
+
 			iterator	insert(iterator position, const value_type &val)
 			{
+				difference_type	diff = this->end() - position;
+				iterator		it = this->end();
+				size_t			i = this->size();
+				size_t			j = i - 1;
 				if ((this->size() + 1) > this->capacity())
 					reserve(this->capacity() * 2);
-				iterator	it = this->end();
-				while (it != position)
+				while (diff > 0)
 				{
-					*it = *(it - 1);
+					allocator_type().destroy(this->_m_data + i);
+					allocator_type().construct(this->_m_data + i, this->_m_data[j]);
+					i--;
+					j--;
 					it--;
+					diff--;
 				}
-				*it = val;
+				allocator_type().destroy(this->_m_data + i);
+				allocator_type().construct(this->_m_data + i, val);
 				this->_size++;
 				return it;
 			};
+
+/*				std::cout << BLUE;
+				for (size_t i = 0; i < this->capacity(); i++)
+				{
+					if (i == this->size())
+						std::cout << MAGENTA;
+					std::cout << this->_m_data[i] << " | ";
+				}
+				std::cout << RESET << std::endl;*/
+
 			void		insert(iterator position, size_type n, const value_type &val)
 			{
-				
+				if (n > this->max_size())
+					throw std::length_error("cannot create ft::vector larger than max_size()");
+				difference_type	diff = this->end() - position;
+				iterator		it = this->end();
+				size_t			what = this->size() - 1;
+				size_t			where = what + n;
+				if ((this->size() + n) > this->capacity())
+					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
+				while (diff > 0)
+				{
+					allocator_type().destroy(this->_m_data + what);
+					allocator_type().construct(this->_m_data + where, this->_m_data[what]);
+					what--;
+					where--;
+					it--;
+					diff--;
+				}
+				what++;
+				for (size_t i = 0; i < n; i++)
+				{
+					allocator_type().destroy(this->_m_data + what);
+					allocator_type().construct(this->_m_data + what, val);
+					what++;
+				}
+				this->_size += n;
 			};
-			//template <class InputIterator>
-			//void		insert(iterator position, InputIterator first, InputIterator last);
+			template <class InputIterator>
+			void		insert(iterator position, InputIterator first, InputIterator last)
+			{
+				difference_type	diff = this->end() - position;
+				difference_type	n = last - first;
+				if ((this->size() + n) > this->capacity())
+					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
+				iterator it = this->end();
+				size_t what = this->size() - 1;
+				size_t where = what + n;
+				while (diff > 0)
+				{
+					allocator_type().destroy(this->_m_data + what);
+					allocator_type().construct(this->_m_data + where, this->_m_data[what]);
+					what--;
+					where--;
+					it--;
+					diff--;
+				}
+				what++;
+				for (size_t i = 0; i < n; i++)
+				{
+					this->_m_data[what] = *(first + i);
+					//allocator_type().destroy(this->_m_data + what);
+					//allocator_type().construct(this->_m_data + what, val);
+					what++;
+				}
+				this->_size += n;
+			};
 			//iterator	erase(iterator position);
 			//iterator	erase(iterator first, iterator last);
 			//void		swap(vector &x);
