@@ -282,33 +282,29 @@ namespace ft
 				}
 				this->_size += n;
 			};
-/*			template <class InputIterator>
+			template <class InputIterator>
 			void		insert(iterator position, InputIterator first, InputIterator last)
 			{
 				difference_type	diff = this->end() - position;
 				difference_type	n = last - first;
+				size_t			index = this->size() - 1;
 				if ((this->size() + n) > this->capacity())
 					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
-				size_t what = this->size() - 1;
-				size_t where = what + n;
 				while (diff > 0)
 				{
-					allocator_type().destroy(this->_m_data + what);
-					allocator_type().construct(this->_m_data + where, this->_m_data[what]);
-					what--;
-					where--;
+					this->_m_data[index + n] = this->_m_data[index];
+					index--;
 					diff--;
 				}
-				what++;
+				index++;
 				for (size_t i = 0; i < n; i++)
 				{
 					value_type tmp = *(first + i);
-					allocator_type().destroy(this->_m_data + what);
-					allocator_type().construct(this->_m_data + what, tmp);
-					what++;
+					this->_m_data[index] = tmp;
+					index++;
 				}
 				this->_size += n;
-			};*/
+			};
 			//iterator	erase(iterator position);
 			//iterator	erase(iterator first, iterator last);
 			//void		swap(vector &x);
