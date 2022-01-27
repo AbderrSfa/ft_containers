@@ -20,7 +20,7 @@ int		main()
 			vec.push_back(2);
 			vec.push_back(3);
 			vec.push_back(4);
-			vec.insert(vec.end() - 1, vec2.begin(), vec2.end());
+			vec.insert(vec.end(), 1, -1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
@@ -52,7 +52,7 @@ int		main()
 			vec.push_back(2);
 			vec.push_back(3);
 			vec.push_back(4);
-			vec.insert(vec.end() - 1, vec2.begin(), vec2.end());
+			vec.insert(vec.end(), 1, -1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)

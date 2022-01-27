@@ -225,39 +225,45 @@ namespace ft
 				this->_size--;
 			};
 
+/*				{
+					std::cout << BLUE;
+					for (size_t i = 0; i < this->capacity(); i++)
+					{
+						if (i == this->size())
+							std::cout << MAGENTA;
+						std::cout << this->_m_data[i] << " | ";
+					}
+					std::cout << RESET << std::endl;
+				}*/
 
 			iterator	insert(iterator position, const value_type &val)
 			{
 				difference_type	diff = this->end() - position;
 				iterator		it = this->end();
-				size_t			i = this->size();
-				size_t			j = i - 1;
+				size_t			what = this->size() - 1;
+				size_t			where = what + 1;
 				if ((this->size() + 1) > this->capacity())
 					reserve(this->capacity() * 2);
+				if (diff < 0)
+				{
+					this->_size++;
+					return (it);
+				}
 				while (diff > 0)
 				{
-					allocator_type().destroy(this->_m_data + i);
-					allocator_type().construct(this->_m_data + i, this->_m_data[j]);
-					i--;
-					j--;
+					allocator_type().destroy(this->_m_data + what);
+					allocator_type().construct(this->_m_data + where, this->_m_data[what]);
+					what--;
+					where--;
 					it--;
 					diff--;
 				}
-				allocator_type().destroy(this->_m_data + i);
-				allocator_type().construct(this->_m_data + i, val);
+				what++;
+				allocator_type().destroy(this->_m_data + what);
+				allocator_type().construct(this->_m_data + what, val);
 				this->_size++;
 				return it;
 			};
-
-/*				std::cout << BLUE;
-				for (size_t i = 0; i < this->capacity(); i++)
-				{
-					if (i == this->size())
-						std::cout << MAGENTA;
-					std::cout << this->_m_data[i] << " | ";
-				}
-				std::cout << RESET << std::endl;*/
-
 			void		insert(iterator position, size_type n, const value_type &val)
 			{
 				if (n > this->max_size())
@@ -286,7 +292,7 @@ namespace ft
 				}
 				this->_size += n;
 			};
-			template <class InputIterator>
+/*			template <class InputIterator>
 			void		insert(iterator position, InputIterator first, InputIterator last)
 			{
 				difference_type	diff = this->end() - position;
@@ -314,7 +320,7 @@ namespace ft
 					what++;
 				}
 				this->_size += n;
-			};
+			};*/
 			//iterator	erase(iterator position);
 			//iterator	erase(iterator first, iterator last);
 			//void		swap(vector &x);
