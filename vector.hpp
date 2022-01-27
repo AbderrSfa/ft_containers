@@ -265,28 +265,24 @@ namespace ft
 				if (n > this->max_size())
 					throw std::length_error("cannot create ft::vector larger than max_size()");
 				difference_type	diff = this->end() - position;
-				size_t			what = this->size() - 1;
-				size_t			where = what + n;
+				size_t			index = this->size() - 1;
 				if ((this->size() + n) > this->capacity())
 					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
 				while (diff > 0)
 				{
-					allocator_type().destroy(this->_m_data + what);
-					allocator_type().construct(this->_m_data + where, this->_m_data[what]);
-					what--;
-					where--;
+					this->_m_data[index + n] = this->_m_data[index];
+					index--;
 					diff--;
 				}
-				what++;
+				index++;
 				for (size_t i = 0; i < n; i++)
 				{
-					allocator_type().destroy(this->_m_data + what);
-					allocator_type().construct(this->_m_data + what, val);
-					what++;
+					this->_m_data[index] = val;
+					index++;
 				}
 				this->_size += n;
 			};
-			template <class InputIterator>
+/*			template <class InputIterator>
 			void		insert(iterator position, InputIterator first, InputIterator last)
 			{
 				difference_type	diff = this->end() - position;
@@ -312,7 +308,7 @@ namespace ft
 					what++;
 				}
 				this->_size += n;
-			};
+			};*/
 			//iterator	erase(iterator position);
 			//iterator	erase(iterator first, iterator last);
 			//void		swap(vector &x);
