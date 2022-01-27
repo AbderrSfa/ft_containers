@@ -112,7 +112,7 @@ namespace ft
 					_fill_vector_elements(n, val);
 				}
 			};
-/*			template <class InputIterator>
+			template <class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
 			{
 				int n = std::distance(first, last);
@@ -120,7 +120,7 @@ namespace ft
 				_fill_vector_elements(first, last);
 				this->_size = n;
 				this->_capacity = n;
-			};*/
+			};
 			vector(const vector& x) : _m_data(), _size(0), _capacity(0) { *this = x; };
 
 			~vector()
@@ -256,7 +256,7 @@ namespace ft
 				iterator it = this->end() - 1;
 				while (diff > 0)
 				{
-					*(it + 1) = *it;
+					*(it + n) = *it;
 					it--;
 					diff--;
 				}
@@ -268,30 +268,32 @@ namespace ft
 				}
 				this->_size += n;
 			};
-/*			template <class InputIterator>
+			template <class InputIterator>
 			void		insert(iterator position, InputIterator first, InputIterator last)
 			{
 				difference_type	diff = this->end() - position;
 				difference_type	n = last - first;
-				size_t			index = this->size() - 1;
 				if ((this->size() + n) > this->capacity())
 					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
+				iterator	it = this->end() - 1;
 				while (diff > 0)
 				{
-					this->_m_data[index + n] = this->_m_data[index];
-					index--;
+					*(it + n) = *it;
+					it--;
 					diff--;
 				}
-				index++;
+				it++;
 				for (size_t i = 0; i < n; i++)
 				{
-					value_type tmp = *(first + i);
-					this->_m_data[index] = tmp;
-					index++;
+					*it = *(first + i);
+					it++;
 				}
 				this->_size += n;
-			};*/
-			//iterator	erase(iterator position);
+			};
+			iterator	erase(iterator position)
+			{
+				
+			};
 			//iterator	erase(iterator first, iterator last);
 			//void		swap(vector &x);
 			void		clear()
