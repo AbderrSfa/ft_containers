@@ -240,8 +240,7 @@ namespace ft
 			{
 				difference_type	diff = this->end() - position;
 				iterator		it = this->end();
-				size_t			what = this->size() - 1;
-				size_t			where = what + 1;
+				size_t			index = this->size() - 1;
 				if ((this->size() + 1) > this->capacity())
 					reserve(this->capacity() * 2);
 				if (diff < 0)
@@ -251,16 +250,13 @@ namespace ft
 				}
 				while (diff > 0)
 				{
-					allocator_type().destroy(this->_m_data + what);
-					allocator_type().construct(this->_m_data + where, this->_m_data[what]);
-					what--;
-					where--;
+					this->_m_data[index + 1] = this->_m_data[index];
+					index--;
 					it--;
 					diff--;
 				}
-				what++;
-				allocator_type().destroy(this->_m_data + what);
-				allocator_type().construct(this->_m_data + what, val);
+				index++;
+				this->_m_data[index] = val;
 				this->_size++;
 				return it;
 			};
