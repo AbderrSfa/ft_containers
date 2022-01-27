@@ -224,25 +224,12 @@ namespace ft
 				allocator_type().destroy(this->_m_data + (this->size() - 1));
 				this->_size--;
 			};
-
-/*				{
-					std::cout << BLUE;
-					for (size_t i = 0; i < this->capacity(); i++)
-					{
-						if (i == this->size())
-							std::cout << MAGENTA;
-						std::cout << this->_m_data[i] << " | ";
-					}
-					std::cout << RESET << std::endl;
-				}*/
-
 			iterator	insert(iterator position, const value_type &val)
 			{
 				difference_type	diff = this->end() - position;
-				iterator		it = this->end();
-				size_t			index = this->size() - 1;
 				if ((this->size() + 1) > this->capacity())
 					reserve(this->capacity() * 2);
+				iterator	it = this->end() - 1;
 				if (diff < 0)
 				{
 					this->_size++;
@@ -250,13 +237,12 @@ namespace ft
 				}
 				while (diff > 0)
 				{
-					this->_m_data[index + 1] = this->_m_data[index];
-					index--;
+					*(it + 1) = *it;
 					it--;
 					diff--;
 				}
-				index++;
-				this->_m_data[index] = val;
+				it++;
+				*it = val;
 				this->_size++;
 				return it;
 			};
@@ -265,24 +251,24 @@ namespace ft
 				if (n > this->max_size())
 					throw std::length_error("cannot create ft::vector larger than max_size()");
 				difference_type	diff = this->end() - position;
-				size_t			index = this->size() - 1;
 				if ((this->size() + n) > this->capacity())
 					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
+				iterator it = this->end() - 1;
 				while (diff > 0)
 				{
-					this->_m_data[index + n] = this->_m_data[index];
-					index--;
+					*(it + 1) = *it;
+					it--;
 					diff--;
 				}
-				index++;
+				it++;
 				for (size_t i = 0; i < n; i++)
 				{
-					this->_m_data[index] = val;
-					index++;
+					*it = val;
+					it++;
 				}
 				this->_size += n;
 			};
-			template <class InputIterator>
+/*			template <class InputIterator>
 			void		insert(iterator position, InputIterator first, InputIterator last)
 			{
 				difference_type	diff = this->end() - position;
@@ -304,7 +290,7 @@ namespace ft
 					index++;
 				}
 				this->_size += n;
-			};
+			};*/
 			//iterator	erase(iterator position);
 			//iterator	erase(iterator first, iterator last);
 			//void		swap(vector &x);

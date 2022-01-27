@@ -4,6 +4,17 @@
 #include <vector>
 #include <iostream>
 
+/*{
+	std::cout << BLUE;
+	for (size_t i = 0; i < this->capacity(); i++)
+	{
+		if (i == this->size())
+			std::cout << MAGENTA;
+		std::cout << this->_m_data[i] << " | ";
+	}
+	std::cout << RESET << std::endl;
+}*/
+
 int		main()
 {
 	{
@@ -20,7 +31,7 @@ int		main()
 			vec.push_back(2);
 			vec.push_back(3);
 			vec.push_back(4);
-			vec.insert(vec.begin() + 3, vec2.begin(), vec2.end());
+			vec.insert(vec.begin() + 2, 1, -1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
@@ -52,7 +63,7 @@ int		main()
 			vec.push_back(2);
 			vec.push_back(3);
 			vec.push_back(4);
-			vec.insert(vec.begin() + 3, vec2.begin(), vec2.end());
+			vec.insert(vec.begin() + 2, 1, -1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
