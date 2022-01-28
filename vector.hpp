@@ -112,7 +112,7 @@ namespace ft
 					_fill_vector_elements(n, val);
 				}
 			};
-			template <class InputIterator>
+/*			template <class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
 			{
 				int n = std::distance(first, last);
@@ -120,7 +120,7 @@ namespace ft
 				_fill_vector_elements(first, last);
 				this->_size = n;
 				this->_capacity = n;
-			};
+			};*/
 			vector(const vector& x) : _m_data(), _size(0), _capacity(0) { *this = x; };
 
 			~vector()
@@ -147,9 +147,9 @@ namespace ft
 
 			/* Iterators */
 			iterator                begin()         { return iterator(this->_m_data); };
-			const_iterator          begin() const   { return const_iterator(this->_m_data); };
-			iterator                end()           { return iterator(this->_m_data + this->_size); };
-			const_iterator          end() const     { return const_iterator(this->_m_data + this->_size); };
+			const_iterator          begin() const   { return const_iterator(this->begin()); };
+			iterator                end()           { return iterator(this->begin() + this->size()); };
+			const_iterator          end() const     { return const_iterator(this->begin() + this->size()); };
 			reverse_iterator        rbegin()        { return reverse_iterator(this->end()); };
 			const_reverse_iterator  rbegin() const  { return const_reverse_iterator(this->end()); };
 			reverse_iterator        rend()          { return reverse_iterator(this->begin()); } ;
@@ -331,6 +331,49 @@ namespace ft
 			/* Allocator */
 			allocator_type  get_allocator() const { return allocator_type(); };
 	};
+
+	template <class T, class Alloc>
+	bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+
+	};
+
+	template <class T, class Alloc>
+	bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+
+	};
+
+	template <class T, class Alloc>
+	bool operator<(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+
+	};
+
+	template <class T, class Alloc>
+	bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+
+	};
+
+	template <class T, class Alloc>
+	bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+
+	};
+
+	template <class T, class Alloc>
+	bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	{
+
+	};
+
+	template <class T, class Alloc>
+	void	swap(vector<T, Alloc> &x, vector<T, Alloc> &y)
+	{
+
+	};
 }
+
 
 #endif

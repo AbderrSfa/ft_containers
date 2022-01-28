@@ -2,6 +2,8 @@
 #include "reverse_iterator.hpp"
 #include "vector.hpp"
 #include <vector>
+#include <stack>
+#include <map>
 #include <iostream>
 
 /*{
@@ -21,20 +23,8 @@ int main()
 		try
 		{
 			std::cout << "========== OG ==========" << std::endl;
-			std::vector<int> vec2;
-			vec2.push_back(-11);
-			vec2.push_back(-22);
-			vec2.push_back(-33);
-			vec2.push_back(-44);
-			std::vector<int> vec;
-			vec.push_back(1);
-			vec.push_back(2);
-			vec.push_back(3);
-			vec.push_back(4);
-			vec.push_back(5);
-			vec.push_back(6);
-			vec.push_back(7);
-			vec.erase(vec.end() - 2);
+			std::vector<int> vec2(5, -1);
+			std::vector<int> vec(5, -1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
@@ -56,20 +46,8 @@ int main()
 		try
 		{
 			std::cout << "========== MINE ==========" << std::endl;
-			ft::vector<int> vec2;
-			vec2.push_back(-11);
-			vec2.push_back(-22);
-			vec2.push_back(-33);
-			vec2.push_back(-44);
-			ft::vector<int> vec;
-			vec.push_back(1);
-			vec.push_back(2);
-			vec.push_back(3);
-			vec.push_back(4);
-			vec.push_back(5);
-			vec.push_back(6);
-			vec.push_back(7);
-			vec.erase(vec.end() - 2);
+			ft::vector<int> vec2(5, -1);
+			ft::vector<int> vec(5, -1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
