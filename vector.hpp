@@ -294,11 +294,13 @@ namespace ft
 			{
 				difference_type index = position - this->begin();
 				allocator_type().destroy(this->_m_data + index);
+				/// Use a for loop here
 				while (index < (this->size() - 1))
 				{
 					this->_m_data[index] = this->_m_data[index + 1];
 					index++;
 				}
+				///
 				this->_size--;
 				return position;
 			};
@@ -316,7 +318,14 @@ namespace ft
 				this->_size -= n;
 				return first;
 			};
-			//void		swap(vector &x);
+			void		swap(vector &x)
+			{
+				vector	tmp(x);
+				x = *(this);
+				x._capacity = this->_capacity;
+				*(this) = tmp;
+				this->_capacity = tmp._capacity;
+			};
 			void		clear()
 			{
 				for (size_t i = 0; i < this->size(); i++)
