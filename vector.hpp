@@ -294,13 +294,8 @@ namespace ft
 			{
 				difference_type index = position - this->begin();
 				allocator_type().destroy(this->_m_data + index);
-				/// Use a for loop here
-				while (index < (this->size() - 1))
-				{
+				for (size_t i = index; i < (this->size() - 1); i++)
 					this->_m_data[index] = this->_m_data[index + 1];
-					index++;
-				}
-				///
 				this->_size--;
 				return position;
 			};

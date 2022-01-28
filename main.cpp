@@ -15,7 +15,7 @@
 	std::cout << RESET << std::endl;
 }*/
 
-int		main()
+int main()
 {
 	{
 		try
@@ -34,9 +34,9 @@ int		main()
 			vec.push_back(5);
 			vec.push_back(6);
 			vec.push_back(7);
+			vec.erase(vec.end() - 2);
 
-			vec.swap(vec2);
-			std::cout << "vec: " << GREEN;
+			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
 			{
 				if (i == vec.size())
@@ -44,16 +44,7 @@ int		main()
 				std::cout << vec[i] << " | ";
 			}
 			std::cout << RESET << std::endl;
-			std::cout << "vec: size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
-			std::cout << "vec2: " << GREEN;
-			for (size_t i = 0; i < vec2.capacity(); i++)
-			{
-				if (i == vec2.size())
-					std::cout << RED;
-				std::cout << vec2[i] << " | ";
-			}
-			std::cout << RESET << std::endl;
-			std::cout << "vec2: size: " << vec2.size() << " capacity: " << vec2.capacity() << std::endl;
+			std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -78,9 +69,9 @@ int		main()
 			vec.push_back(5);
 			vec.push_back(6);
 			vec.push_back(7);
+			vec.erase(vec.end() - 2);
 
-			vec.swap(vec2);
-			std::cout << "vec: " << GREEN;
+			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
 			{
 				if (i == vec.size())
@@ -88,16 +79,7 @@ int		main()
 				std::cout << vec[i] << " | ";
 			}
 			std::cout << RESET << std::endl;
-			std::cout << "vec: size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
-			std::cout << "vec2: " << GREEN;
-			for (size_t i = 0; i < vec2.capacity(); i++)
-			{
-				if (i == vec2.size())
-					std::cout << RED;
-				std::cout << vec2[i] << " | ";
-			}
-			std::cout << RESET << std::endl;
-			std::cout << "vec2: size: " << vec2.size() << " capacity: " << vec2.capacity() << std::endl;
+			std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
 		}
 		catch (const std::exception &e)
 		{
