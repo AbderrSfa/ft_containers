@@ -271,8 +271,8 @@ namespace ft
 			template <class InputIterator>
 			void		insert(iterator position, InputIterator first, InputIterator last)
 			{
-				difference_type	diff = this->end() - position;
-				difference_type	n = last - first;
+				difference_type diff = this->end() - position;
+				difference_type n = last - first;
 				if ((this->size() + n) > this->capacity())
 					((this->size() + n) < (this->capacity() * 2)) ? this->reserve(this->capacity() * 2) : this->reserve(this->size() + n);
 				iterator	it = this->end() - 1;
@@ -292,9 +292,30 @@ namespace ft
 			};
 			iterator	erase(iterator position)
 			{
-				
+				difference_type index = position - this->begin();
+				allocator_type().destroy(this->_m_data + index);
+				while (index < (this->size() - 1))
+				{
+					this->_m_data[index] = this->_m_data[index + 1];
+					index++;
+				}
+				this->_size--;
+				return position;
 			};
-			//iterator	erase(iterator first, iterator last);
+			iterator	erase(iterator first, iterator last)
+			{
+				difference_type index = first - this->begin();
+				difference_type n = last - first;
+				for (size_t i = 0; i < n; i++)
+				{
+					allocator_type().destroy(this->_m_data + index);
+					index++;
+				}
+				for (size_t i = index; i < this->size(); i++)
+					this->_m_data[i - n] = this->_m_data[i];
+				this->_size -= n;
+				return first;
+			};
 			//void		swap(vector &x);
 			void		clear()
 			{

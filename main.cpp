@@ -31,7 +31,11 @@ int		main()
 			vec.push_back(2);
 			vec.push_back(3);
 			vec.push_back(4);
-			vec.insert(vec.end(), vec2.begin() + 1, vec2.end());
+			vec.push_back(5);
+			vec.push_back(6);
+			vec.push_back(7);
+			//std::cout << *(vec.erase(vec.end() - 2)) << std::endl;
+			vec.erase(vec.begin() + 1, vec.end() - 1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
@@ -63,7 +67,11 @@ int		main()
 			vec.push_back(2);
 			vec.push_back(3);
 			vec.push_back(4);
-			vec.insert(vec.end(), vec2.begin() + 1, vec2.end());
+			vec.push_back(5);
+			vec.push_back(6);
+			vec.push_back(7);
+			// std::cout << *(vec.erase(vec.end() - 2)) << std::endl;
+			vec.erase(vec.begin() + 1, vec.end() - 1);
 
 			std::cout << GREEN;
 			for (size_t i = 0; i < vec.capacity(); i++)
