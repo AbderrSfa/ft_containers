@@ -17,6 +17,7 @@
 # include <cstdlib>
 # include <string>
 # include "iterator.hpp"
+# include "reverse_iterator.hpp"
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"
@@ -171,7 +172,12 @@ namespace ft
 				this->_size = n;
 			};
 			size_type   capacity() const    { return this->_capacity; };
-			bool        empty() const       { return this->_size; };
+			bool        empty() const
+			{
+				if (this->size() == 0)
+					return true;
+				return false;
+			};
 			void		reserve(size_type n)
 			{
 				if (n > this->max_size())

@@ -1,10 +1,8 @@
-#include "iterator.hpp"
-#include "reverse_iterator.hpp"
 #include "vector.hpp"
+#include "stack.hpp"
 #include <vector>
 #include <stack>
 #include <map>
-#include <iostream>
 
 /*{
 	std::cout << BLUE;
@@ -23,18 +21,19 @@ int main()
 		try
 		{
 			std::cout << "========== OG ==========" << std::endl;
-			std::vector<int> vec2(5, -1);
-			std::vector<int> vec(5, -1);
+			std::stack<int> st;
+			std::stack<int> st2;
 
-			std::cout << GREEN;
-			for (size_t i = 0; i < vec.capacity(); i++)
-			{
-				if (i == vec.size())
-					std::cout << RED;
-				std::cout << vec[i] << " | ";
-			}
-			std::cout << RESET << std::endl;
-			std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
+			std::cout << st.empty() << std::endl;
+			std::cout << st.size() << std::endl;
+			st.push(10);
+			std::cout << st.top() << std::endl;
+			st.push(20);
+			std::cout << st.top() << std::endl;
+			st.pop();
+			std::cout << st.top() << std::endl;
+			std::cout << st.empty() << std::endl;
+			std::cout << st.size() << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -46,18 +45,19 @@ int main()
 		try
 		{
 			std::cout << "========== MINE ==========" << std::endl;
-			ft::vector<int> vec2(5, -1);
-			ft::vector<int> vec(5, -1);
+			ft::stack<int>	st;
+			ft::stack<int>	st2;
 
-			std::cout << GREEN;
-			for (size_t i = 0; i < vec.capacity(); i++)
-			{
-				if (i == vec.size())
-					std::cout << RED;
-				std::cout << vec[i] << " | ";
-			}
-			std::cout << RESET << std::endl;
-			std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
+			std::cout << st.empty() << std::endl;
+			std::cout << st.size() << std::endl;
+			st.push(10);
+			std::cout << st.top() << std::endl;
+			st.push(20);
+			std::cout << st.top() << std::endl;
+			st.pop();
+			std::cout << st.top() << std::endl;
+			std::cout << st.empty() << std::endl;
+			std::cout << st.size() << std::endl;
 		}
 		catch (const std::exception &e)
 		{
