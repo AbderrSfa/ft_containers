@@ -1,22 +1,20 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-//# include "vector.hpp"
-# include <deque>
-
 namespace ft
 {
 	template < class T, class Container = vector<T> >
 	class stack
 	{
-		protected:
-			Container	c;
-
 		public:
 			typedef T								value_type;
 			typedef Container						container_type;
 			typedef typename Container::size_type	size_type;
 
+		protected:
+			Container	c;
+
+		public:
 			explicit stack(const container_type &ctnr = container_type()) : c(ctnr) {};
 			bool				empty() const { return c.empty(); };
 			size_type			size() const { return c.size(); };
