@@ -20,7 +20,7 @@ FLAGS = -Wall -Wextra -Werror
 
 CPP_STANDARD = -std=c++98
 
-HEADERS = iterator.hpp reverse_iterator.hpp vector.hpp stack.hpp map.hpp
+HEADERS = vector.hpp vectorIt.hpp vectorRevIt.hpp stack.hpp map.hpp mapIt.hpp mapRevIt.hpp
 
 all: $(NAME)
 
