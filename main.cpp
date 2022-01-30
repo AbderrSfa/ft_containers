@@ -3,7 +3,6 @@
 #include <stack>
 #include "stack.hpp"
 #include <map>
-#include <iterator>
 #include "map.hpp"
 
 /*{
@@ -24,7 +23,7 @@ int main()
 		try
 		{
 			std::cout << "========== OG ==========" << std::endl;
-			std::map<char, int>	mp;
+			std::map<char, int> mp;
 		}
 		catch (const std::exception &e)
 		{
@@ -36,7 +35,8 @@ int main()
 		try
 		{
 			std::cout << "========= MINE =========" << std::endl;
-			ft::map<char, int>	mp;
+			ft::vector<int>	vec;
+			ft::map<char, int> mp;
 		}
 		catch (const std::exception &e)
 		{
