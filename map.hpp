@@ -31,8 +31,32 @@ namespace ft
 			typedef typename allocator_type::difference_type	difference_type;
 			typedef typename allocator_type::size_type			size_type;
 
+			/* Constructors - Destructor - Assignment operator */
 			explicit map(const key_compare &comp = key_compare(),
 						 const allocator_type &alloc = allocator_type()) {};
+
+			/* Iterators */
+			iterator                begin()         {  };
+			const_iterator          begin() const   {  };
+			iterator                end()           {  };
+			const_iterator          end() const     {  };
+			reverse_iterator        rbegin()        {  };
+			const_reverse_iterator  rbegin() const  {  };
+			reverse_iterator        rend()          { } ;
+			const_reverse_iterator  rend() const    {  };
+
+			/* Capacity */
+
+			/* Element access */
+
+			/* Modifiers */
+
+			/* Observers */
+
+			/* Operations */
+
+			/* Allocator */
+			allocator_type	get_allocator() const { return allocator_type(); };
 	};
 }
 
