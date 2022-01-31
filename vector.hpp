@@ -49,9 +49,9 @@ namespace ft
 			typedef vectorRevIt<const_iterator>					const_reverse_iterator;
 
 		private:
-			value_type* _m_data;
-			size_type   _size;
-			size_type   _capacity;
+			value_type*	_m_data;
+			size_type	_size;
+			size_type	_capacity;
 
 		protected:
 			void	_range_check(size_type n) const
@@ -147,18 +147,18 @@ namespace ft
 			};
 
 			/* Iterators */
-			iterator                begin()         { return iterator(this->_m_data); };
-			const_iterator          begin() const   { return const_iterator(this->begin()); };
-			iterator                end()           { return iterator(this->begin() + this->size()); };
-			const_iterator          end() const     { return const_iterator(this->begin() + this->size()); };
-			reverse_iterator        rbegin()        { return reverse_iterator(this->end()); };
-			const_reverse_iterator  rbegin() const  { return const_reverse_iterator(this->end()); };
-			reverse_iterator        rend()          { return reverse_iterator(this->begin()); };
-			const_reverse_iterator  rend() const    { return const_reverse_iterator(this->begin()); };
+			iterator				begin()			{ return iterator(this->_m_data); };
+			const_iterator			begin() const	{ return const_iterator(this->begin()); };
+			iterator				end()			{ return iterator(this->begin() + this->size()); };
+			const_iterator			end() const		{ return const_iterator(this->begin() + this->size()); };
+			reverse_iterator		rbegin()		{ return reverse_iterator(this->end()); };
+			const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(this->end()); };
+			reverse_iterator		rend()			{ return reverse_iterator(this->begin()); };
+			const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
 
 			/* Capacity */
-			size_type   size() const        { return this->_size; };
-			size_type   max_size() const    { return allocator_type().max_size(); };
+			size_type	size() const		{ return this->_size; };
+			size_type	max_size() const	{ return allocator_type().max_size(); };
 			void		resize (size_type n, value_type val = value_type())
 			{
 				if (n < this->size())
@@ -171,8 +171,8 @@ namespace ft
 				}
 				this->_size = n;
 			};
-			size_type   capacity() const    { return this->_capacity; };
-			bool        empty() const
+			size_type	capacity() const    { return this->_capacity; };
+			bool		empty() const
 			{
 				if (this->size() == 0)
 					return true;
@@ -190,14 +190,14 @@ namespace ft
 			};
 
 			/* Element access */
-			reference       operator[](size_type n)         { return *(this->_m_data + n); };
-			const_reference operator[](size_type n) const   { return *(this->_m_data + n); };
-			reference       at(size_type n)                 { _range_check(n); return (*this)[n]; };
-			const_reference at(size_type n) const           { _range_check(n); return (*this)[n]; };
-			reference       front()                         { return *this->begin(); };
-			const_reference front() const                   { return *this->begin(); };
-			reference       back()                          { return *(this->end() - 1); };
-			const_reference back() const                    { return *(this->end() - 1); };
+			reference		operator[](size_type n)			{ return *(this->_m_data + n); };
+			const_reference	operator[](size_type n) const	{ return *(this->_m_data + n); };
+			reference		at(size_type n)					{ _range_check(n); return (*this)[n]; };
+			const_reference	at(size_type n) const			{ _range_check(n); return (*this)[n]; };
+			reference		front()							{ return *this->begin(); };
+			const_reference	front() const					{ return *this->begin(); };
+			reference		back()							{ return *(this->end() - 1); };
+			const_reference	back() const					{ return *(this->end() - 1); };
 
 			/* Modifiers */
 			template <class InputIterator>
@@ -218,14 +218,14 @@ namespace ft
 				_fill_vector_elements(n, val);
 				this->_size = n;
 			};
-			void    	push_back(const value_type& val)
+			void		push_back(const value_type& val)
 			{
 				if ((this->size() + 1) > this->capacity())
 					(this->capacity() > 0) ? this->reserve(this->capacity() * 2) : this->reserve(1);
 				allocator_type().construct(this->_m_data + this->size(), val);
 				this->_size++;
 			};
-			void    	pop_back()
+			void		pop_back()
 			{
 				allocator_type().destroy(this->_m_data + (this->size() - 1));
 				this->_size--;
