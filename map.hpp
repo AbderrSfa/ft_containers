@@ -31,13 +31,29 @@ namespace ft
 			typedef typename allocator_type::difference_type	difference_type;
 			typedef typename allocator_type::size_type			size_type;
 
+		protected:
+			struct bstNode
+			{
+				value_type	data;
+				bstNode*	leftChild;
+				bstNode*	rightChild;
+			};
+
+		private:
+			bstNode*	_root;
+			size_type	_size;
+
+		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) {};
-			template <class InputIterator>
-			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
-			map(const map& x) {};
-			~map();
-			map& operator=(const map& x);
+			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _root(0), _size(0)
+			{
+				
+			};
+			//template <class InputIterator>
+			//map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
+			//map(const map& x) {};
+			//~map() {};
+			//map& operator=(const map& x) {};
 
 			/* Iterators */
 			//iterator				begin()			{  };
@@ -50,9 +66,14 @@ namespace ft
 			//const_reverse_iterator	rend() const	{  };
 
 			/* Capacity */
-			//bool		empty()const {};
-			//size_type	size() const {};
-			//size_type	max_size() const {};
+			bool		empty() const
+			{
+				if (this->size() == 0)
+					return true;
+				return false;
+			};
+			size_type	size() const { return (this->_size); };
+			size_type	max_size() const { return ((allocator_type().max_size()) / 3); };
 
 			/* Element access */
 			//mapped_type	&operator[](const key_type &k) {};

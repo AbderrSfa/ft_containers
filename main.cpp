@@ -5,25 +5,13 @@
 #include <map>
 #include "map.hpp"
 
-/*{
-	std::cout << BLUE;
-	for (size_t i = 0; i < this->capacity(); i++)
-	{
-		if (i == this->size())
-			std::cout << MAGENTA;
-		std::cout << this->_m_data[i] << " | ";
-	}
-	std::cout << RESET << std::endl;
-}*/
-
-
 int main()
 {
 	{
 		try
 		{
 			std::cout << "========== OG ==========" << std::endl;
-			std::map<char, int> mp;
+			std::pair<int, std::string> player(9, "Firmino");
 		}
 		catch (const std::exception &e)
 		{
@@ -35,12 +23,15 @@ int main()
 		try
 		{
 			std::cout << "========= MINE =========" << std::endl;
-			ft::vector<int>	vec;
+			ft::vector<int> vec;
 			ft::map<char, int> mp;
+
 		}
 		catch (const std::exception &e)
 		{
 			std::cerr << e.what() << '\n';
 		}
 	}
+
+	return 0;
 }

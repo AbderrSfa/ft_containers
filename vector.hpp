@@ -171,7 +171,7 @@ namespace ft
 				}
 				this->_size = n;
 			};
-			size_type	capacity() const    { return this->_capacity; };
+			size_type	capacity() const	{ return this->_capacity; };
 			bool		empty() const
 			{
 				if (this->size() == 0)
