@@ -17,7 +17,9 @@ namespace ft
 		public:
 			typedef Key											key_type;
 			typedef T											mapped_type;
-			typedef std::pair<const key_type, mapped_type>		value_type;
+			//key_type should be const
+			typedef std::pair<key_type, mapped_type>		value_type;
+			//
 			typedef Compare										key_compare;
 			typedef Alloc										allocator_type;
 			typedef typename allocator_type::reference			reference;
@@ -39,16 +41,60 @@ namespace ft
 				bstNode*	rightChild;
 			};
 
+			bstNode *makeNewNode(value_type data)
+			{
+				bstNode *newNode = new bstNode();
+
+				newNode->data = data;
+				newNode->leftChild = NULL;
+				newNode->rightChild = NULL;
+				return (newNode);
+			};
+			bstNode *insert(bstNode *root, value_type data)
+			{
+				if (root == NULL)
+					root = makeNewNode(data);
+				else if (data.first <= root->data.first)
+					root->leftChild = insert(root->leftChild, data);
+				else
+					root->rightChild = insert(root->rightChild, data);
+				return (root);
+			};
+
+
+			void print2DUtil(bstNode *root, int space)
+			{
+				if (root == NULL)
+					return;
+				space += 10;
+				print2DUtil(root->rightChild, space);
+				std::cout << std::endl;
+				for (int i = 10; i < space; i++)
+					std::cout << " ";
+				std::cout << "{" << root->data.first << ", " << root->data.second << "}\n";
+				print2DUtil(root->leftChild, space);
+			};
+			void print2D(bstNode *root)
+			{
+				print2DUtil(root, 0);
+			};
+
 		private:
 			bstNode*	_root;
-			size_type	_size;
+			size_type	_nodeCount;
 
 		public:
+			void	printTree() { print2D(this->_root); };
+
 			/* Constructors - Destructor - Assignment operator */
-			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _root(0), _size(0)
+			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _root(0), _nodeCount(0)
 			{
-				
+				this->_root = insert(this->_root, {10, 'f'});
+				this->_root = insert(this->_root, {5, 'a'});
+				this->_root = insert(this->_root, {55, 'a'});
+				this->_root = insert(this->_root, {7, 'd'});
 			};
+
 			//template <class InputIterator>
 			//map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
 			//map(const map& x) {};
@@ -56,14 +102,14 @@ namespace ft
 			//map& operator=(const map& x) {};
 
 			/* Iterators */
-			//iterator				begin()			{  };
-			//const_iterator			begin() const	{  };
+			//iterator				begin()			{ return iterator(this->_root->data); };
+			//const_iterator			begin() const	{ return const_iterator(this->_root->data); };
 			//iterator				end()			{  };
 			//const_iterator			end() const		{  };
-			//reverse_iterator		rbegin()		{  };
-			//const_reverse_iterator	rbegin() const	{  };
-			//reverse_iterator		rend()			{  };
-			//const_reverse_iterator	rend() const	{  };
+			//reverse_iterator		rbegin()		{ return reverse_iterator(this->end()); };
+			//const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(this->end()); };
+			//reverse_iterator		rend()			{ return reverse_iterator(this->begin()); };
+			//const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
 
 			/* Capacity */
 			bool		empty() const
@@ -72,7 +118,7 @@ namespace ft
 					return true;
 				return false;
 			};
-			size_type	size() const { return (this->_size); };
+			size_type	size() const { return (this->_nodeCount); };
 			size_type	max_size() const { return ((allocator_type().max_size()) / 3); };
 
 			/* Element access */
@@ -90,7 +136,7 @@ namespace ft
 			//void					clear() {};
 
 			/* Observers */
-			//key_compare		key_comp() const {};
+			key_compare		key_comp() const { return key_compare(); };
 			//value_compare	value_comp() const {};
 
 			/* Operations */

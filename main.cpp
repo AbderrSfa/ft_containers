@@ -11,7 +11,18 @@ int main()
 		try
 		{
 			std::cout << "========== OG ==========" << std::endl;
-			std::pair<int, std::string> player(9, "Firmino");
+			std::map<int, char> mp;
+
+			mp.insert({10, 'f'});
+			mp.insert({5, 'a'});
+			mp.insert({55, 'a'});
+			mp.insert({7, 'd'});
+
+			for (auto& p: mp)
+				std::cout << "{" << p.first << ", " << p.second << "} ";
+			std::cout << "*" << mp[0] << "*" << std::endl;
+
+			std::cout << "{" << (*mp.begin()).first << ", " << (*mp.begin()).second << "} " << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -23,9 +34,9 @@ int main()
 		try
 		{
 			std::cout << "========= MINE =========" << std::endl;
-			ft::vector<int> vec;
-			ft::map<char, int> mp;
+			ft::map<int, char> mp;
 
+			mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
