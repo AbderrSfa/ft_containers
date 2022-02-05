@@ -36,28 +36,36 @@ namespace ft
 		protected:
 			struct bstNode
 			{
-				value_type	data;
-				bstNode*	leftChild;
-				bstNode*	rightChild;
+				key_type	key;
+				mapped_type	value;
+				bool		isBlack;
+				bstNode*	left;
+				bstNode*	right;
+				bstNode*	parent;
 			};
 
 			bstNode *makeNewNode(value_type data)
 			{
 				bstNode *newNode = new bstNode();
 
-				newNode->data = data;
-				newNode->leftChild = NULL;
-				newNode->rightChild = NULL;
+				newNode->key = data.first;
+				newNode->value = data.second;
+				newNode->isBlack = false;
+				newNode->left = NULL;
+				newNode->right = NULL;
+				newNode->parent = NULL;
 				return (newNode);
 			};
-			bstNode *insert(bstNode *root, value_type data)
+			bstNode *addNode(bstNode *root, value_type data)
 			{
-				if (root == NULL)
+				if (root == NULL) {
 					root = makeNewNode(data);
-				else if (data.first <= root->data.first)
-					root->leftChild = insert(root->leftChild, data);
+					this->_nodeCount++;
+				}
+				else if (data.first <= root->key)
+					root->left = addNode(root->left, data);
 				else
-					root->rightChild = insert(root->rightChild, data);
+					root->right = addNode(root->right, data);
 				return (root);
 			};
 
@@ -67,12 +75,15 @@ namespace ft
 				if (root == NULL)
 					return;
 				space += 10;
-				print2DUtil(root->rightChild, space);
+				print2DUtil(root->right, space);
 				std::cout << std::endl;
 				for (int i = 10; i < space; i++)
 					std::cout << " ";
-				std::cout << "{" << root->data.first << ", " << root->data.second << "}\n";
-				print2DUtil(root->leftChild, space);
+				if (root->isBlack == false)
+					std::cout << RED;
+				std::cout << "{" << root->key << ", " << root->value << "}\n";
+				std::cout << RESET;
+				print2DUtil(root->left, space);
 			};
 			void print2D(bstNode *root)
 			{
@@ -89,10 +100,10 @@ namespace ft
 			/* Constructors - Destructor - Assignment operator */
 			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _root(0), _nodeCount(0)
 			{
-				this->_root = insert(this->_root, {10, 'f'});
+/*				this->_root = insert(this->_root, {10, 'f'});
 				this->_root = insert(this->_root, {5, 'a'});
 				this->_root = insert(this->_root, {55, 'a'});
-				this->_root = insert(this->_root, {7, 'd'});
+				this->_root = insert(this->_root, {7, 'd'});*/
 			};
 
 			//template <class InputIterator>
@@ -125,7 +136,12 @@ namespace ft
 			//mapped_type	&operator[](const key_type &k) {};
 
 			/* Modifiers */
-			//pair<iterator, bool>	insert(const value_type &val) {};
+			std::pair<iterator, bool>	insert(const value_type &val)
+			{
+				iterator	it;
+				this->_root = addNode(this->_root, val);
+				return (std::pair<iterator, bool>(it, false));
+			};
 			//iterator				insert(iterator position, const value_type &val) {};
 			//template <class InputIterator>
 			//void					insert(InputIterator first, InputIterator last) {};

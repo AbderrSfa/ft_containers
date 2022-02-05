@@ -4,6 +4,7 @@
 #include "stack.hpp"
 #include <map>
 #include "map.hpp"
+#include "redBlackTree.hpp"
 
 int main()
 {
@@ -20,8 +21,6 @@ int main()
 
 			for (auto& p: mp)
 				std::cout << "{" << p.first << ", " << p.second << "} ";
-			std::cout << "*" << mp[0] << "*" << std::endl;
-
 			std::cout << "{" << (*mp.begin()).first << ", " << (*mp.begin()).second << "} " << std::endl;
 		}
 		catch (const std::exception &e)
@@ -36,7 +35,12 @@ int main()
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
 
+			mp.insert({10, 'f'});
+			mp.insert({5, 'a'});
+			mp.insert({55, 'a'});
+			mp.insert({7, 'd'});
 			mp.printTree();
+			ft::redBlackTree<int, char>	rb;
 		}
 		catch (const std::exception &e)
 		{

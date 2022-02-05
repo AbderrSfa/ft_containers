@@ -20,14 +20,17 @@ FLAGS = -Wall -Wextra -Werror
 
 CPP_STANDARD = -std=c++98
 
-HEADERS = vector.hpp vectorIt.hpp vectorRevIt.hpp stack.hpp map.hpp mapIt.hpp mapRevIt.hpp
+VEC_HEADERS = vector.hpp vectorIt.hpp vectorRevIt.hpp
+STACK_HEADERS = stack.hpp
+MAP_HEADERS = map.hpp mapIt.hpp mapRevIt.hpp redBlackTree.hpp
+
 
 all: $(NAME)
 
 $(NAME): $(OBJECT)
 	clang++ $(OBJECT) -o $(NAME)
 
-%.o:%.cpp $(HEADERS)
+%.o:%.cpp $(VEC_HEADERS) $(STACK_HEADERS) $(MAP_HEADERS)
 	clang++ -c $<
 
 clean:
