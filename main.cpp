@@ -35,12 +35,16 @@ int main()
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
 
-			mp.insert({10, 'f'});
+/*			mp.insert({10, 'f'});
 			mp.insert({5, 'a'});
 			mp.insert({55, 'a'});
 			mp.insert({7, 'd'});
-			mp.printTree();
+			mp.printTree();*/
 			ft::redBlackTree<int, char>	rb;
+
+			rb.add(4, 'e');
+			rb.add(5, 'f');
+			rb.printTree();
 		}
 		catch (const std::exception &e)
 		{
