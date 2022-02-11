@@ -72,6 +72,8 @@ private:
 			else
 				node->parent->left = temp;
 		}
+		else
+			node->parent = temp;
 		return (temp);
 	};
 
@@ -86,6 +88,8 @@ private:
 			else
 				node->parent->left = temp;
 		}
+		else
+			node->parent = temp;
 		return (temp);
 	};
 
@@ -112,7 +116,6 @@ private:
 		}
 		if (node->parent == NULL)
 			this->root = node;
-		//print2DUtil(node, 0);
 	};
 
 	void	checkBalance(Node<T>* node) {
@@ -158,7 +161,9 @@ public:
 	};
 
 	void	printTree() {
+		std::cout << "||||||||||||||||\n";
 		print2DUtil(this->root, 0);
+		std::cout << "||||||||||||||||\n\n";
 	};
 
 	void	add(T obj) {
@@ -175,26 +180,35 @@ public:
 int		main() {
 	AVLTree<int>	tree;
 
-
-	tree.add(10);
-	tree.add(4);
-	tree.add(6);
-	tree.add(1);
-	tree.add(3);
-	// tree.add(9);
-	// tree.add(8);
-	// tree.add(7);
-	// tree.add(5);
-	// tree.add(2);
-	// tree.add(52);
-	// tree.add(38);
-	// tree.add(25);
-	// tree.add(40);
-	// tree.add(61);
-	// tree.add(74);
-	// tree.add(23);
-	// tree.add(35);
-	// tree.add(68);
+	tree.add(52);
+	tree.add(38);
+	tree.add(25);
+	tree.add(40);
+	tree.add(61);
+	tree.add(74);
+	tree.add(23);
+	tree.add(35);
+	tree.add(68);
+	//tree.add(57);
+	//tree.add(65);
+	//tree.add(53);
+	//tree.add(34);
+	//tree.add(18);
+	//tree.add(88);
+	//tree.add(80);
+	//tree.add(67);
+	//tree.add(57);
+	//tree.add(37);
+	//tree.add(85);
+	//tree.add(17);
+	//tree.add(36);
+	//tree.add(10);
+	//tree.add(2);
+	//tree.add(35);
+	//tree.add(3);
+	//tree.add(89);
+	//tree.add(59);
+	//tree.add(50);
 	tree.printTree();
 	return (0);
 }
