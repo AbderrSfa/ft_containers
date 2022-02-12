@@ -166,7 +166,14 @@ private:
 			return search(node->right, key);			
 	};
 
-	Node<K,V>*	deleteNode(Node<K, V>* node, K key) {
+	Node<K, V>* getSuccessor(Node<K, V>* node) {
+		Node<K, V>* current = node;
+		while (current->left != NULL)
+			current = current->left;
+		return current;
+	};
+	
+	Node<K, V>* deleteNode(Node<K, V>* node, K key) {
 		if (node == NULL)
 			return NULL;
 		else if (key < node->key)
@@ -179,19 +186,29 @@ private:
 			if (node->left == NULL && node->right == NULL) {
 				delete node;
 				node = NULL;
-				return node;
 				std::cout << "No children\n";
 			}
 			else if (node->left == NULL) {
-				std::cout << "One right child\n";				
+				std::cout << "One right child\n";
+				Node<K, V>* temp = node;
+				node = node->right;
+				delete temp;
 			}
 			else if (node->right == NULL) {
 				std::cout << "One left child\n";
+				Node<K, V>* temp = node;
+				node = node->left;
+				delete temp;
 			}
 			else {
 				std::cout << "two children\n";
+				Node<K, V>* temp = getSuccessor(node->right);
+				node->key = temp->key;
+				node->value = temp->value;
+				node->right = deleteNode(node->right, temp->key);
 			}
 		}
+		return node;
 	};
 
 public:
@@ -228,15 +245,15 @@ public:
 int		main() {
 	AVLTree<int, char>	tree;
 
+	tree.add(40, 'd');
 	tree.add(38, 'b');
 	tree.add(52, 'a');
 	tree.add(25, 'c');
-	tree.add(40, 'd');
 	tree.add(61, 'e');
 	tree.add(74, 'f');
 	tree.add(35, 'h');
 	tree.add(68, 'i');
-	//tree.deleteNode(74);
+	//tree.deleteNode(40);
 	//std::cout << tree.search(53) << std::endl;
 	tree.printTree();
 	return (0);
