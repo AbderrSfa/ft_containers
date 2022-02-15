@@ -50,21 +50,21 @@ private:
 		}
 	};
 
-	void	print2DUtil(Node<K, V>* root, int space) {
-		if (root == NULL)
+	void	print2DUtil(Node<K, V>* node, int space) {
+		if (node == NULL)
 			return;
 		space += 20;
-		print2DUtil(root->right, space);
+		print2DUtil(node->right, space);
 		std::cout << std::endl;
 		for (int i = 10; i < space; i++)
 			std::cout << " ";
 		std::cout << GREEN;
-		if (root->parent)
-			std::cout << "(" << root->parent->key << ")<-";
+		if (node->parent)
+			std::cout << "(" << node->parent->key << ")<-";
 		std::cout << RESET;
-		std::cout << "{" << root->key << "} ";
-		std::cout << abs(maxHeight(root->left) - maxHeight(root->right)) << "\n";
-		print2DUtil(root->left, space);
+		std::cout << "{" << node->key << "} ";
+		std::cout << abs(maxHeight(node->left) - maxHeight(node->right)) << "\n";
+		print2DUtil(node->left, space);
 	};
 
 	Node<K, V>* rightLeftRotate(Node<K, V>* node) {
@@ -197,6 +197,37 @@ private:
 		return current;
 	};
 
+	Node<K, V>* tryThis(Node<K, V>* node) {
+		std::cout << "Gotcha: " << node->value << std::endl;
+		if (node->left == NULL && node->right == NULL) {
+			std::cout << "No children\n";
+			delete node;
+			node = NULL;
+		}
+		else if (node->left == NULL) {
+			std::cout << "One right child\n";
+			Node<K, V>* temp = node;
+			node = node->right;
+			node->parent = temp->parent;
+			delete temp;
+		}
+		else if (node->right == NULL) {
+			std::cout << "One left child\n";
+			Node<K, V>* temp = node;
+			node = node->left;
+			node->parent = temp->parent;
+			delete temp;
+		}
+		else {
+			std::cout << "two children\n";
+			Node<K, V>* temp = getMinSuccessor(node->right);
+			node->key = temp->key;
+			node->value = temp->value;
+			node->right = deleteNode(node->right, temp->key);
+		}
+		return node;
+	}
+	
 	Node<K, V>* deleteNode(Node<K, V>* node, K key) {
 		if (node == NULL)
 			return NULL;
@@ -211,34 +242,10 @@ private:
 			node->right = deleteNode(node->right, key);
 		else
 		{
-			std::cout << "Gotcha: " << node->value << std::endl;
-			if (node->left == NULL && node->right == NULL) {
-				std::cout << "No children\n";
-				delete node;
-				node = NULL;
-			}
-			else if (node->left == NULL) {
-				std::cout << "One right child\n";
-				Node<K, V>* temp = node;
-				node = node->right;
-				delete temp;
-			}
-			else if (node->right == NULL) {
-				std::cout << "One left child\n";
-				Node<K, V>* temp = node;
-				node = node->left;
-				delete temp;
-			}
-			else {
-				std::cout << "two children\n";
-				Node<K, V>* temp = getMinSuccessor(node->right);
-				node->key = temp->key;
-				node->value = temp->value;
-				node->right = deleteNode(node->right, temp->key);
-			}
+			node = tryThis(node);
 		}
-		if (temp)
-			checkBalance(temp);
+		// if (temp)
+		// 	checkBalance(temp);
 		return node;
 	};
 
@@ -269,7 +276,10 @@ public:
 	};
 
 	void	deleteNode(K key) {
+		//std::cout << getMinSuccessor(this->root->right)->key << std::endl;
+		//std::cout << getMaxSuccessor(this->root->left)->key << std::endl;
 		deleteNode(this->root, key);
+		checkBalance(getMinSuccessor(this->root->right));
 	};
 };
 
@@ -286,29 +296,34 @@ int		main() {
 	tree.add(74, 'f');
 	tree.add(35, 'h');
 	tree.add(68, 'i');
+	tree.add(88, 'j');
+	tree.add(49, 'k');
+	tree.add(55, 'l');
+	tree.add(65, 'm');
+	tree.add(58, 'n');
+	tree.add(47, 'o');
+	tree.add(67, 'p');
+	tree.add(11, 'q');
+	tree.add(59, 'r');
 
-	//tree.deleteNode(40);
 
-	tree.add(88, 'z');
-	tree.add(49, 'z');
-	tree.add(55, 'z');
-	tree.add(65, 'z');
-	tree.add(58, 'z');
-	tree.add(47, 'z');
-	tree.add(67, 'z');
-	tree.add(11, 'z');
-	tree.add(59, 'z');
-	tree.add(89, 'z');
-	tree.add(19, 'z');
-	tree.add(50, 'z');
-	tree.add(83, 'z');
-	tree.add(24, 'z');
-	tree.add(77, 'z');
-	tree.add(41, 'z');
-	tree.add(12, 'z');
-	tree.add(76, 'z');
-	tree.add(93, 'z');
-	tree.add(46, 'z');
+
+	// tree.deleteNode(11);
+	// tree.deleteNode(49);
+	// tree.deleteNode(58);
+	tree.deleteNode(88);
+
+	// tree.add(89, 'z');
+	// tree.add(19, 'z');
+	// tree.add(50, 'z');
+	// tree.add(83, 'z');
+	// tree.add(24, 'z');
+	// tree.add(77, 'z');
+	// tree.add(41, 'z');
+	// tree.add(12, 'z');
+	// tree.add(76, 'z');
+	// tree.add(93, 'z');
+	// tree.add(46, 'z');
 	std::cout << "\n== print whole tree == \n";
 	tree.printTree();
 	return (0);
