@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/15 17:36:41 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/15 18:07:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include "mapIt.hpp"
 # include "mapRevIt.hpp"
+# include "AVLTree.hpp"
 
 namespace ft
 {
@@ -45,77 +46,14 @@ namespace ft
 			typedef typename allocator_type::difference_type	difference_type;
 			typedef typename allocator_type::size_type			size_type;
 
-		protected:
-			struct bstNode
-			{
-				key_type	key;
-				mapped_type	value;
-				bool		isBlack;
-				bstNode*	left;
-				bstNode*	right;
-				bstNode*	parent;
-			};
-
-			bstNode *makeNewNode(value_type data)
-			{
-				bstNode *newNode = new bstNode();
-
-				newNode->key = data.first;
-				newNode->value = data.second;
-				newNode->isBlack = false;
-				newNode->left = NULL;
-				newNode->right = NULL;
-				newNode->parent = NULL;
-				return (newNode);
-			};
-			bstNode *addNode(bstNode *root, value_type data)
-			{
-				if (root == NULL) {
-					root = makeNewNode(data);
-					this->_nodeCount++;
-				}
-				else if (data.first <= root->key)
-					root->left = addNode(root->left, data);
-				else
-					root->right = addNode(root->right, data);
-				return (root);
-			};
-
-
-			void print2DUtil(bstNode *root, int space)
-			{
-				if (root == NULL)
-					return;
-				space += 10;
-				print2DUtil(root->right, space);
-				std::cout << std::endl;
-				for (int i = 10; i < space; i++)
-					std::cout << " ";
-				if (root->isBlack == false)
-					std::cout << RED;
-				std::cout << "{" << root->key << ", " << root->value << "}\n";
-				std::cout << RESET;
-				print2DUtil(root->left, space);
-			};
-			void print2D(bstNode *root)
-			{
-				print2DUtil(root, 0);
-			};
-
 		private:
-			bstNode*	_root;
-			size_type	_nodeCount;
+			AVLTree<key_type, mapped_type>*	_root;
+			size_type						_nodeCount;
 
 		public:
-			void	printTree() { print2D(this->_root); };
-
 			/* Constructors - Destructor - Assignment operator */
 			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _root(0), _nodeCount(0)
 			{
-/*				this->_root = insert(this->_root, {10, 'f'});
-				this->_root = insert(this->_root, {5, 'a'});
-				this->_root = insert(this->_root, {55, 'a'});
-				this->_root = insert(this->_root, {7, 'd'});*/
 			};
 
 			//template <class InputIterator>
