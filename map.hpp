@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 16:58:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 17:24:58 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ namespace ft
 			typedef typename allocator_type::size_type			size_type;
 
 		private:
-			AVLTree<value_type, key_compare, allocator_type>*	_root;
-			size_type						_nodeCount;
+			AVLTree<value_type, key_compare>	_root;
+			size_type							_nodeCount;
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _root(0), _nodeCount(0)
+			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _nodeCount(0)
 			{
 			};
 
-			void	printTree(void) { this->_root->printTree(); }
+			void	printTree(void) { this->_root.printTree(); }
 			
 			//template <class InputIterator>
 			//map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
@@ -88,8 +88,11 @@ namespace ft
 			//mapped_type	&operator[](const key_type &k) {};
 
 			/* Modifiers */
-			std::pair<iterator, bool>	insert(const value_type &val)
+			void	insert(const value_type &val)
 			{
+				this->_root.insert(val);
+				this->_nodeCount++;
+				return ;
 			};
 			//iterator				insert(iterator position, const value_type &val) {};
 			//template <class InputIterator>

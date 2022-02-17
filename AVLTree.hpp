@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AVLTreePair.hpp                                    :+:      :+:    :+:   */
+/*   AVLTree.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 16:52:50 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 17:23:54 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ public:
 	};
 };
 
-template <class T, class Compare, class Alloc>
+template <class T, class Compare, class Alloc = std::allocator<Node<T> > >
 class AVLTree {
 private:
 	typedef typename T::first_type	first_type;
