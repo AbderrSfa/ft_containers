@@ -1,47 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AVLTree.hpp                                        :+:      :+:    :+:   */
+/*   AVLTreePair.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 15:02:22 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:52:50 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AVL_TREE_HPP
-# define AVL_TREE_HPP
+#ifndef AVL_TREE_PAIR_HPP
+# define AVL_TREE_PAIR_HPP
 
 # include <iostream>
+# define RESET "\033[0m"
+# define BLACK "\033[30m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+# define WHITE "\033[37m"
 
-template <class K, class V>
+template <class T>
 class Node {
 public:
-	K		key;
-	V		value;
+	T		data;
 	Node*	left;
 	Node*	right;
 	int		height;
 
 
-	Node(K objKey, V objVal) {
-		key = objKey;
-		value = objVal;
+	Node(T obj) {
+		data = obj;
 		left = NULL;
 		right = NULL;
 		height = 1;
 	};
-
 };
 
-template <class K, class V, class Alloc>
+template <class T, class Compare, class Alloc>
 class AVLTree {
 private:
-	Node<K, V>*	root;
-	size_t		CurrentSize;
+	typedef typename T::first_type	first_type;
+	Node<T>*			root;
+	size_t				CurrentSize;
 
-	int	getHeight(Node<K, V>* node) {
+	int	getHeight(Node<T>* node) {
 		if (node == NULL)
 			return 0;
 		return node->height;
@@ -51,15 +58,15 @@ private:
 		return (a > b) ? a : b;
 	};
 
-	int	getBalanceFactor(Node<K, V>* node) {
+	int	getBalanceFactor(Node<T>* node) {
 		if (node == NULL)
 			return 0;
 		return getHeight(node->left) - getHeight(node->right);
 	};
 
-	Node<K, V>* rightRotate(Node<K, V>* node) {
-		Node<K, V>*	temp = node->left;
-		Node<K, V>*	temp2 = temp->right;
+	Node<T>* rightRotate(Node<T>* node) {
+		Node<T>*	temp = node->left;
+		Node<T>*	temp2 = temp->right;
 		node->left = temp2;
 		temp->right = node;
 		node->height = max(getHeight(node->left),
@@ -69,9 +76,9 @@ private:
 		return temp;
 	};
 
-	Node<K, V>* leftRotate(Node<K, V>* node) {
-		Node<K, V>*	temp = node->right;
-		Node<K, V>*	temp2 = temp->left;
+	Node<T>* leftRotate(Node<T>* node) {
+		Node<T>*	temp = node->right;
+		Node<T>*	temp2 = temp->left;
 		node->right = temp2;
 		temp->left = node;
 		node->height = max(getHeight(node->left),
@@ -80,11 +87,11 @@ private:
 			getHeight(temp->right)) + 1;
 		return temp;
 	};
-
-	Node<K, V>* checkBalance(Node<K, V>* node, K key) {
+	
+	Node<T>* checkBalance(Node<T>* node, first_type key) {
 		int	balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
-			if (key < node->left->key)
+			if (key < node->left->data.first)
 				return rightRotate(node);
 			else {
 				node->left = leftRotate(node->left);
@@ -92,7 +99,7 @@ private:
 			}
 		}
 		else if (balanceFactor < -1) {
-			if (key > node->right->key)
+			if (key > node->right->data.first)
 				return leftRotate(node);
 			else {
 				node->right = rightRotate(node->right);
@@ -102,14 +109,14 @@ private:
 		return node;
 	};
 
-	Node<K, V>* getMinSuccessor(Node<K, V>* node) {
-		Node<K, V>*	current = node;
+	Node<T>* getMinSuccessor(Node<T>* node) {
+		Node<T>*	current = node;
 		while (current->left != NULL)
 			current = current->left;
 		return current;
 	};
-
-	Node<K, V>* reBalance(Node<K, V>* node) {
+	
+	Node<T>* reBalance(Node<T>* node) {
 		int balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
 			if (getBalanceFactor(node->left) >= 0)
@@ -130,27 +137,17 @@ private:
 		return node;
 	};
 
-	bool	search(Node<K, V>* node, K key) {
-		if (node == NULL)
-			return false;
-		else if (node->key == key)
-			return true;
-		else if (key < node->key)
-			return search(node->left, key);
-		else
-			return search(node->right, key);
-	};
-
-	Node<K, V>* deleteNode(Node<K, V>* node, K key) {
+	
+	Node<T>* deleteNode(Node<T>* node, first_type key) {
 		if (node == NULL)
 			return node;
-		if (key < node->key)
+		if (key < node->data.first)
 			node->left = deleteNode(node->left, key);
-		else if (key > node->key)
+		else if (key > node->data.first)
 			node->right = deleteNode(node->right, key);
 		else {
 			if ((node->left == NULL) || (node->right == NULL)) {
-				Node<K, V>*	temp = node->left ? node->left : node->right;
+				Node<T>*	temp = node->left ? node->left : node->right;
 				if (temp == NULL) {
 					temp = node;
 					node = NULL;
@@ -162,10 +159,9 @@ private:
 				this->CurrentSize--;
 			}
 			else {
-				Node<K, V>*	temp = getMinSuccessor(node->right);
-				node->key = temp->key;
-				node->value = temp->value;
-				node->right = deleteNode(node->right, temp->key);
+				Node<T>*	temp = getMinSuccessor(node->right);
+				node->data = temp->data;
+				node->right = deleteNode(node->right, temp->data.first);
 			}
 		}
 		if (node == NULL)
@@ -174,25 +170,36 @@ private:
 		return reBalance(node);
 	};
 
-	Node<K, V>* addNode(Node<K, V>* node, K key, V value) {
+	bool	search(Node<T>* node, first_type key) {
+		if (node == NULL)
+			return false;
+		else if (node->data.first == key)
+			return true;
+		else if (key < node->data.first)
+			return search(node->left, key);
+		else
+			return search(node->right, key);
+	};
+
+	Node<T>* addNode(Node<T>* node, T pair, first_type key) {
 		if (node == NULL)
 		{
-			Node<K, V>*	ret = Alloc().allocate(1);
-			Alloc().construct(ret, Node<K, V>(key, value));
+			Node<T>*	ret = Alloc().allocate(1);
+			Alloc().construct(ret, Node<T>(pair));
 			this->CurrentSize++;
 			return ret;
 		}
-		if (key < node->key)
-			node->left = addNode(node->left, key, value);
-		else if (key > node->key)
-			node->right = addNode(node->right, key, value);
+		if (key < node->data.first)
+			node->left = addNode(node->left, pair, key);
+		else if (key > node->data.first)
+			node->right = addNode(node->right, pair, key);
 		else
 			return node;
-		node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+		node->height = 1 + max(getHeight(node->left), getHeight(node->right));		
 		return checkBalance(node, key);
 	};
 
-	void	print2DUtil(Node<K, V>* node, int space) {
+	void	print2DUtil(Node<T>* node, int space) {
 		if (node == NULL)
 			return;
 		space += 20;
@@ -200,31 +207,31 @@ private:
 		std::cout << std::endl;
 		for (int i = 10; i < space; i++)
 			std::cout << " ";
-		std::cout << "{" << node->key << " " << node->value << "} ";
+		std::cout << "{" << node->data.first << " " << node->data.second << "} ";
 		std::cout << GREEN;
 		std::cout << node->height << "\n";
 		std::cout << RESET;
 		print2DUtil(node->left, space);
 	};
-
+	
 public:
 	AVLTree() {
 		this->root = NULL;
 		this->CurrentSize = 0;
 	};
 
-	void	insert(K objKey, V objVal) {
-		this->root = addNode(this->root, objKey, objVal);
+	void	insert(T pair) {
+		this->root = addNode(this->root, pair, pair.first);
 	};
 
-	bool	search(K key) {
+	bool	search(first_type key) {
 		return (search(this->root, key));
 	};
-
-	void	deleteNode(K objKey) {
-		this->root = deleteNode(this->root, objKey);
+	
+	void	deleteNode(first_type key) {
+		this->root = deleteNode(this->root, key);
 	};
-
+	
 	void	printTree() {
 		print2DUtil(this->root, 0);
 	};

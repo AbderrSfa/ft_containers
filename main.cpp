@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 16:56:46 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:58:03 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "stack.hpp"
 #include <map>
 #include "map.hpp"
-#include "AVLTreePair.hpp"
+#include "AVLTree.hpp"
 
 int main()
 {
