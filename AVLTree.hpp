@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 12:30:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 12:47:45 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ template <class K, class V, class Alloc>
 class AVLTree {
 private:
 	typedef Alloc	allocator_type;
-	Node<K, V>* root;
+	Node<K, V>*	root;
 	size_t		CurrentSize;
 
 	int	getHeight(Node<K, V>* node) {
@@ -58,8 +58,8 @@ private:
 	};
 
 	Node<K, V>* rightRotate(Node<K, V>* node) {
-		Node<K, V>* temp = node->left;
-		Node<K, V>* temp2 = temp->right;
+		Node<K, V>*	temp = node->left;
+		Node<K, V>*	temp2 = temp->right;
 		node->left = temp2;
 		temp->right = node;
 		node->height = max(getHeight(node->left),
@@ -70,8 +70,8 @@ private:
 	}
 
 	Node<K, V>* leftRotate(Node<K, V>* node) {
-		Node<K, V>* temp = node->right;
-		Node<K, V>* temp2 = temp->left;
+		Node<K, V>*	temp = node->right;
+		Node<K, V>*	temp2 = temp->left;
 		node->right = temp2;
 		temp->left = node;
 		node->height = max(getHeight(node->left),
@@ -83,7 +83,6 @@ private:
 
 	Node<K, V>* checkBalance(Node<K, V>* node, K key) {
 		int	balanceFactor = getBalanceFactor(node);
-
 		if (balanceFactor > 1) {
 			if (key < node->left->key)
 				return rightRotate(node);
@@ -104,7 +103,7 @@ private:
 	};
 
 	Node<K, V>* getMinSuccessor(Node<K, V>* node) {
-		Node<K, V>* current = node;
+		Node<K, V>*	current = node;
 		while (current->left != NULL)
 			current = current->left;
 		return current;
@@ -112,7 +111,6 @@ private:
 
 	Node<K, V>* reBalance(Node<K, V>* node) {
 		int balanceFactor = getBalanceFactor(node);
-
 		if (balanceFactor > 1) {
 			if (getBalanceFactor(node->left) >= 0)
 				return rightRotate(node);
@@ -152,7 +150,7 @@ private:
 			node->right = deleteNode(node->right, key);
 		else {
 			if ((node->left == NULL) || (node->right == NULL)) {
-				Node<K, V>* temp = node->left ? node->left : node->right;
+				Node<K, V>*	temp = node->left ? node->left : node->right;
 				if (temp == NULL) {
 					temp = node;
 					node = NULL;
@@ -161,9 +159,10 @@ private:
 					*node = *temp;
 				Alloc().destroy(temp);
 				Alloc().deallocate(temp, 1);
+				this->CurrentSize--;
 			}
 			else {
-				Node<K, V>* temp = getMinSuccessor(node->right);
+				Node<K, V>*	temp = getMinSuccessor(node->right);
 				node->key = temp->key;
 				node->value = temp->value;
 				node->right = deleteNode(node->right, temp->key);
@@ -178,8 +177,9 @@ private:
 	Node<K, V>* addNode(Node<K, V>* node, K key, V value) {
 		if (node == NULL)
 		{
-			Node<K, V>* ret = Alloc().allocate(1);
+			Node<K, V>*	ret = Alloc().allocate(1);
 			Alloc().construct(ret, Node<K, V>(key, value));
+			this->CurrentSize++;
 			return ret;
 		}
 		if (key < node->key)

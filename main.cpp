@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 12:38:23 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 12:44:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int main()
 			tree.insert(59, 'q');
 			tree.deleteNode(88);
 			tree.printTree();
-
 		}
 		catch (const std::exception &e)
 		{
