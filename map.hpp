@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 12:40:56 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:56:01 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <iostream>
 # include "mapIt.hpp"
 # include "mapRevIt.hpp"
-# include "AVLTree.hpp"
+# include "AVLTreePair.hpp"
 
 namespace ft
 {
@@ -47,7 +47,7 @@ namespace ft
 			typedef typename allocator_type::size_type			size_type;
 
 		private:
-			AVLTree<key_type, mapped_type, allocator_type>*	_root;
+			AVLTree<value_type, key_compare, allocator_type>*	_root;
 			size_type						_nodeCount;
 
 		public:
@@ -56,6 +56,8 @@ namespace ft
 			{
 			};
 
+			void	printTree(void) { this->_root->printTree(); }
+			
 			//template <class InputIterator>
 			//map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
 			//map(const map& x) {};
@@ -88,9 +90,6 @@ namespace ft
 			/* Modifiers */
 			std::pair<iterator, bool>	insert(const value_type &val)
 			{
-				iterator	it;
-				this->_root = addNode(this->_root, val);
-				return (std::pair<iterator, bool>(it, false));
 			};
 			//iterator				insert(iterator position, const value_type &val) {};
 			//template <class InputIterator>

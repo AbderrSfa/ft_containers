@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 12:47:45 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 15:02:22 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ public:
 template <class K, class V, class Alloc>
 class AVLTree {
 private:
-	typedef Alloc	allocator_type;
 	Node<K, V>*	root;
 	size_t		CurrentSize;
 
@@ -47,6 +46,7 @@ private:
 			return 0;
 		return node->height;
 	};
+
 	int max(int a, int b) {
 		return (a > b) ? a : b;
 	};
@@ -67,7 +67,7 @@ private:
 		temp->height = max(getHeight(temp->left),
 			getHeight(temp->right)) + 1;
 		return temp;
-	}
+	};
 
 	Node<K, V>* leftRotate(Node<K, V>* node) {
 		Node<K, V>*	temp = node->right;
@@ -79,7 +79,7 @@ private:
 		temp->height = max(getHeight(temp->left),
 			getHeight(temp->right)) + 1;
 		return temp;
-	}
+	};
 
 	Node<K, V>* checkBalance(Node<K, V>* node, K key) {
 		int	balanceFactor = getBalanceFactor(node);
