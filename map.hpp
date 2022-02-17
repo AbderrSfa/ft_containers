@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/15 18:07:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 12:17:12 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft
 			typedef typename allocator_type::size_type			size_type;
 
 		private:
-			AVLTree<key_type, mapped_type>*	_root;
+			AVLTree<key_type, mapped_type, allocator_type>*	_root;
 			size_type						_nodeCount;
 
 		public:

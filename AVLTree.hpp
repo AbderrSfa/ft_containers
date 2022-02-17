@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/15 18:10:02 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/17 12:30:19 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ class Node {
 public:
 	K		key;
 	V		value;
-	Node* left;
-	Node* right;
+	Node*	left;
+	Node*	right;
 	int		height;
 
 
@@ -35,9 +35,10 @@ public:
 
 };
 
-template <class K, class V>
+template <class K, class V, class Alloc>
 class AVLTree {
 private:
+	typedef Alloc	allocator_type;
 	Node<K, V>* root;
 	size_t		CurrentSize;
 
@@ -158,7 +159,8 @@ private:
 				}
 				else
 					*node = *temp;
-				delete temp;
+				Alloc().destroy(temp);
+				Alloc().deallocate(temp, 1);
 			}
 			else {
 				Node<K, V>* temp = getMinSuccessor(node->right);
@@ -175,7 +177,11 @@ private:
 
 	Node<K, V>* addNode(Node<K, V>* node, K key, V value) {
 		if (node == NULL)
-			return (new Node<K, V>(key, value));
+		{
+			Node<K, V>* ret = Alloc().allocate(1);
+			Alloc().construct(ret, Node<K, V>(key, value));
+			return ret;
+		}
 		if (key < node->key)
 			node->left = addNode(node->left, key, value);
 		else if (key > node->key)
