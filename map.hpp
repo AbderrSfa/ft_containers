@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 17:24:58 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 12:17:09 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft
 			typedef typename allocator_type::size_type			size_type;
 
 		private:
-			AVLTree<value_type, key_compare>	_root;
+			AVLTree<value_type, key_compare>	_tree;
 			size_type							_nodeCount;
 
 		public:
@@ -56,7 +56,7 @@ namespace ft
 			{
 			};
 
-			void	printTree(void) { this->_root.printTree(); }
+			void	printTree(void) { this->_tree.printTree(); }
 			
 			//template <class InputIterator>
 			//map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
@@ -65,14 +65,14 @@ namespace ft
 			//map& operator=(const map& x) {};
 
 			/* Iterators */
-			//iterator				begin()			{ return iterator(this->_root->data); };
-			//const_iterator			begin() const	{ return const_iterator(this->_root->data); };
-			//iterator				end()			{  };
-			//const_iterator			end() const		{  };
-			//reverse_iterator		rbegin()		{ return reverse_iterator(this->end()); };
-			//const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(this->end()); };
-			//reverse_iterator		rend()			{ return reverse_iterator(this->begin()); };
-			//const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
+			// iterator				begin()			{ return iterator(this->_tree->root->data); };
+			// const_iterator			begin() const	{ return const_iterator(this->_tree->root->data); };
+			// iterator				end()			{  };
+			// const_iterator			end() const		{  };
+			// reverse_iterator		rbegin()		{ return reverse_iterator(this->end()); };
+			// const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(this->end()); };
+			// reverse_iterator		rend()			{ return reverse_iterator(this->begin()); };
+			// const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
 
 			/* Capacity */
 			bool		empty() const
@@ -90,7 +90,7 @@ namespace ft
 			/* Modifiers */
 			void	insert(const value_type &val)
 			{
-				this->_root.insert(val);
+				this->_tree.insert(val);
 				this->_nodeCount++;
 				return ;
 			};
@@ -110,7 +110,10 @@ namespace ft
 			/* Operations */
 			//iterator								find(const key_type &k) {};
 			//const_iterator							find(const key_type &k) const {};
-			//size_type								count(const key_type &k) const {};
+			size_type								count(const key_type &k) const
+			{
+				return _tree.search(k);
+			};
 			//iterator								lower_bound(const key_type &k) {};
 			//const_iterator							lower_bound(const key_type &k) const {};
 			//iterator								upper_bound(const key_type &k) {};

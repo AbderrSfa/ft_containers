@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/17 17:23:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 12:19:38 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ private:
 	Node<T>*			root;
 	size_t				CurrentSize;
 
-	int	getHeight(Node<T>* node) {
+	int	getHeight(Node<T>* node) const {
 		if (node == NULL)
 			return 0;
 		return node->height;
 	};
 
-	int max(int a, int b) {
+	int max(int a, int b) const {
 		return (a > b) ? a : b;
 	};
 
-	int	getBalanceFactor(Node<T>* node) {
+	int	getBalanceFactor(Node<T>* node) const {
 		if (node == NULL)
 			return 0;
 		return getHeight(node->left) - getHeight(node->right);
@@ -109,7 +109,7 @@ private:
 		return node;
 	};
 
-	Node<T>* getMinSuccessor(Node<T>* node) {
+	Node<T>* getMinSuccessor(Node<T>* node) const {
 		Node<T>*	current = node;
 		while (current->left != NULL)
 			current = current->left;
@@ -170,7 +170,7 @@ private:
 		return reBalance(node);
 	};
 
-	bool	search(Node<T>* node, first_type key) {
+	bool	search(Node<T>* node, first_type key) const {
 		if (node == NULL)
 			return false;
 		else if (node->data.first == key)
@@ -199,7 +199,7 @@ private:
 		return checkBalance(node, key);
 	};
 
-	void	print2DUtil(Node<T>* node, int space) {
+	void	print2DUtil(Node<T>* node, int space) const {
 		if (node == NULL)
 			return;
 		space += 20;
@@ -224,7 +224,7 @@ public:
 		this->root = addNode(this->root, pair, pair.first);
 	};
 
-	bool	search(first_type key) {
+	bool	search(first_type key) const {
 		return (search(this->root, key));
 	};
 	
@@ -232,7 +232,7 @@ public:
 		this->root = deleteNode(this->root, key);
 	};
 	
-	void	printTree() {
+	void	printTree() const {
 		print2DUtil(this->root, 0);
 	};
 };
