@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/18 13:57:28 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 16:04:18 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ namespace ft
 
 		private:
 			AVLTree<value_type, key_compare>	_tree;
-			size_type							_nodeCount;
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _nodeCount(0) {};
+			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) {};
 
 			void	printTree(void) { this->_tree.printTree(); }
 			
@@ -79,34 +78,28 @@ namespace ft
 					return true;
 				return false;
 			};
-			size_type	size() const { return (this->_nodeCount); };
+			size_type	size() const { return this->_tree.size(); };
 			size_type	max_size() const { return ((allocator_type().max_size()) / 3); };
 
 			/* Element access */
 			//mapped_type	&operator[](const key_type &k) {};
 
 			/* Modifiers */
-			void	insert(const value_type &val)
-			{
-				this->_tree.insert(val);
-				this->_nodeCount++;
-				return ;
-			};
+			void	insert(const value_type &val) { this->_tree.insert(val); };
 			//iterator				insert(iterator position, const value_type &val) {};
-			//template <class InputIterator>
-			//void					insert(InputIterator first, InputIterator last) {};
+			// template <class InputIterator>
+			// void					insert(InputIterator first, InputIterator last) {};
 			//void					erase(iterator position) {};
 			size_type				erase(const key_type &k)
 			{
 				if (!this->count(k))
 					return 0;
 				this->_tree.deleteNode(k);
-				this->_nodeCount--;
 				return 1;
 			};
 			//void					erase(iterator first, iterator last) {};
 			//void					swap(map &x) {};
-			//void					clear() {};
+			void					clear() { this->_tree.clear(); };
 
 			/* Observers */
 			key_compare		key_comp() const { return key_compare(); };
@@ -121,10 +114,15 @@ namespace ft
 			};
 			const_iterator							find(const key_type &k) const {};
 			size_type								count(const key_type &k) const { return _tree.search(k); };
-			iterator								lower_bound(const key_type &k) {};
-			const_iterator							lower_bound(const key_type &k) const {};
-			iterator								upper_bound(const key_type &k) {};
-			const_iterator							upper_bound(const key_type &k) const {};
+			value_type								lower_bound(const key_type &k)
+			{
+				if (this->count(k))
+					return this->_tree.find(k);
+				return value_type(0, '\0');
+			};
+			// const_iterator							lower_bound(const key_type &k) const {};
+			value_type								upper_bound(const key_type &k) {};
+			// const_iterator							upper_bound(const key_type &k) const {};
 			//pair<iterator, iterator>				equal_range(const key_type &k) {};
 			//pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {};
 

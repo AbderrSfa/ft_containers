@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/18 13:54:09 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 16:04:43 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ public:
 
 
 	Node(T obj) {
-		data = obj;
-		left = NULL;
-		right = NULL;
-		height = 1;
+		this->data = obj;
+		this->left = NULL;
+		this->right = NULL;
+		this->height = 1;
 	};
 };
 
@@ -45,8 +45,8 @@ template <class T, class Compare, class Alloc = std::allocator<Node<T> > >
 class AVLTree {
 private:
 	typedef typename T::first_type	first_type;
-	Node<T>*			root;
-	size_t				CurrentSize;
+	Node<T>*			_root;
+	size_t				_CurrentSize;
 
 	int	getHeight(Node<T>* node) const {
 		if (node == NULL)
@@ -137,6 +137,15 @@ private:
 		return node;
 	};
 
+	void	deleteTree(Node<T>* node)
+	{
+		if (node == NULL)
+			return;
+		deleteTree(node->left);
+		deleteTree(node->right);
+		Alloc().destroy(node);
+		Alloc().deallocate(node, 1);
+	}
 	
 	Node<T>* deleteNode(Node<T>* node, first_type key) {
 		if (node == NULL)
@@ -156,7 +165,7 @@ private:
 					*node = *temp;
 				Alloc().destroy(temp);
 				Alloc().deallocate(temp, 1);
-				this->CurrentSize--;
+				this->_CurrentSize--;
 			}
 			else {
 				Node<T>*	temp = getMinSuccessor(node->right);
@@ -197,7 +206,7 @@ private:
 		{
 			Node<T>*	ret = Alloc().allocate(1);
 			Alloc().construct(ret, Node<T>(pair));
-			this->CurrentSize++;
+			this->_CurrentSize++;
 			return ret;
 		}
 		if (key < node->data.first)
@@ -226,30 +235,14 @@ private:
 	};
 	
 public:
-	AVLTree() {
-		this->root = NULL;
-		this->CurrentSize = 0;
-	};
-
-	void	insert(T pair) {
-		this->root = addNode(this->root, pair, pair.first);
-	};
-
-	bool	search(first_type key) const {
-		return (search(this->root, key));
-	};
-
-	T		find(first_type key) {
-		return (find(this->root, key));
-	};
-
-	void	deleteNode(first_type key) {
-		this->root = deleteNode(this->root, key);
-	};
-	
-	void	printTree() const {
-		print2DUtil(this->root, 0);
-	};
+	AVLTree()								{ this->_root = NULL; this->_CurrentSize = 0; };
+	void	insert(T pair)					{ this->_root = addNode(this->_root, pair, pair.first); };
+	size_t	size() const					{ return this->_CurrentSize; };
+	bool	search(first_type key) const	{ return (search(this->_root, key)); };
+	T		find(first_type key)			{ return (find(this->_root, key)); };
+	void	deleteNode(first_type key)		{ this->_root = deleteNode(this->_root, key); };
+	void	clear()							{ deleteTree(this->_root); this->_CurrentSize = 0; };
+	void	printTree() const				{ print2DUtil(this->_root, 0); };
 };
 
 #endif
