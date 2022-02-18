@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/18 12:20:11 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 13:54:22 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ int main()
 			mp.insert(std::pair<int, char>(38, 'a'));
 			mp.insert(std::pair<int, char>(52, 'c'));
 
-			std::cout << mp.count(0) << std::endl;
+			std::cout << mp.find(48)->second << std::endl;
 		}
 		catch (const std::exception &e)
 		{
 			std::cerr << e.what() << '\n';
 		}
 	}
-
 	{
 		try
 		{
@@ -48,7 +47,8 @@ int main()
 			mp.insert(std::pair<int, char>(38, 'a'));
 			mp.insert(std::pair<int, char>(52, 'c'));
 
-			std::cout << mp.count(0) << std::endl;
+			std::cout << mp.find(48).second << std::endl;
+
 			// mp.insert(std::pair<int, char>(25, 'd'));
 			// mp.insert(std::pair<int, char>(74, 'f'));
 			// mp.insert(std::pair<int, char>(35, 'g'));
@@ -72,6 +72,5 @@ int main()
 			std::cerr << e.what() << '\n';
 		}
 	}
-
 	return 0;
 }

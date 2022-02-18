@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/18 12:19:38 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 13:54:09 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,17 @@ private:
 		return reBalance(node);
 	};
 
+	T		find(Node<T>* node, first_type key) {
+		if (node == NULL)
+			return node->data;
+		else if (node->data.first == key)
+			return node->data;
+		else if (key < node->data.first)
+			return find(node->left, key);
+		else
+			return find(node->right, key);
+	}
+	
 	bool	search(Node<T>* node, first_type key) const {
 		if (node == NULL)
 			return false;
@@ -227,7 +238,11 @@ public:
 	bool	search(first_type key) const {
 		return (search(this->root, key));
 	};
-	
+
+	T		find(first_type key) {
+		return (find(this->root, key));
+	};
+
 	void	deleteNode(first_type key) {
 		this->root = deleteNode(this->root, key);
 	};

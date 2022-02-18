@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/18 12:17:09 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/18 13:57:28 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ namespace ft
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _nodeCount(0)
-			{
-			};
+			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _nodeCount(0) {};
 
 			void	printTree(void) { this->_tree.printTree(); }
 			
@@ -98,7 +96,14 @@ namespace ft
 			//template <class InputIterator>
 			//void					insert(InputIterator first, InputIterator last) {};
 			//void					erase(iterator position) {};
-			//size_type				erase(const key_type &k) {};
+			size_type				erase(const key_type &k)
+			{
+				if (!this->count(k))
+					return 0;
+				this->_tree.deleteNode(k);
+				this->_nodeCount--;
+				return 1;
+			};
 			//void					erase(iterator first, iterator last) {};
 			//void					swap(map &x) {};
 			//void					clear() {};
@@ -108,18 +113,20 @@ namespace ft
 			//value_compare	value_comp() const {};
 
 			/* Operations */
-			//iterator								find(const key_type &k) {};
-			//const_iterator							find(const key_type &k) const {};
-			size_type								count(const key_type &k) const
+			value_type								find(const key_type &k)
 			{
-				return _tree.search(k);
+				if (!this->count(k))
+					return value_type(0, '\0');
+				return this->_tree.find(k);
 			};
-			//iterator								lower_bound(const key_type &k) {};
-			//const_iterator							lower_bound(const key_type &k) const {};
-			//iterator								upper_bound(const key_type &k) {};
-			//const_iterator							upper_bound(const key_type &k) const {};
-			//pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {};
+			const_iterator							find(const key_type &k) const {};
+			size_type								count(const key_type &k) const { return _tree.search(k); };
+			iterator								lower_bound(const key_type &k) {};
+			const_iterator							lower_bound(const key_type &k) const {};
+			iterator								upper_bound(const key_type &k) {};
+			const_iterator							upper_bound(const key_type &k) const {};
 			//pair<iterator, iterator>				equal_range(const key_type &k) {};
+			//pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {};
 
 			/* Allocator */
 			allocator_type	get_allocator() const { return allocator_type(); };
