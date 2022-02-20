@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:37:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/15 17:37:10 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/20 01:04:18 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 namespace ft
 {
 	template <class T>
-	class vectorIt : public iterator<std::random_access_iterator_tag, T> {
+	class vectorIt : public std::iterator<std::random_access_iterator_tag, T> {
 		public:
 			typedef T												iterator_type;
 			typedef typename iterator_traits<T>::difference_type	difference_type;

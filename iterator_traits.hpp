@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:32 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/20 00:57:11 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/20 01:03:45 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@
 
 namespace ft
 {
-	template <
-		class Category,
-		class T,
-		class Distance = std::ptrdiff_t,
-		class Pointer = T*,
-		class Reference = T& >
-	struct iterator
-	{
-		typedef T			value_type;
-		typedef Distance	difference_type;
-		typedef	Pointer		pointer;
-		typedef	Reference	reference;
-		typedef	Category	iterator_category;
-	};
-
 	template <class Iterator>
 	struct iterator_traits
 	{

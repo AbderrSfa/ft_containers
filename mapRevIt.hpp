@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:49 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/15 17:36:50 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/20 01:04:14 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 namespace ft
 {
 	template <class T>
-	class mapRevIt : public iterator<std::bidirectional_iterator_tag, T> {
+	class mapRevIt : public std::iterator<std::bidirectional_iterator_tag, T> {
 		public:
 			typedef T    											iterator_type;
 			typedef typename iterator_traits<T>::difference_type	difference_type;
