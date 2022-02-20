@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/18 16:04:43 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/20 00:50:54 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ public:
 	int		height;
 
 
-	Node(T obj) {
-		this->data = obj;
-		this->left = NULL;
-		this->right = NULL;
-		this->height = 1;
-	};
+	Node(T obj) : data(obj), left(NULL), right(NULL), height(1) {};
 };
 
 template <class T, class Compare, class Alloc = std::allocator<Node<T> > >
