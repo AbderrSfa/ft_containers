@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/20 00:59:59 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 14:01:43 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "mapIt.hpp"
 # include "mapRevIt.hpp"
 # include "AVLTree.hpp"
+# include "pair.hpp"
 
 namespace ft
 {

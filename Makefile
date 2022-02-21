@@ -6,7 +6,7 @@
 #    By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/13 11:24:13 by asfaihi           #+#    #+#              #
-#    Updated: 2022/02/17 12:35:52 by asfaihi          ###   ########.fr        #
+#    Updated: 2022/02/21 14:04:04 by asfaihi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ FLAGS = -Wall -Wextra -Werror
 
 CPP_STANDARD = -std=c++98
 
-VEC_HEADERS = iterator_traits.hpp vectorIt.hpp vectorRevIt.hpp vector.hpp
-STACK_HEADERS = stack.hpp
-MAP_HEADERS = AVLTree.hpp mapIt.hpp mapRevIt.hpp map.hpp
+VEC_HEADERS = vector/iterator_traits.hpp vector/vectorIt.hpp vector/vectorRevIt.hpp vector/vector.hpp
+STACK_HEADERS = stack/stack.hpp
+MAP_HEADERS = map/iterator_traits.hpp map/pair.hpp map/AVLTree.hpp map/mapIt.hpp map/mapRevIt.hpp map/map.hpp
 
 all: $(NAME)
 

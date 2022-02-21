@@ -6,18 +6,16 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/20 00:47:48 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 14:01:50 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
-#include "vector.hpp"
+#include "vector/vector.hpp"
 #include <stack>
-#include "stack.hpp"
+#include "stack/stack.hpp"
 #include <map>
-#include "map.hpp"
-#include "AVLTree.hpp"
-#include "pair.hpp"
+#include "map/map.hpp"
 
 int main()
 {
@@ -65,6 +63,8 @@ int main()
 			mp.erase(25);
 			mp.erase(35);
 			mp.printTree();
+
+			ft::vector<int>	vec(10, 5);
 		}
 		catch (const std::exception &e)
 		{
