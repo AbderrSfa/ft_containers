@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AVLTree.hpp                                        :+:      :+:    :+:   */
+/*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 14:06:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 17:49:58 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AVL_TREE_PAIR_HPP
-# define AVL_TREE_PAIR_HPP
+#ifndef TREE_HPP
+# define TREE_HPP
 
 # include <iostream>
-# define RESET "\033[0m"
-# define BLACK "\033[30m"
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define BLUE "\033[34m"
-# define MAGENTA "\033[35m"
-# define CYAN "\033[36m"
-# define WHITE "\033[37m"
 
 template <class T>
 class Node {
@@ -223,9 +214,9 @@ private:
 		for (int i = 10; i < space; i++)
 			std::cout << " ";
 		std::cout << "{" << node->data.first << " " << node->data.second << "} ";
-		std::cout << GREEN;
+		std::cout << "\033[32m";
 		std::cout << node->height << "\n";
-		std::cout << RESET;
+		std::cout << "\033[0m";
 		print2DUtil(node->left, space);
 	};
 	

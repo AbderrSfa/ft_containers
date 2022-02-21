@@ -6,12 +6,12 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:12:04 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 17:15:57 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 17:48:21 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_HPP
-# define ITERATOR_HPP
+#ifndef VEC_ITERATOR_HPP
+# define VEC_ITERATOR_HPP
 
 namespace ft
 {
