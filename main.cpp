@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 14:01:50 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 15:17:21 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,35 @@ int main()
 		try
 		{
 			std::cout << "========= MINE =========" << std::endl;
-			ft::map<int, char> mp;
+			// ft::map<int, char> mp;
 
-			mp.insert(std::make_pair(40, 'b'));
-			mp.insert(std::make_pair(38, 'a'));
-			mp.insert(std::make_pair(52, 'c'));
-			mp.insert(std::make_pair(25, 'd'));
-			mp.insert(std::make_pair(74, 'f'));
-			mp.insert(std::make_pair(35, 'g'));
-			mp.insert(std::make_pair(68, 'h'));
-			mp.insert(std::make_pair(61, 'e'));
-			mp.insert(std::make_pair(88, 'i'));
-			mp.insert(std::make_pair(49, 'j'));
-			mp.insert(std::make_pair(55, 'k'));
-			mp.insert(std::make_pair(65, 'l'));
-			mp.insert(std::make_pair(58, 'm'));
-			mp.insert(std::make_pair(47, 'n'));
-			mp.insert(std::make_pair(67, 'o'));
-			mp.insert(std::make_pair(11, 'p'));
-			mp.insert(std::make_pair(59, 'q'));
-			mp.erase(25);
-			mp.erase(35);
-			mp.printTree();
+			// mp.insert(std::make_pair(40, 'b'));
+			// mp.insert(std::make_pair(38, 'a'));
+			// mp.insert(std::make_pair(52, 'c'));
+			// mp.insert(std::make_pair(25, 'd'));
+			// mp.insert(std::make_pair(74, 'f'));
+			// mp.insert(std::make_pair(35, 'g'));
+			// mp.insert(std::make_pair(68, 'h'));
+			// mp.insert(std::make_pair(61, 'e'));
+			// mp.insert(std::make_pair(88, 'i'));
+			// mp.insert(std::make_pair(49, 'j'));
+			// mp.insert(std::make_pair(55, 'k'));
+			// mp.insert(std::make_pair(65, 'l'));
+			// mp.insert(std::make_pair(58, 'm'));
+			// mp.insert(std::make_pair(47, 'n'));
+			// mp.insert(std::make_pair(67, 'o'));
+			// mp.insert(std::make_pair(11, 'p'));
+			// mp.insert(std::make_pair(59, 'q'));
+			// mp.erase(25);
+			// mp.erase(35);
+			// mp.printTree();
 
-			ft::vector<int>	vec(10, 5);
+			ft::vector<int>	vec2(10, 0);
+
+			ft::vector<int>	vec(vec2.begin() + 2, vec2.end() - 2);
+
+			for (int i = 0; i < vec.size(); i++)
+				std::cout << vec.at(i) << ' ';
 		}
 		catch (const std::exception &e)
 		{

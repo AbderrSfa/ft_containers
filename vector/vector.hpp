@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 14:02:36 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 15:21:49 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string>
 # include "vectorIt.hpp"
 # include "vectorRevIt.hpp"
+# include "enable_if.hpp"
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"
@@ -113,15 +114,16 @@ namespace ft
 					_fill_vector_elements(n, val);
 				}
 			};
-			// template <class InputIterator>
-			// vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0)
-			// {
-			// 	int n = std::distance(first, last);
-			// 	this->_m_data = allocator_type().allocate(n);
-			// 	_fill_vector_elements(first, last);
-			// 	this->_size = n;
-			// 	this->_capacity = n;
-			// };
+			template <class InputIterator>
+			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
+				: _m_data(), _size(0), _capacity(0)
+			{
+				int n = std::distance(first, last);
+				this->_m_data = allocator_type().allocate(n);
+				_fill_vector_elements(first, last);
+				this->_size = n;
+				this->_capacity = n;
+			};
 			vector(const vector& x) : _m_data(), _size(0), _capacity(0) { *this = x; };
 
 			~vector()
