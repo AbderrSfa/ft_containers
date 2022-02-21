@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 16:47:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 17:21:19 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 # include <iostream>
 # include <cstdlib>
 # include <string>
-# include "vectorIt.hpp"
-# include "vectorRevIt.hpp"
+# include "iterator.hpp"
 # include "enable_if.hpp"
-# include "algos.hpp"
+# include "utils.hpp"
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"

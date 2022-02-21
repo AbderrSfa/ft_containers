@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 16:45:49 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 17:23:50 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main()
 		try
 		{
 			std::cout << "========= MINE =========" << std::endl;
-			// ft::map<int, char> mp;
+			ft::map<int, char> mp;
 
 			// mp.insert(std::make_pair(40, 'b'));
 			// mp.insert(std::make_pair(38, 'a'));
@@ -68,7 +68,7 @@ int main()
 
 			ft::vector<int>	vec(vec2.begin() + 2, vec2.end() - 2);
 
-			std::cout << (vec < vec2);
+			//std::cout << (vec < vec2);
 		}
 		catch (const std::exception &e)
 		{
