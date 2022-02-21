@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 15:21:49 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 16:47:19 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "vectorIt.hpp"
 # include "vectorRevIt.hpp"
 # include "enable_if.hpp"
+# include "algos.hpp"
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"
@@ -341,39 +342,43 @@ namespace ft
 	};
 
 	template <class T, class Alloc>
-	bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+	bool operator==(vector<T, Alloc> &lhs, vector<T, Alloc> &rhs)
 	{
-
+		if (lhs.size() == rhs.size())
+			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+		return false;
 	};
 
 	template <class T, class Alloc>
 	bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
 	{
-
+		return !(lhs == rhs);
 	};
 
 	template <class T, class Alloc>
 	bool operator<(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
 	{
-
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	};
 
 	template <class T, class Alloc>
 	bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
 	{
+		return !(rhs < lhs);
 
 	};
 
 	template <class T, class Alloc>
 	bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
 	{
+		return rhs < lhs;
 
 	};
 
 	template <class T, class Alloc>
 	bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
 	{
-
+		return !(lhs < rhs);
 	};
 
 	template <class T, class Alloc>

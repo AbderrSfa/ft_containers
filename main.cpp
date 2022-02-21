@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 15:17:21 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/21 16:45:49 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int main()
 
 			ft::vector<int>	vec(vec2.begin() + 2, vec2.end() - 2);
 
-			for (int i = 0; i < vec.size(); i++)
-				std::cout << vec.at(i) << ' ';
+			std::cout << (vec < vec2);
 		}
 		catch (const std::exception &e)
 		{
