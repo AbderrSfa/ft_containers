@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/22 14:39:22 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/22 14:50:27 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,11 @@ private:
 					temp = node;
 					node = NULL;
 				}
-				else
+				else {
+					Node<T>*	tempParent = node->parent;
 					*node = *temp;
+					node->parent = tempParent;
+				}
 				Alloc().destroy(temp);
 				Alloc().deallocate(temp, 1);
 				this->_CurrentSize--;
