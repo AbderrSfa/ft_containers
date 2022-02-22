@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/22 14:50:27 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/22 16:33:26 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ template <class T, class Compare, class Alloc = std::allocator<Node<T> > >
 class AVLTree {
 private:
 	typedef typename T::first_type	first_type;
+	typedef Compare					key_compare;
 	Node<T>*			_root;
 	size_t				_CurrentSize;
 
+	bool	compare(first_type a, first_type b, key_compare	comp) {
+		return (comp(a, b));
+	};
+	
 	int	getHeight(Node<T>* node) const {
 		if (node == NULL)
 			return 0;
@@ -102,7 +107,7 @@ private:
 	Node<T>* checkBalance(Node<T>* node, first_type key) {
 		int	balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
-			if (key < node->left->data.first)
+			if (compare(key, node->left->data.first, key_compare()))
 				return rightRotate(node);
 			else {
 				node->left = leftRotate(node->left);
@@ -110,12 +115,12 @@ private:
 			}
 		}
 		else if (balanceFactor < -1) {
-			if (key > node->right->data.first)
-				return leftRotate(node);
-			else {
+			if (compare(key, node->right->data.first, key_compare())) {
 				node->right = rightRotate(node->right);
 				return leftRotate(node);
 			}
+			else
+				return leftRotate(node);
 		}
 		return node;
 	};
@@ -161,9 +166,9 @@ private:
 	Node<T>* deleteNode(Node<T>* node, first_type key) {
 		if (node == NULL)
 			return node;
-		if (key < node->data.first)
+		if (compare(key, node->data.first, key_compare()))
 			node->left = deleteNode(node->left, key);
-		else if (key > node->data.first)
+		else if (compare(node->data.first, key, key_compare()))
 			node->right = deleteNode(node->right, key);
 		else {
 			if ((node->left == NULL) || (node->right == NULL)) {
@@ -196,23 +201,23 @@ private:
 	T		find(Node<T>* node, first_type key) {
 		if (node == NULL)
 			return node->data;
-		else if (node->data.first == key)
-			return node->data;
 		else if (key < node->data.first)
 			return find(node->left, key);
-		else
+		else if (key > node->data.first)
 			return find(node->right, key);
+		else
+			return node->data;
 	}
 	
 	bool	search(Node<T>* node, first_type key) const {
 		if (node == NULL)
 			return false;
-		else if (node->data.first == key)
-			return true;
 		else if (key < node->data.first)
 			return search(node->left, key);
-		else
+		else if (key > node->data.first)
 			return search(node->right, key);
+		else
+			return true;
 	};
 
 	Node<T>* addNode(Node<T>* node, Node<T>* parent, T pair, first_type key) {
@@ -224,9 +229,9 @@ private:
 			this->_CurrentSize++;
 			return ret;
 		}
-		if (key < node->data.first)
+		if (compare(key, node->data.first, key_compare()))
 			node->left = addNode(node->left, node, pair, key);
-		else if (key > node->data.first)
+		else if (compare(node->data.first, key, key_compare()))
 			node->right = addNode(node->right, node, pair, key);
 		else
 			return node;
@@ -254,8 +259,10 @@ private:
 	};
 	
 public:
-	AVLTree()								{ this->_root = NULL; this->_CurrentSize = 0; };
-	void	insert(T pair)					{ this->_root = addNode(this->_root, this->_root, pair, pair.first); };
+	AVLTree() {
+		this->_root = NULL; this->_CurrentSize = 0;
+	};
+	void	insert(T pair) { this->_root = addNode(this->_root, this->_root, pair, pair.first); };
 	size_t	size() const					{ return this->_CurrentSize; };
 	bool	search(first_type key) const	{ return (search(this->_root, key)); };
 	T		find(first_type key)			{ return (find(this->_root, key)); };
