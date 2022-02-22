@@ -6,12 +6,12 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 17:49:24 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/22 14:38:04 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
-//#include "vector/vector.hpp"
+// #include "vector/vector.hpp"
 #include <stack>
 //#include "stack/stack.hpp"
 #include <map>
@@ -43,9 +43,9 @@ int main()
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
 
+			mp.insert(std::make_pair(52, 'c'));
 			mp.insert(std::make_pair(40, 'b'));
 			mp.insert(std::make_pair(38, 'a'));
-			mp.insert(std::make_pair(52, 'c'));
 			mp.insert(std::make_pair(25, 'd'));
 			mp.insert(std::make_pair(74, 'f'));
 			mp.insert(std::make_pair(35, 'g'));
@@ -60,11 +60,9 @@ int main()
 			mp.insert(std::make_pair(67, 'o'));
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
-			mp.erase(25);
-			mp.erase(35);
+			// mp.erase(25);
+			// mp.erase(35);
 			mp.printTree();
-
-			//std::cout << (vec < vec2);
 		}
 		catch (const std::exception &e)
 		{

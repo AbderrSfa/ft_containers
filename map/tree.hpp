@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 17:49:58 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/22 14:39:22 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ template <class T>
 class Node {
 public:
 	T		data;
+	Node*	parent;
 	Node*	left;
 	Node*	right;
 	int		height;
 
 
-	Node(T obj) : data(obj), left(NULL), right(NULL), height(1) {};
+	Node(T obj) : data(obj), left(NULL), right(NULL), parent(NULL), height(1) {};
 };
 
 template <class T, class Compare, class Alloc = std::allocator<Node<T> > >
@@ -53,8 +54,20 @@ private:
 	Node<T>* rightRotate(Node<T>* node) {
 		Node<T>*	temp = node->left;
 		Node<T>*	temp2 = temp->right;
+
 		node->left = temp2;
+		if (node->left)
+			node->left->parent = node;
 		temp->right = node;
+		temp->parent = node->parent;
+		if (node->parent) {
+			if (node == node->parent->right)
+				node->parent->right = temp;
+			else
+				node->parent->left = temp;
+		}
+		node->parent = temp;
+		
 		node->height = max(getHeight(node->left),
 			getHeight(node->right)) + 1;
 		temp->height = max(getHeight(temp->left),
@@ -65,8 +78,20 @@ private:
 	Node<T>* leftRotate(Node<T>* node) {
 		Node<T>*	temp = node->right;
 		Node<T>*	temp2 = temp->left;
+
 		node->right = temp2;
+		if (node->right)
+			node->right->parent = node;
 		temp->left = node;
+		temp->parent = node->parent;
+		if (node->parent) {
+			if (node == node->parent->right)
+				node->parent->right = temp;
+			else
+				node->parent->left = temp;
+		}
+		node->parent = temp;
+		
 		node->height = max(getHeight(node->left),
 			getHeight(node->right)) + 1;
 		temp->height = max(getHeight(temp->left),
@@ -187,18 +212,19 @@ private:
 			return search(node->right, key);
 	};
 
-	Node<T>* addNode(Node<T>* node, T pair, first_type key) {
+	Node<T>* addNode(Node<T>* node, Node<T>* parent, T pair, first_type key) {
 		if (node == NULL)
 		{
 			Node<T>*	ret = Alloc().allocate(1);
 			Alloc().construct(ret, Node<T>(pair));
+			ret->parent = parent;
 			this->_CurrentSize++;
 			return ret;
 		}
 		if (key < node->data.first)
-			node->left = addNode(node->left, pair, key);
+			node->left = addNode(node->left, node, pair, key);
 		else if (key > node->data.first)
-			node->right = addNode(node->right, pair, key);
+			node->right = addNode(node->right, node, pair, key);
 		else
 			return node;
 		node->height = 1 + max(getHeight(node->left), getHeight(node->right));		
@@ -213,6 +239,10 @@ private:
 		std::cout << std::endl;
 		for (int i = 10; i < space; i++)
 			std::cout << " ";
+		std::cout << "\033[32m";
+		if (node->parent)
+			std::cout << "(" << node->parent->data.first << ")<-";
+		std::cout << "\033[0m";
 		std::cout << "{" << node->data.first << " " << node->data.second << "} ";
 		std::cout << "\033[32m";
 		std::cout << node->height << "\n";
@@ -222,7 +252,7 @@ private:
 	
 public:
 	AVLTree()								{ this->_root = NULL; this->_CurrentSize = 0; };
-	void	insert(T pair)					{ this->_root = addNode(this->_root, pair, pair.first); };
+	void	insert(T pair)					{ this->_root = addNode(this->_root, this->_root, pair, pair.first); };
 	size_t	size() const					{ return this->_CurrentSize; };
 	bool	search(first_type key) const	{ return (search(this->_root, key)); };
 	T		find(first_type key)			{ return (find(this->_root, key)); };
