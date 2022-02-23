@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/22 11:59:43 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/23 11:53:23 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ namespace ft
 				this->_size += n;
 			};
 			template <class InputIterator>
-			void		insert(iterator position, InputIterator first, InputIterator last)
+			void		insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
 			{
 				difference_type diff = this->end() - position;
 				difference_type n = last - first;
@@ -330,7 +330,7 @@ namespace ft
 	};
 
 	template <class T, class Alloc>
-	bool operator==(vector<T, Alloc> &lhs, vector<T, Alloc> &rhs)
+	bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
 	{
 		if (lhs.size() == rhs.size())
 			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
