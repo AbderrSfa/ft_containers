@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:12:04 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/23 11:28:26 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/23 12:00:07 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 namespace ft
 {
+#ifndef ITERATOR_TRAITS
+# define ITERATOR_TRAITS
 	template <class Iterator>
 	struct iterator_traits
 	{
@@ -24,6 +26,7 @@ namespace ft
 		typedef typename Iterator::reference			reference;
 		typedef typename Iterator::iterator_category	iterator_category;
 	};
+#endif
 
 	template <class T>
 	struct iterator_traits<T*>
