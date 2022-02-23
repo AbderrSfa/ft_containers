@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/22 16:33:26 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/23 11:20:58 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ private:
 	Node<T>*			_root;
 	size_t				_CurrentSize;
 
-	bool	compare(first_type a, first_type b, key_compare	comp) {
+	bool	compare(first_type a, first_type b, key_compare	comp) const {
 		return (comp(a, b));
 	};
 	
@@ -201,9 +201,9 @@ private:
 	T		find(Node<T>* node, first_type key) {
 		if (node == NULL)
 			return node->data;
-		else if (key < node->data.first)
+		else if (compare(key, node->data.first, key_compare()))
 			return find(node->left, key);
-		else if (key > node->data.first)
+		else if (compare(node->data.first, key, key_compare()))
 			return find(node->right, key);
 		else
 			return node->data;
@@ -212,9 +212,9 @@ private:
 	bool	search(Node<T>* node, first_type key) const {
 		if (node == NULL)
 			return false;
-		else if (key < node->data.first)
+		else if (compare(key, node->data.first, key_compare()))
 			return search(node->left, key);
-		else if (key > node->data.first)
+		else if (compare(node->data.first, key, key_compare()))
 			return search(node->right, key);
 		else
 			return true;
