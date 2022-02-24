@@ -6,14 +6,14 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/24 14:14:47 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/24 14:24:13 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
 #include "vector/vector.hpp"
 #include <stack>
-// #include "stack/stack.hpp"
+#include "stack/stack.hpp"
 #include <map>
 // #include "map/map.hpp"
 
@@ -63,34 +63,33 @@ int main()
 			// mp.printTree();
 
 
-			ft::vector<int>	vec2(10, 0);
-			ft::vector<int>	vec(5, 1);
+			// ft::vector<int>	vec2(10, 0);
+			// ft::vector<int>	vec(5, 1);
 
-			for (int i = 0; i < vec.size(); i++)
-				std::cout << vec.at(i) << ' ';
-			std::cout << std::endl;
+			// for (int i = 0; i < vec.size(); i++)
+			// 	std::cout << vec.at(i) << ' ';
+			// std::cout << std::endl;
 			
-			for (int i = 0; i < vec2.size(); i++)
-				std::cout << vec2.at(i) << ' ';
-			std::cout << std::endl;
+			// for (int i = 0; i < vec2.size(); i++)
+			// 	std::cout << vec2.at(i) << ' ';
+			// std::cout << std::endl;
 
-			std::cout << "vec: " << vec.size() << " " << vec.capacity() << std::endl;
-			std::cout << "vec2: " << vec2.size() << " " << vec2.capacity() << std::endl;
+			// std::cout << "vec: " << vec.size() << " " << vec.capacity() << std::endl;
+			// std::cout << "vec2: " << vec2.size() << " " << vec2.capacity() << std::endl;
 
 			
-			swap(vec, vec2);
+			// swap(vec, vec2);
 
-			for (int i = 0; i < vec.size(); i++)
-				std::cout << vec.at(i) << ' ';
-			std::cout << std::endl;
+			// for (int i = 0; i < vec.size(); i++)
+			// 	std::cout << vec.at(i) << ' ';
+			// std::cout << std::endl;
 
-			for (int i = 0; i < vec2.size(); i++)
-				std::cout << vec2.at(i) << ' ';
-			std::cout << std::endl;
+			// for (int i = 0; i < vec2.size(); i++)
+			// 	std::cout << vec2.at(i) << ' ';
+			// std::cout << std::endl;
 
-			std::cout << "vec: " << vec.size() << " " << vec.capacity() << std::endl;
-			std::cout << "vec2: " << vec2.size() << " " << vec2.capacity() << std::endl;
-
+			// std::cout << "vec: " << vec.size() << " " << vec.capacity() << std::endl;
+			// std::cout << "vec2: " << vec2.size() << " " << vec2.capacity() << std::endl;
 		}
 		catch (const std::exception &e)
 		{
