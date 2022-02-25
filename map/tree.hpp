@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/25 13:44:55 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:40:56 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,25 @@ public:
 	Node(T obj) : data(obj), left(NULL), right(NULL), parent(NULL), height(1) {};
 };
 
-template <class T, class Compare, class Allocator = std::allocator<Node<T> > >
+template <class T, class Compare, class Allocator>
 class Tree {
 public:
-	typedef T						value_type;
-	typedef Compare					value_compare;
-	typedef Allocator				allocator_type;
+	typedef T								value_type;
+	typedef Compare							value_compare;
+	typedef Allocator						allocator_type;
 
 private:
-	typedef typename T::first_type	first_type;
-	Node<T>*		_root;
+	///
+	typedef typename allocator_type::template rebind<Node<T> >::other	node_allocator;
+	///
+	typedef typename value_type::first_type	first_type;
+	typedef Node<value_type>				Node_type;
+	typedef Node_type*						Node_ptr;
+	Node_ptr		_root;
 	size_t			_CurrentSize;
 	value_compare	_comp;
 	
-	int	getHeight(Node<T>* node) const {
+	int	getHeight(Node_ptr node) const {
 		if (node == NULL)
 			return 0;
 		return node->height;
@@ -51,15 +56,15 @@ private:
 		return (a > b) ? a : b;
 	};
 
-	int	getBalanceFactor(Node<T>* node) const {
+	int	getBalanceFactor(Node_ptr node) const {
 		if (node == NULL)
 			return 0;
 		return getHeight(node->left) - getHeight(node->right);
 	};
 
-	Node<T>* rightRotate(Node<T>* node) {
-		Node<T>*	temp = node->left;
-		Node<T>*	temp2 = temp->right;
+	Node_ptr rightRotate(Node_ptr node) {
+		Node_ptr	temp = node->left;
+		Node_ptr	temp2 = temp->right;
 
 		node->left = temp2;
 		if (node->left)
@@ -81,9 +86,9 @@ private:
 		return temp;
 	};
 
-	Node<T>* leftRotate(Node<T>* node) {
-		Node<T>*	temp = node->right;
-		Node<T>*	temp2 = temp->left;
+	Node_ptr leftRotate(Node_ptr node) {
+		Node_ptr	temp = node->right;
+		Node_ptr	temp2 = temp->left;
 
 		node->right = temp2;
 		if (node->right)
@@ -105,7 +110,7 @@ private:
 		return temp;
 	};
 	
-	Node<T>* checkBalance(Node<T>* node, first_type key) {
+	Node_ptr checkBalance(Node_ptr node, first_type key) {
 		int	balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
 			if (this->_comp(key, node->left->data.first))
@@ -126,14 +131,14 @@ private:
 		return node;
 	};
 
-	Node<T>* getMinSuccessor(Node<T>* node) const {
-		Node<T>*	current = node;
+	Node_ptr getMinSuccessor(Node_ptr node) const {
+		Node_ptr	current = node;
 		while (current->left != NULL)
 			current = current->left;
 		return current;
 	};
 	
-	Node<T>* reBalance(Node<T>* node) {
+	Node_ptr reBalance(Node_ptr node) {
 		int balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
 			if (getBalanceFactor(node->left) >= 0)
@@ -154,17 +159,17 @@ private:
 		return node;
 	};
 
-	void	deleteTree(Node<T>* node)
+	void	deleteTree(Node_ptr node)
 	{
 		if (node == NULL)
 			return;
 		deleteTree(node->left);
 		deleteTree(node->right);
-		allocator_type().destroy(node);
-		allocator_type().deallocate(node, 1);
+		node_allocator().destroy(node);
+		node_allocator().deallocate(node, 1);
 	}
 	
-	Node<T>* deleteNode(Node<T>* node, first_type key) {
+	Node_ptr deleteNode(Node_ptr node, first_type key) {
 		if (node == NULL)
 			return node;
 		if (this->_comp(key, node->data.first))
@@ -173,22 +178,22 @@ private:
 			node->right = deleteNode(node->right, key);
 		else {
 			if ((node->left == NULL) || (node->right == NULL)) {
-				Node<T>*	temp = node->left ? node->left : node->right;
+				Node_ptr	temp = node->left ? node->left : node->right;
 				if (temp == NULL) {
 					temp = node;
 					node = NULL;
 				}
 				else {
-					Node<T>*	tempParent = node->parent;
+					Node_ptr	tempParent = node->parent;
 					*node = *temp;
 					node->parent = tempParent;
 				}
-				allocator_type().destroy(temp);
-				allocator_type().deallocate(temp, 1);
+				node_allocator().destroy(temp);
+				node_allocator().deallocate(temp, 1);
 				this->_CurrentSize--;
 			}
 			else {
-				Node<T>*	temp = getMinSuccessor(node->right);
+				Node_ptr	temp = getMinSuccessor(node->right);
 				node->data = temp->data;
 				node->right = deleteNode(node->right, temp->data.first);
 			}
@@ -199,7 +204,7 @@ private:
 		return reBalance(node);
 	};
 
-	T		find(Node<T>* node, first_type key) {
+	T		find(Node_ptr node, first_type key) {
 		if (node == NULL)
 			return node->data;
 		else if (this->_comp(key, node->data.first))
@@ -210,7 +215,7 @@ private:
 			return node->data;
 	}
 	
-	bool	search(Node<T>* node, first_type key) const {
+	bool	search(Node_ptr node, first_type key) const {
 		if (node == NULL)
 			return false;
 		else if (this->_comp(key, node->data.first))
@@ -221,11 +226,11 @@ private:
 			return true;
 	};
 
-	Node<T>* addNode(Node<T>* node, Node<T>* parent, T pair, first_type key) {
+	Node_ptr addNode(Node_ptr node, Node_ptr parent, T pair, first_type key) {
 		if (node == NULL)
 		{
-			Node<T>*	ret = allocator_type().allocate(1);
-			allocator_type().construct(ret, Node<T>(pair));
+			Node_ptr	ret = node_allocator().allocate(1);
+			node_allocator().construct(ret, Node<T>(pair));
 			ret->parent = parent;
 			this->_CurrentSize++;
 			return ret;
@@ -240,7 +245,7 @@ private:
 		return checkBalance(node, key);
 	};
 
-	void	print2DUtil(Node<T>* node, int space) const {
+	void	print2DUtil(Node_ptr node, int space) const {
 		if (node == NULL)
 			return;
 		space += 20;
@@ -263,7 +268,7 @@ public:
 	Tree() {
 		this->_root = NULL; this->_CurrentSize = 0;
 	};
-	void	insert(T pair) { this->_root = addNode(this->_root, this->_root, pair, pair.first); };
+	void	insert(T pair)					{ this->_root = addNode(this->_root, this->_root, pair, pair.first); };
 	size_t	size() const					{ return this->_CurrentSize; };
 	bool	search(first_type key) const	{ return (search(this->_root, key)); };
 	T		find(first_type key)			{ return (find(this->_root, key)); };
