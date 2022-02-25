@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/25 14:55:30 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/25 15:06:17 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,10 @@ public:
 	Tree() {
 		this->_root = NULL; this->_CurrentSize = 0;
 	};
-	void	insert(T pair)					{ this->_root = addNode(this->_root, this->_root, pair, pair.first); };
+	~Tree() {
+		this->clear();
+	}
+	void	insert(T pair) { this->_root = addNode(this->_root, this->_root, pair, pair.first); };
 	size_t	size() const					{ return this->_CurrentSize; };
 	bool	search(first_type key) const	{ return (search(this->_root, key)); };
 	T		find(first_type key)			{ return (find(this->_root, key)); };
