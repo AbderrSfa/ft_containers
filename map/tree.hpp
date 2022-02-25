@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/23 11:20:58 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/25 13:44:55 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,18 @@ public:
 	Node(T obj) : data(obj), left(NULL), right(NULL), parent(NULL), height(1) {};
 };
 
-template <class T, class Compare, class Alloc = std::allocator<Node<T> > >
-class AVLTree {
+template <class T, class Compare, class Allocator = std::allocator<Node<T> > >
+class Tree {
+public:
+	typedef T						value_type;
+	typedef Compare					value_compare;
+	typedef Allocator				allocator_type;
+
 private:
 	typedef typename T::first_type	first_type;
-	typedef Compare					key_compare;
-	Node<T>*			_root;
-	size_t				_CurrentSize;
-
-	bool	compare(first_type a, first_type b, key_compare	comp) const {
-		return (comp(a, b));
-	};
+	Node<T>*		_root;
+	size_t			_CurrentSize;
+	value_compare	_comp;
 	
 	int	getHeight(Node<T>* node) const {
 		if (node == NULL)
@@ -107,7 +108,7 @@ private:
 	Node<T>* checkBalance(Node<T>* node, first_type key) {
 		int	balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
-			if (compare(key, node->left->data.first, key_compare()))
+			if (this->_comp(key, node->left->data.first))
 				return rightRotate(node);
 			else {
 				node->left = leftRotate(node->left);
@@ -115,7 +116,7 @@ private:
 			}
 		}
 		else if (balanceFactor < -1) {
-			if (compare(key, node->right->data.first, key_compare())) {
+			if (this->_comp(key, node->right->data.first)) {
 				node->right = rightRotate(node->right);
 				return leftRotate(node);
 			}
@@ -159,16 +160,16 @@ private:
 			return;
 		deleteTree(node->left);
 		deleteTree(node->right);
-		Alloc().destroy(node);
-		Alloc().deallocate(node, 1);
+		allocator_type().destroy(node);
+		allocator_type().deallocate(node, 1);
 	}
 	
 	Node<T>* deleteNode(Node<T>* node, first_type key) {
 		if (node == NULL)
 			return node;
-		if (compare(key, node->data.first, key_compare()))
+		if (this->_comp(key, node->data.first))
 			node->left = deleteNode(node->left, key);
-		else if (compare(node->data.first, key, key_compare()))
+		else if (this->_comp(node->data.first, key))
 			node->right = deleteNode(node->right, key);
 		else {
 			if ((node->left == NULL) || (node->right == NULL)) {
@@ -182,8 +183,8 @@ private:
 					*node = *temp;
 					node->parent = tempParent;
 				}
-				Alloc().destroy(temp);
-				Alloc().deallocate(temp, 1);
+				allocator_type().destroy(temp);
+				allocator_type().deallocate(temp, 1);
 				this->_CurrentSize--;
 			}
 			else {
@@ -201,9 +202,9 @@ private:
 	T		find(Node<T>* node, first_type key) {
 		if (node == NULL)
 			return node->data;
-		else if (compare(key, node->data.first, key_compare()))
+		else if (this->_comp(key, node->data.first))
 			return find(node->left, key);
-		else if (compare(node->data.first, key, key_compare()))
+		if (this->_comp(node->data.first, key))
 			return find(node->right, key);
 		else
 			return node->data;
@@ -212,9 +213,9 @@ private:
 	bool	search(Node<T>* node, first_type key) const {
 		if (node == NULL)
 			return false;
-		else if (compare(key, node->data.first, key_compare()))
+		else if (this->_comp(key, node->data.first))
 			return search(node->left, key);
-		else if (compare(node->data.first, key, key_compare()))
+		if (this->_comp(node->data.first, key))
 			return search(node->right, key);
 		else
 			return true;
@@ -223,15 +224,15 @@ private:
 	Node<T>* addNode(Node<T>* node, Node<T>* parent, T pair, first_type key) {
 		if (node == NULL)
 		{
-			Node<T>*	ret = Alloc().allocate(1);
-			Alloc().construct(ret, Node<T>(pair));
+			Node<T>*	ret = allocator_type().allocate(1);
+			allocator_type().construct(ret, Node<T>(pair));
 			ret->parent = parent;
 			this->_CurrentSize++;
 			return ret;
 		}
-		if (compare(key, node->data.first, key_compare()))
+		if (this->_comp(key, node->data.first))
 			node->left = addNode(node->left, node, pair, key);
-		else if (compare(node->data.first, key, key_compare()))
+		else if (this->_comp(node->data.first, key))
 			node->right = addNode(node->right, node, pair, key);
 		else
 			return node;
@@ -259,7 +260,7 @@ private:
 	};
 	
 public:
-	AVLTree() {
+	Tree() {
 		this->_root = NULL; this->_CurrentSize = 0;
 	};
 	void	insert(T pair) { this->_root = addNode(this->_root, this->_root, pair, pair.first); };

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/23 11:19:51 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/25 13:27:44 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft
 			typedef typename allocator_type::size_type			size_type;
 
 		private:
-			AVLTree<value_type, key_compare>	_tree;
+			Tree<value_type, key_compare>	_tree;
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
