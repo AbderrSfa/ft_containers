@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/25 14:37:34 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:54:47 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::pointer			pointer;
 			typedef typename allocator_type::const_pointer		const_pointer;
+			typedef typename allocator_type::difference_type	difference_type;
+			typedef typename allocator_type::size_type			size_type;
 			typedef mapIt<pointer>								iterator;
 			typedef mapIt<const_pointer>						const_iterator;
 			typedef mapRevIt<iterator>							reverse_iterator;
 			typedef mapRevIt<const_iterator>					const_reverse_iterator;
-			typedef typename allocator_type::difference_type	difference_type;
-			typedef typename allocator_type::size_type			size_type;
 
 		private:
 			Tree<value_type, key_compare, allocator_type>	_tree;
