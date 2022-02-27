@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/25 14:54:47 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/27 06:12:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ namespace ft
 			// map& operator=(const map& x) {};
 
 			/* Iterators */
-			// iterator				begin()			{ return iterator(this->_tree->root->data); };
+			iterator				begin()			{ return this->_tree.begin(); };
 			// const_iterator			begin() const	{ return const_iterator(this->_tree->root->data); };
 			// iterator				end()			{  };
 			// const_iterator			end() const		{  };

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/25 13:44:23 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/27 06:12:56 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int main()
 			mp.insert(ft::make_pair(59, 'q'));
 
 			mp.printTree();
-
 
 			// ft::vector<int>	vec2(10, 0);
 			// ft::vector<int>	vec(5, 1);

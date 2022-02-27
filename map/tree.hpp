@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/25 15:06:17 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/02/27 06:26:13 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,67 @@ public:
 	Node*	right;
 	int		height;
 
-
 	Node(T obj) : data(obj), left(NULL), right(NULL), parent(NULL), height(1) {};
 };
 
 template <class T, class Compare, class Allocator>
 class Tree {
 public:
-	typedef T								value_type;
-	typedef Compare							value_compare;
-	typedef Allocator						allocator_type;
+	typedef T															value_type;
+	typedef Compare														value_compare;
+	typedef Allocator													allocator_type;
 
 private:
 	typedef typename value_type::first_type	first_type;
-	///
 	typedef typename allocator_type::template rebind<Node<T> >::other	node_allocator;
-	///
-	typedef Node<value_type>				Node_type;
-	typedef Node_type*						Node_ptr;
+	typedef Node<value_type>											Node_type;
+	typedef Node_type*													Node_ptr;
+
+public:
 	typedef typename allocator_type::reference							reference;
 	typedef typename allocator_type::const_reference					const_reference;
 	typedef typename allocator_type::difference_type					difference_type;
 	typedef typename allocator_type::pointer							pointer;
 	typedef typename allocator_type::const_pointer						const_pointer;
 	typedef typename allocator_type::size_type							size_type;
+	typedef ft::TreeIt<Node_ptr>										iterator;
+	typedef ft::TreeIt<const Node_ptr>									const_iterator;
 
+private:
 	Node_ptr		_root;
+	Node_ptr		_end;
 	size_t			_CurrentSize;
 	value_compare	_comp;
-	
+	node_allocator	_alloc;
+
+public:
+	Tree() {
+		this->_end = this->_alloc.allocate(1);
+		// this->_root = this->_end;
+		this->_CurrentSize = 0;
+	};
+	~Tree() {
+		this->clear();
+	}
+
+	iterator		begin()					{ return iterator(this->_root); };
+	const_iterator	begin() const			{ return const_iterator(this->_root); };
+	iterator		end()					{ return iterator(this->end); }
+	const_iterator	end() const				{ return const_iterator(this->end); }
+
+	bool		empty() const				{ return (this->_size == 0); };
+	size_type	size() const				{ return this->_CurrentSize; };
+	size_type	max_size() const			{ return this->_alloc.max_size(); };
+
+
+	void		insert(T pair)					{ this->_root = addNode(this->_root, this->_root, pair, pair.first); };
+	bool		search(first_type key) const	{ return (search(this->_root, key)); };
+	Node_ptr	find(first_type key)			{ return (find(this->_root, key)); };
+	void		deleteNode(first_type key)		{ this->_root = deleteNode(this->_root, key); };
+	void		clear()							{ deleteTree(this->_root); this->_CurrentSize = 0; };
+	void		printTree() const				{ print2DUtil(this->_root, 0); };
+
+private:
 	int	getHeight(Node_ptr node) const {
 		if (node == NULL)
 			return 0;
@@ -116,7 +148,7 @@ private:
 			getHeight(temp->right)) + 1;
 		return temp;
 	};
-	
+
 	Node_ptr checkBalance(Node_ptr node, first_type key) {
 		int	balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
@@ -144,7 +176,7 @@ private:
 			current = current->left;
 		return current;
 	};
-	
+
 	Node_ptr reBalance(Node_ptr node) {
 		int balanceFactor = getBalanceFactor(node);
 		if (balanceFactor > 1) {
@@ -172,10 +204,10 @@ private:
 			return;
 		deleteTree(node->left);
 		deleteTree(node->right);
-		node_allocator().destroy(node);
-		node_allocator().deallocate(node, 1);
+		this->_alloc.destroy(node);
+		this->_alloc.deallocate(node, 1);
 	}
-	
+
 	Node_ptr deleteNode(Node_ptr node, first_type key) {
 		if (node == NULL)
 			return node;
@@ -195,8 +227,8 @@ private:
 					*node = *temp;
 					node->parent = tempParent;
 				}
-				node_allocator().destroy(temp);
-				node_allocator().deallocate(temp, 1);
+				this->_alloc.destroy(temp);
+				this->_alloc.deallocate(temp, 1);
 				this->_CurrentSize--;
 			}
 			else {
@@ -221,7 +253,7 @@ private:
 		else
 			return node->data;
 	}
-	
+
 	bool	search(Node_ptr node, first_type key) const {
 		if (node == NULL)
 			return false;
@@ -236,8 +268,8 @@ private:
 	Node_ptr addNode(Node_ptr node, Node_ptr parent, T pair, first_type key) {
 		if (node == NULL)
 		{
-			Node_ptr	ret = node_allocator().allocate(1);
-			node_allocator().construct(ret, Node<T>(pair));
+			Node_ptr	ret = this->_alloc.allocate(1);
+			this->_alloc.construct(ret, Node<T>(pair));
 			ret->parent = parent;
 			this->_CurrentSize++;
 			return ret;
@@ -270,21 +302,6 @@ private:
 		std::cout << "\033[0m";
 		print2DUtil(node->left, space);
 	};
-	
-public:
-	Tree() {
-		this->_root = NULL; this->_CurrentSize = 0;
-	};
-	~Tree() {
-		this->clear();
-	}
-	void	insert(T pair) { this->_root = addNode(this->_root, this->_root, pair, pair.first); };
-	size_t	size() const					{ return this->_CurrentSize; };
-	bool	search(first_type key) const	{ return (search(this->_root, key)); };
-	T		find(first_type key)			{ return (find(this->_root, key)); };
-	void	deleteNode(first_type key)		{ this->_root = deleteNode(this->_root, key); };
-	void	clear()							{ deleteTree(this->_root); this->_CurrentSize = 0; };
-	void	printTree() const				{ print2DUtil(this->_root, 0); };
 };
 
 #endif
