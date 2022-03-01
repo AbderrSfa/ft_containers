@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/27 06:12:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/01 15:31:48 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,9 @@ namespace ft
 			// const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
 
 			/* Capacity */
-			bool		empty() const
-			{
-				if (this->size() == 0)
-					return true;
-				return false;
-			};
-			size_type	size() const { return this->_tree.size(); };
-			size_type	max_size() const { return ((allocator_type().max_size()) / 3); };
+			bool		empty() const		{ return this->_tree.empty(); };
+			size_type	size() const		{ return this->_tree.size(); };
+			size_type	max_size() const	{ return this->_tree.max_size(); };
 
 			/* Element access */
 			mapped_type	&operator[](const key_type &k)
