@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/27 06:26:13 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/02 11:52:51 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ public:
 		this->clear();
 	}
 
-	iterator		begin()					{ return iterator(this->_root); };
+	iterator		begin()					{ return iterator(getMinSuccessor(this->_root)); };
 	const_iterator	begin() const			{ return const_iterator(this->_root); };
 	iterator		end()					{ return iterator(this->end); }
 	const_iterator	end() const				{ return const_iterator(this->end); }

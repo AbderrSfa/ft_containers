@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/27 06:12:56 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/02 15:45:07 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int main()
 			mp.insert(std::make_pair(38, 'a'));
 			mp.insert(std::make_pair(52, 'c'));
 
-			std::cout << mp[40] << std::endl;
+			std::map<int, char>::iterator	it = mp.begin();
+			std::cout << it->first << " " << it->second << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -60,7 +61,11 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
-			mp.printTree();
+			ft::map<int, char>::iterator	it = mp.begin();
+			std::cout << it->first << " " << it->second << std::endl;
+
+			//mp.printTree();
+
 
 			// ft::vector<int>	vec2(10, 0);
 			// ft::vector<int>	vec(5, 1);
