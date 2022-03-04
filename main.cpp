@@ -6,14 +6,14 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 13:46:06 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:53:16 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
-// #include "vector/vector.hpp"
+#include "vector/vector.hpp"
 #include <stack>
-// #include "stack/stack.hpp"
+#include "stack/stack.hpp"
 #include <map>
 #include "map/map.hpp"
 
