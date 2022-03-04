@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:25:18 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/27 05:00:25 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 11:43:11 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,80 +51,6 @@ namespace ft
 	};
 
 	template <class T>
-	class mapIt : public std::iterator<std::bidirectional_iterator_tag, T> {
-		public:
-			typedef T												iterator_type;
-			typedef typename iterator_traits<T>::difference_type	difference_type;
-			typedef typename iterator_traits<T>::value_type			value_type;
-			typedef typename iterator_traits<T>::pointer			pointer;
-			typedef typename iterator_traits<T>::reference			reference;
-			typedef typename iterator_traits<T>::iterator_category	iterator_category;
-
-		private:
-			iterator_type	_m_ptr;
-
-		public:
-			mapIt() : _m_ptr(){};
-			explicit mapIt(const iterator_type &_i) : _m_ptr(_i){};
-			template <class Iter>
-			mapIt(const mapIt<Iter> &_i) : _m_ptr(_i.base()){};
-
-			const iterator_type&	base() const						{ return this->_m_ptr; };
-			reference				operator*() const 					{ return *this->_m_ptr; };
-			mapIt&					operator++() 						{ ++this->_m_ptr; return *this; };
-			mapIt					operator++(int) 					{ return mapIt(this->_m_ptr++); };
-			mapIt&					operator--() 						{ --this->_m_ptr; return *this; };
-			mapIt					operator--(int) 					{ return mapIt(this->_m_ptr--); };
-			pointer					operator->() const 					{ return this->_m_ptr; };
-	};
-
-	template <class Iterator>
-	bool	operator==(const mapIt<Iterator>& lhs, const mapIt<Iterator>& rhs)
-	{ return (lhs.base() == rhs.base()); };
-
-	template <class Iterator>
-	bool	operator!=(const mapIt<Iterator>& lhs, const mapIt<Iterator>& rhs)
-	{ return (lhs.base() != rhs.base()); };
-
-	template <class T>
-	class mapRevIt : public std::iterator<std::bidirectional_iterator_tag, T> {
-		public:
-			typedef T    											iterator_type;
-			typedef typename iterator_traits<T>::difference_type	difference_type;
-			typedef typename iterator_traits<T>::value_type			value_type;
-			typedef typename iterator_traits<T>::pointer			pointer;
-			typedef typename iterator_traits<T>::reference			reference;
-			typedef typename iterator_traits<T>::iterator_category	iterator_category;
-
-		private:
-			iterator_type	_m_ptr;
-
-		public:
-			mapRevIt() : _m_ptr() {};
-			explicit mapRevIt(iterator_type _it) : _m_ptr(_it) {};
-			template <class Iter>
-			mapRevIt(const mapRevIt<Iter>& _rev_it) : _m_ptr(_rev_it.base()) {};
-
-			iterator_type	base() const 						{ return this->_m_ptr; };
-			reference		operator*() const 					{ iterator_type tmp = _m_ptr; return *--tmp; };
-			mapRevIt&		operator++() 						{ --this->_m_ptr; return *this; };
-			mapRevIt		operator++(int) 					{ mapRevIt tmp = *this; --this->_m_ptr; return tmp; };
-			mapRevIt&		operator--() 						{ ++this->_m_ptr; return *this; };
-			mapRevIt		operator--(int) 					{ mapRevIt tmp = *this; ++this->_m_ptr; return tmp; };
-			pointer			operator->() const 					{ return &(operator*()); };
-	};
-
-	template <class Iterator>
-	bool operator==(const mapRevIt<Iterator>& lhs, const mapRevIt<Iterator>& rhs)
-	{ return (lhs.base() == rhs.base()); };
-	
-	template <class Iterator>
-	bool operator!=(const mapRevIt<Iterator>& lhs, const mapRevIt<Iterator>& rhs)
-	{
-		return (lhs.base() != rhs.base());
-	};
-
-	template <class T>
 	class TreeIt : public std::iterator<std::bidirectional_iterator_tag, T> {
 	public:
 		typedef T												iterator_type;
@@ -135,21 +61,21 @@ namespace ft
 		typedef typename iterator_traits<T>::iterator_category	iterator_category;
 
 	private:
-		iterator_type	_m_ptr;
+		iterator_type	_it;
 
 	public:
-		TreeIt() : _m_ptr() {};
-		explicit TreeIt(const iterator_type &_i) : _m_ptr(_i) {};
+		TreeIt() : _it() {};
+		explicit TreeIt(const iterator_type &_i) : _it(_i) {};
 		template <class Iter>
-		TreeIt(const TreeIt<Iter> &_i) : _m_ptr(_i.base()) {};
+		TreeIt(const TreeIt<Iter> &_i) : _it(_i.base()) {};
 
-		const iterator_type&	base() const { return this->_m_ptr; };
-		reference				operator*() const { return *this->_m_ptr; };
-		TreeIt&					operator++() { ++this->_m_ptr; return *this; };
-		TreeIt					operator++(int) { return TreeIt(this->_m_ptr++); };
-		TreeIt&					operator--() { --this->_m_ptr; return *this; };
-		TreeIt					operator--(int) { return TreeIt(this->_m_ptr--); };
-		pointer					operator->() const { return this->_m_ptr; };
+		const iterator_type&	base() const { return this->_it; };
+		reference				operator*() const { return *this->_it; };
+		TreeIt&					operator++() { ++this->_it; return *this; };
+		TreeIt					operator++(int) { return TreeIt(this->_it++); };
+		TreeIt&					operator--() { --this->_it; return *this; };
+		TreeIt					operator--(int) { return TreeIt(this->_it--); };
+		pointer					operator->() const { return this->_it; };
 	};
 
 	template <class Iterator>

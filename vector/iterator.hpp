@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:12:04 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/23 12:00:07 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 11:43:44 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,26 @@ namespace ft
 		typedef typename iterator_traits<T>::iterator_category	iterator_category;
 
 	private:
-		iterator_type	_m_ptr;
+		iterator_type	_it;
 
 	public:
-		vectorIt() : _m_ptr() {};
-		explicit vectorIt(const iterator_type& _i) : _m_ptr(_i) {};
+		vectorIt() : _it() {};
+		explicit vectorIt(const iterator_type& _i) : _it(_i) {};
 		template <class Iter>
-		vectorIt(const vectorIt<Iter>& _i) : _m_ptr(_i.base()) {};
+		vectorIt(const vectorIt<Iter>& _i) : _it(_i.base()) {};
 
-		const iterator_type&	base() const { return this->_m_ptr; };
-		reference				operator*() const { return *this->_m_ptr; };
-		vectorIt				operator+(difference_type n) const { return vectorIt(this->_m_ptr + n); };
-		vectorIt&				operator++() { ++this->_m_ptr; return *this; };
-		vectorIt				operator++(int) { return vectorIt(this->_m_ptr++); };
-		vectorIt&				operator+=(difference_type n) { this->_m_ptr += n; return *this; };
-		vectorIt				operator-(difference_type n) const { return vectorIt(this->_m_ptr - n); };
-		vectorIt&				operator--() { --this->_m_ptr; return *this; };
-		vectorIt				operator--(int) { return vectorIt(this->_m_ptr--); };
-		vectorIt&				operator-=(difference_type n) { this->_m_ptr -= n; return *this; };
-		pointer					operator->() const { return this->_m_ptr; };
-		reference				operator[](difference_type n) const { return this->_m_ptr[n]; };
+		const iterator_type&	base() const { return this->_it; };
+		reference				operator*() const { return *this->_it; };
+		vectorIt				operator+(difference_type n) const { return vectorIt(this->_it + n); };
+		vectorIt&				operator++() { ++this->_it; return *this; };
+		vectorIt				operator++(int) { return vectorIt(this->_it++); };
+		vectorIt&				operator+=(difference_type n) { this->_it += n; return *this; };
+		vectorIt				operator-(difference_type n) const { return vectorIt(this->_it - n); };
+		vectorIt&				operator--() { --this->_it; return *this; };
+		vectorIt				operator--(int) { return vectorIt(this->_it--); };
+		vectorIt&				operator-=(difference_type n) { this->_it -= n; return *this; };
+		pointer					operator->() const { return this->_it; };
+		reference				operator[](difference_type n) const { return this->_it[n]; };
 	};
 
 	template <class Iterator>
@@ -124,24 +124,24 @@ namespace ft
 		typedef typename iterator_traits<T>::iterator_category	iterator_category;
 
 	private:
-		iterator_type	_m_ptr;
+		iterator_type	_it;
 
 	public:
-		vectorRevIt() : _m_ptr() {};
-		explicit vectorRevIt(iterator_type _it) : _m_ptr(_it) {};
+		vectorRevIt() : _it() {};
+		explicit vectorRevIt(iterator_type _it) : _it(_it) {};
 		template <class Iter>
-		vectorRevIt(const vectorRevIt<Iter>& _rev_it) : _m_ptr(_rev_it.base()) {};
+		vectorRevIt(const vectorRevIt<Iter>& _rev_it) : _it(_rev_it.base()) {};
 
-		iterator_type	base() const { return this->_m_ptr; };
-		reference		operator*() const { iterator_type tmp = _m_ptr; return *--tmp; };
-		vectorRevIt		operator+(difference_type n) const { return vectorRevIt(this->_m_ptr - n); };
-		vectorRevIt&	operator++() { --this->_m_ptr; return *this; };
-		vectorRevIt		operator++(int) { vectorRevIt tmp = *this; --this->_m_ptr; return tmp; };
-		vectorRevIt&	operator+=(difference_type n) { this->_m_ptr -= n; return *this; };
-		vectorRevIt		operator-(difference_type n) const { return vectorRevIt(this->_m_ptr + n); };
-		vectorRevIt&	operator--() { ++this->_m_ptr; return *this; };
-		vectorRevIt		operator--(int) { vectorRevIt tmp = *this; ++this->_m_ptr; return tmp; };
-		vectorRevIt&	operator-=(difference_type n) { this->_m_ptr += n; return *this; };
+		iterator_type	base() const { return this->_it; };
+		reference		operator*() const { iterator_type tmp = _it; return *--tmp; };
+		vectorRevIt		operator+(difference_type n) const { return vectorRevIt(this->_it - n); };
+		vectorRevIt&	operator++() { --this->_it; return *this; };
+		vectorRevIt		operator++(int) { vectorRevIt tmp = *this; --this->_it; return tmp; };
+		vectorRevIt&	operator+=(difference_type n) { this->_it -= n; return *this; };
+		vectorRevIt		operator-(difference_type n) const { return vectorRevIt(this->_it + n); };
+		vectorRevIt&	operator--() { ++this->_it; return *this; };
+		vectorRevIt		operator--(int) { vectorRevIt tmp = *this; ++this->_it; return tmp; };
+		vectorRevIt&	operator-=(difference_type n) { this->_it += n; return *this; };
 		pointer			operator->() const { return &(operator*()); };
 		reference		operator[](difference_type n) const { return *(*this + n); };
 	};

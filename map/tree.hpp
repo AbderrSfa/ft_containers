@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/03 12:24:37 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 11:11:48 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ public:
 	typedef typename allocator_type::const_pointer						const_pointer;
 	typedef typename allocator_type::size_type							size_type;
 	typedef ft::TreeIt<Node_ptr>										iterator;
-	typedef ft::TreeIt<const Node_ptr>									const_iterator;
+	typedef ft::TreeIt<Node_ptr>										const_iterator;
 
 private:
 	Node_ptr		_root;
@@ -78,31 +78,31 @@ public:
 	size_type		max_size() const				{ return this->_alloc.max_size(); };
 
 
-	void			insert(T pair)					{ this->_root = addNode(this->_root, this->_root, pair, pair.first); };
-	bool			search(first_type key) const	{ return (search(this->_root, key)); };
-	Node_ptr		find(first_type key)			{ return (find(this->_root, key)); };
-	void			deleteNode(first_type key)		{ this->_root = deleteNode(this->_root, key); };
-	void			clear()							{ deleteTree(this->_root); this->_CurrentSize = 0; };
-	void			printTree() const				{ print2DUtil(this->_root, 0); };
+	void			insert(T pair)					{ this->_root = _addNode(this->_root, this->_root, pair, pair.first); };
+	bool			search(first_type key) const	{ return (_search(this->_root, key)); };
+	Node_ptr		find(first_type key)			{ return (_find(this->_root, key)); };
+	void			deleteNode(first_type key)		{ this->_root = _deleteNode(this->_root, key); };
+	void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
+	void			printTree() const				{ _print2DUtil(this->_root, 0); };
 
 private:
-	int	getHeight(Node_ptr node) const {
+	int	_getHeight(Node_ptr node) const {
 		if (node == NULL)
 			return 0;
 		return node->height;
 	};
 
-	int max(int a, int b) const {
+	int _max(int a, int b) const {
 		return (a > b) ? a : b;
 	};
 
-	int	getBalanceFactor(Node_ptr node) const {
+	int	_getBalanceFactor(Node_ptr node) const {
 		if (node == NULL)
 			return 0;
-		return getHeight(node->left) - getHeight(node->right);
+		return _getHeight(node->left) - _getHeight(node->right);
 	};
 
-	Node_ptr rightRotate(Node_ptr node) {
+	Node_ptr _rightRotate(Node_ptr node) {
 		Node_ptr	temp = node->left;
 		Node_ptr	temp2 = temp->right;
 
@@ -119,14 +119,14 @@ private:
 		}
 		node->parent = temp;
 		
-		node->height = max(getHeight(node->left),
-			getHeight(node->right)) + 1;
-		temp->height = max(getHeight(temp->left),
-			getHeight(temp->right)) + 1;
+		node->height = _max(_getHeight(node->left),
+			_getHeight(node->right)) + 1;
+		temp->height = _max(_getHeight(temp->left),
+			_getHeight(temp->right)) + 1;
 		return temp;
 	};
 
-	Node_ptr leftRotate(Node_ptr node) {
+	Node_ptr _leftRotate(Node_ptr node) {
 		Node_ptr	temp = node->right;
 		Node_ptr	temp2 = temp->left;
 
@@ -143,79 +143,79 @@ private:
 		}
 		node->parent = temp;
 		
-		node->height = max(getHeight(node->left),
-			getHeight(node->right)) + 1;
-		temp->height = max(getHeight(temp->left),
-			getHeight(temp->right)) + 1;
+		node->height = _max(_getHeight(node->left),
+			_getHeight(node->right)) + 1;
+		temp->height = _max(_getHeight(temp->left),
+			_getHeight(temp->right)) + 1;
 		return temp;
 	};
 
-	Node_ptr checkBalance(Node_ptr node, first_type key) {
-		int	balanceFactor = getBalanceFactor(node);
+	Node_ptr _checkBalance(Node_ptr node, first_type key) {
+		int	balanceFactor = _getBalanceFactor(node);
 		if (balanceFactor > 1) {
 			if (this->_comp(key, node->left->data.first))
-				return rightRotate(node);
+				return _rightRotate(node);
 			else {
-				node->left = leftRotate(node->left);
-				return rightRotate(node);
+				node->left = _leftRotate(node->left);
+				return _rightRotate(node);
 			}
 		}
 		else if (balanceFactor < -1) {
 			if (this->_comp(key, node->right->data.first)) {
-				node->right = rightRotate(node->right);
-				return leftRotate(node);
+				node->right = _rightRotate(node->right);
+				return _leftRotate(node);
 			}
 			else
-				return leftRotate(node);
+				return _leftRotate(node);
 		}
 		return node;
 	};
 
-	Node_ptr getMinSuccessor(Node_ptr node) const {
+	Node_ptr _getMinSuccessor(Node_ptr node) const {
 		Node_ptr	current = node;
 		while (current->left != NULL)
 			current = current->left;
 		return current;
 	};
 
-	Node_ptr reBalance(Node_ptr node) {
-		int balanceFactor = getBalanceFactor(node);
+	Node_ptr _reBalance(Node_ptr node) {
+		int balanceFactor = _getBalanceFactor(node);
 		if (balanceFactor > 1) {
-			if (getBalanceFactor(node->left) >= 0)
-				return rightRotate(node);
+			if (_getBalanceFactor(node->left) >= 0)
+				return _rightRotate(node);
 			else {
-				node->left = leftRotate(node->left);
-				return rightRotate(node);
+				node->left = _leftRotate(node->left);
+				return _rightRotate(node);
 			}
 		}
 		else if (balanceFactor < -1) {
-			if (getBalanceFactor(node->right) <= 0)
-				return leftRotate(node);
+			if (_getBalanceFactor(node->right) <= 0)
+				return _leftRotate(node);
 			else {
-				node->right = rightRotate(node->right);
-				return leftRotate(node);
+				node->right = _rightRotate(node->right);
+				return _leftRotate(node);
 			}
 		}
 		return node;
 	};
 
-	void	deleteTree(Node_ptr node)
+	void	_deleteTree(Node_ptr node)
 	{
 		if (node == NULL)
 			return;
-		deleteTree(node->left);
-		deleteTree(node->right);
+		_deleteTree(node->left);
+		_deleteTree(node->right);
 		this->_alloc.destroy(node);
 		this->_alloc.deallocate(node, 1);
 	}
 
-	Node_ptr deleteNode(Node_ptr node, first_type key) {
+	Node_ptr _deleteNode(Node_ptr node, first_type key) {
 		if (node == NULL)
 			return node;
 		if (this->_comp(key, node->data.first))
-			node->left = deleteNode(node->left, key);
+			node->left = _deleteNode(node->left, key);
 		else if (this->_comp(node->data.first, key))
-			node->right = deleteNode(node->right, key);
+			node->right = _deleteNode(node->right, key);
 		else {
 			if ((node->left == NULL) || (node->right == NULL)) {
 				Node_ptr	temp = node->left ? node->left : node->right;
@@ -233,40 +233,40 @@ private:
 				this->_CurrentSize--;
 			}
 			else {
-				Node_ptr	temp = getMinSuccessor(node->right);
+				Node_ptr	temp = _getMinSuccessor(node->right);
 				node->data = temp->data;
-				node->right = deleteNode(node->right, temp->data.first);
+				node->right = _deleteNode(node->right, temp->data.first);
 			}
 		}
 		if (node == NULL)
 			return node;
-		node->height = 1 + max(getHeight(node->left), getHeight(node->right));
-		return reBalance(node);
+		node->height = 1 + _max(_getHeight(node->left), _getHeight(node->right));
+		return _reBalance(node);
 	};
 
-	T		find(Node_ptr node, first_type key) {
+	T		_find(Node_ptr node, first_type key) {
 		if (node == NULL)
 			return node->data;
 		else if (this->_comp(key, node->data.first))
-			return find(node->left, key);
+			return _find(node->left, key);
 		if (this->_comp(node->data.first, key))
-			return find(node->right, key);
+			return _find(node->right, key);
 		else
 			return node->data;
 	}
 
-	bool	search(Node_ptr node, first_type key) const {
+	bool	_search(Node_ptr node, first_type key) const {
 		if (node == NULL)
 			return false;
 		else if (this->_comp(key, node->data.first))
-			return search(node->left, key);
+			return _search(node->left, key);
 		if (this->_comp(node->data.first, key))
-			return search(node->right, key);
+			return _search(node->right, key);
 		else
 			return true;
 	};
 
-	Node_ptr addNode(Node_ptr node, Node_ptr parent, T pair, first_type key) {
+	Node_ptr _addNode(Node_ptr node, Node_ptr parent, T pair, first_type key) {
 		if (node == NULL)
 		{
 			Node_ptr	ret = this->_alloc.allocate(1);
@@ -276,20 +276,20 @@ private:
 			return ret;
 		}
 		if (this->_comp(key, node->data.first))
-			node->left = addNode(node->left, node, pair, key);
+			node->left = _addNode(node->left, node, pair, key);
 		else if (this->_comp(node->data.first, key))
-			node->right = addNode(node->right, node, pair, key);
+			node->right = _addNode(node->right, node, pair, key);
 		else
 			return node;
-		node->height = 1 + max(getHeight(node->left), getHeight(node->right));		
-		return checkBalance(node, key);
+		node->height = 1 + _max(_getHeight(node->left), _getHeight(node->right));		
+		return _checkBalance(node, key);
 	};
 
-	void	print2DUtil(Node_ptr node, int space) const {
+	void	_print2DUtil(Node_ptr node, int space) const {
 		if (node == NULL)
 			return;
 		space += 20;
-		print2DUtil(node->right, space);
+		_print2DUtil(node->right, space);
 		std::cout << std::endl;
 		for (int i = 10; i < space; i++)
 			std::cout << " ";
@@ -301,7 +301,7 @@ private:
 		std::cout << "\033[32m";
 		std::cout << node->height << "\n";
 		std::cout << "\033[0m";
-		print2DUtil(node->left, space);
+		_print2DUtil(node->left, space);
 	};
 };
 
