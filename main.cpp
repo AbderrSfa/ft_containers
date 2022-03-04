@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 13:36:14 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:46:06 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
+			std::map<int, char>::iterator   it = mp.begin();
+
+
+			std::cout << it->first << " " << it->second << std::endl;
 			// mp.printTree();
 		}
 		catch (const std::exception &e)
@@ -80,7 +84,7 @@ int main()
 
 			ft::map<int, char>::iterator   it = mp.begin();
 
-			std::cout << (*it).first << " " << (*it).second << std::endl;
+			std::cout << it->first << " " << it->second << std::endl;
 
 			// mp.printTree();
 

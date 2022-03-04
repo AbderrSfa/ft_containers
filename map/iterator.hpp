@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:25:18 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 13:35:25 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:40:25 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ namespace ft
 
 		node_pointer	base() const		{ return this->_it; };
 		reference		operator*() const	{ return this->_it->data; };
-		TreeIt&			operator++()		{ ++this->_it; return *this; };
-		TreeIt			operator++(int)		{ return TreeIt(this->_it++); };
-		TreeIt&			operator--()		{ --this->_it; return *this; };
-		TreeIt			operator--(int)		{ return TreeIt(this->_it--); };
+		// TreeIt&			operator++()		{ ++this->_it; return *this; };
+		// TreeIt			operator++(int)		{ return TreeIt(this->_it++); };
+		// TreeIt&			operator--()		{ --this->_it; return *this; };
+		// TreeIt			operator--(int)		{ return TreeIt(this->_it--); };
 		pointer			operator->() const	{ return (&(operator*())); };
 	};
 
