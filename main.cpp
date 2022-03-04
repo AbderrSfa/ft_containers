@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/03 14:03:18 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:36:14 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ int main()
 			mp.insert(std::make_pair(59, 'q'));
 
 			// mp.printTree();
-			std::cout << mp.size() << std::endl;
-			std::cout << mp.empty() << std::endl;
-			std::cout << mp.max_size() << std::endl;
-			mp.clear();
-			std::cout << mp.empty() << std::endl;
-			std::cout << mp.size() << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -86,14 +80,9 @@ int main()
 
 			ft::map<int, char>::iterator   it = mp.begin();
 
-			mp.printTree();
-			std::cout << mp.size() << std::endl;
-			std::cout << mp.empty() << std::endl;
-			std::cout << mp.max_size() << std::endl;
-			mp.clear();
-			std::cout << mp.empty() << std::endl;
-			std::cout << mp.size() << std::endl;
+			std::cout << (*it).first << " " << (*it).second << std::endl;
 
+			// mp.printTree();
 
 
 			// ft::vector<int>	vec2(10, 0);
