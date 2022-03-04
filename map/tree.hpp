@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 13:33:11 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 15:16:54 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,22 @@ namespace ft
 				this->clear();
 		}
 
-		iterator		begin() { return iterator(this->_root); };
-		const_iterator	begin() const { return const_iterator(this->_root); };
-		iterator		end() { return iterator(this->end); }
-		const_iterator	end() const { return const_iterator(this->end); }
+		iterator		begin()							{ return iterator(this->_getMin()); };
+		const_iterator	begin() const					{ return const_iterator(this->_getMin()); };
+		iterator		end()							{ return iterator(this->end); }
+		const_iterator	end() const						{ return const_iterator(this->end); }
 
-		bool			empty() const { return (this->_CurrentSize == 0); };
-		size_type		size() const { return this->_CurrentSize; };
-		size_type		max_size() const { return this->_alloc.max_size(); };
+		bool			empty() const					{ return (this->_CurrentSize == 0); };
+		size_type		size() const					{ return this->_CurrentSize; };
+		size_type		max_size() const				{ return this->_alloc.max_size(); };
 
 
-		void			insert(T pair) { this->_root = _addNode(this->_root, this->_root, pair, pair.first); };
-		bool			search(first_type key) const { return (_search(this->_root, key)); };
-		NodePtr			find(first_type key) { return (_find(this->_root, key)); };
-		void			deleteNode(first_type key) { this->_root = _deleteNode(this->_root, key); };
-		void			clear() { _deleteTree(this->_root); this->_CurrentSize = 0; };
-		void			printTree() const { _print2DUtil(this->_root, 0); };
+		void			insert(T pair)					{ this->_root = _addNode(this->_root, this->_root, pair, pair.first); };
+		bool			search(first_type key) const	{ return (_search(this->_root, key)); };
+		NodePtr			find(first_type key)			{ return (_find(this->_root, key)); };
+		void			deleteNode(first_type key)		{ this->_root = _deleteNode(this->_root, key); };
+		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
+		void			printTree() const				{ _print2DUtil(this->_root, 0); };
 
 	private:
 		int	_getHeight(NodePtr node) const {
@@ -103,6 +103,26 @@ namespace ft
 			if (node == NULL)
 				return 0;
 			return _getHeight(node->left) - _getHeight(node->right);
+		};
+
+		NodePtr	_getMin() {
+			NodePtr	current = this->_root;
+			while (current->left != NULL)
+				current = current->left;
+			return current;
+		}
+
+		NodePtr	_getMax() {
+			NodePtr	current = this->_root;
+			while (current->right != NULL)
+				current = current->right;
+			return current;
+		}
+
+		NodePtr _getMinSuccessor(NodePtr node) {
+			while (node->left != NULL)
+				node = node->left;
+			return node;
 		};
 
 		NodePtr _rightRotate(NodePtr node) {
@@ -172,13 +192,6 @@ namespace ft
 					return _leftRotate(node);
 			}
 			return node;
-		};
-
-		NodePtr _getMinSuccessor(NodePtr node) const {
-			NodePtr	current = node;
-			while (current->left != NULL)
-				current = current->left;
-			return current;
 		};
 
 		NodePtr _reBalance(NodePtr node) {
