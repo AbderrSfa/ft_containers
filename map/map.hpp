@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 13:35:45 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:57:39 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ namespace ft
 		public:
 			typedef Key												key_type;
 			typedef T												mapped_type;
-			// key_type should be const
-			typedef ft::pair<const key_type, mapped_type>					value_type;
-			//
+			typedef ft::pair<const key_type, mapped_type>			value_type;
 			typedef Compare											key_compare;
 			typedef Alloc											allocator_type;
 			typedef typename allocator_type::reference				reference;
@@ -50,9 +48,6 @@ namespace ft
 		public:
 			typedef typename Tree_type::iterator					iterator;
 			typedef typename Tree_type::const_iterator				const_iterator;
-			//typedef mapIt<const_pointer>						const_iterator;
-			//typedef mapRevIt<iterator>							reverse_iterator;
-			//typedef mapRevIt<const_iterator>					const_reverse_iterator;
 
 		private:
 			Tree_type	_tree;
