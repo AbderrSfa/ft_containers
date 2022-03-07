@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 14:07:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:36:49 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft
 
 		private:
 			typedef Node<value_type>								Node_type;
-			typedef Node_type*										Node_ptr;
+			typedef Node_type*										NodePtr;
 			typedef Tree<value_type, key_compare, allocator_type>	Tree_type;
 
 		public:
@@ -113,10 +113,10 @@ namespace ft
 			// value_compare	value_comp() const {};
 
 			/* Operations */
-			value_type								find(const key_type &k)
+			NodePtr								find(const key_type &k)
 			{
 				if (!this->count(k))
-					return value_type(0, '\0');
+					return NULL;
 				return this->_tree.find(k);
 			};
 			const_iterator							find(const key_type &k) const {};

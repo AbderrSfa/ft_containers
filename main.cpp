@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/07 14:34:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:36:37 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int main()
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
 
-			std::cout << mp.empty() << std::endl;
-
 			mp.insert(ft::make_pair(40, 'b'));
 			mp.insert(ft::make_pair(52, 'c'));
 			mp.insert(ft::make_pair(38, 'a'));
@@ -99,23 +97,25 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
-			ft::map<int, char>::iterator   it = mp.begin();
+			std::cout << mp.erase(5) << std::endl;
+			
+			// ft::map<int, char>::iterator   it = mp.begin();
 
-			std::cout << it->first << " " << it->second << std::endl;
+			// std::cout << it->first << " " << it->second << std::endl;
 
-			++it;
-			std::cout << it->first << " " << it->second << std::endl;
+			// ++it;
+			// std::cout << it->first << " " << it->second << std::endl;
 
-			it++;
-			std::cout << it->first << " " << it->second << std::endl;
+			// it++;
+			// std::cout << it->first << " " << it->second << std::endl;
 
-			it--;
-			std::cout << it->first << " " << it->second << std::endl;
+			// it--;
+			// std::cout << it->first << " " << it->second << std::endl;
 
-			--it;
-			std::cout << it->first << " " << it->second << std::endl;
+			// --it;
+			// std::cout << it->first << " " << it->second << std::endl;
 
-			mp.printTree();
+			// mp.printTree();
 		}
 		catch (const std::exception &e)
 		{

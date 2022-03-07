@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/07 14:35:45 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:40:02 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ namespace ft
 	public:
 		Tree() {
 			this->_end = this->_alloc.allocate(1);
-			// this->_root = this->_end;
+			this->_root = this->_end;
 			this->_CurrentSize = 0;
 		};
 		~Tree() {
@@ -218,7 +218,7 @@ namespace ft
 		}
 
 		NodePtr _deleteNode(NodePtr node, first_type key) {
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 				return node;
 			if (this->_comp(key, node->data.first))
 				node->left = _deleteNode(node->left, key);
@@ -252,19 +252,19 @@ namespace ft
 			return _reBalance(node);
 		};
 
-		T		_find(NodePtr node, first_type key) {
+		NodePtr		_find(NodePtr node, first_type key) {
 			if (node == NULL)
-				return node->data;
+				return node;
 			else if (this->_comp(key, node->data.first))
 				return _find(node->left, key);
 			if (this->_comp(node->data.first, key))
 				return _find(node->right, key);
 			else
-				return node->data;
+				return node;
 		}
 
 		bool	_search(NodePtr node, first_type key) const {
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 				return false;
 			else if (this->_comp(key, node->data.first))
 				return _search(node->left, key);
@@ -275,7 +275,7 @@ namespace ft
 		};
 
 		NodePtr _addNode(NodePtr node, NodePtr parent, T pair, first_type key) {
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 			{
 				NodePtr	ret = this->_alloc.allocate(1);
 				this->_alloc.construct(ret, Node<T>(pair));
