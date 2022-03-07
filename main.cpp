@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/07 14:17:42 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:34:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,54 +25,54 @@
 
 int main()
 {
-	{
-		try
-		{
-			std::cout << "========== OG ==========" << std::endl;
-			std::map<int, char> mp;
+	// {
+	// 	try
+	// 	{
+	// 		std::cout << "========== OG ==========" << std::endl;
+	// 		std::map<int, char> mp;
 
-			std::cout << mp.empty() << std::endl;
+	// 		std::cout << mp.empty() << std::endl;
 
-			mp.insert(std::make_pair(40, 'b'));
-			mp.insert(std::make_pair(52, 'c'));
-			mp.insert(std::make_pair(38, 'a'));
-			mp.insert(std::make_pair(25, 'd'));
-			mp.insert(std::make_pair(74, 'f'));
-			mp.insert(std::make_pair(35, 'g'));
-			mp.insert(std::make_pair(68, 'h'));
-			mp.insert(std::make_pair(61, 'e'));
-			mp.insert(std::make_pair(88, 'i'));
-			mp.insert(std::make_pair(49, 'j'));
-			mp.insert(std::make_pair(55, 'k'));
-			mp.insert(std::make_pair(65, 'l'));
-			mp.insert(std::make_pair(58, 'm'));
-			mp.insert(std::make_pair(47, 'n'));
-			mp.insert(std::make_pair(67, 'o'));
-			mp.insert(std::make_pair(11, 'p'));
-			mp.insert(std::make_pair(59, 'q'));
+	// 		mp.insert(std::make_pair(40, 'b'));
+	// 		mp.insert(std::make_pair(52, 'c'));
+	// 		mp.insert(std::make_pair(38, 'a'));
+	// 		mp.insert(std::make_pair(25, 'd'));
+	// 		mp.insert(std::make_pair(74, 'f'));
+	// 		mp.insert(std::make_pair(35, 'g'));
+	// 		mp.insert(std::make_pair(68, 'h'));
+	// 		mp.insert(std::make_pair(61, 'e'));
+	// 		mp.insert(std::make_pair(88, 'i'));
+	// 		mp.insert(std::make_pair(49, 'j'));
+	// 		mp.insert(std::make_pair(55, 'k'));
+	// 		mp.insert(std::make_pair(65, 'l'));
+	// 		mp.insert(std::make_pair(58, 'm'));
+	// 		mp.insert(std::make_pair(47, 'n'));
+	// 		mp.insert(std::make_pair(67, 'o'));
+	// 		mp.insert(std::make_pair(11, 'p'));
+	// 		mp.insert(std::make_pair(59, 'q'));
 
-			std::map<int, char>::iterator   it = mp.begin();
+	// 		std::map<int, char>::iterator   it = mp.begin();
 
 
-			std::cout << it->first << " " << it->second << std::endl;
+	// 		std::cout << it->first << " " << it->second << std::endl;
 
-			++it;
-			std::cout << it->first << " " << it->second << std::endl;
+	// 		++it;
+	// 		std::cout << it->first << " " << it->second << std::endl;
 
-			it++;
-			std::cout << it->first << " " << it->second << std::endl;
+	// 		it++;
+	// 		std::cout << it->first << " " << it->second << std::endl;
 
-			it--;
-			std::cout << it->first << " " << it->second << std::endl;
+	// 		it--;
+	// 		std::cout << it->first << " " << it->second << std::endl;
 
-			--it;
-			std::cout << it->first << " " << it->second << std::endl;
-		}
-		catch (const std::exception &e)
-		{
-			std::cerr << e.what() << '\n';
-		}
-	}
+	// 		--it;
+	// 		std::cout << it->first << " " << it->second << std::endl;
+	// 	}
+	// 	catch (const std::exception &e)
+	// 	{
+	// 		std::cerr << e.what() << '\n';
+	// 	}
+	// }
 	{
 		try
 		{
@@ -115,7 +115,7 @@ int main()
 			--it;
 			std::cout << it->first << " " << it->second << std::endl;
 
-			// mp.printTree();
+			mp.printTree();
 		}
 		catch (const std::exception &e)
 		{

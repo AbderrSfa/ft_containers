@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/07 14:11:08 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:35:45 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,29 +111,11 @@ namespace ft
 			return current;
 		}
 
-		NodePtr	_getMax() {
-			NodePtr	current = this->_root;
-			while (current->right != NULL)
-				current = current->right;
-			return current;
-		}
-
 		NodePtr _getMinSuccessor(NodePtr node) {
 			while (node->left != NULL)
 				node = node->left;
 			return node;
 		};
-
-		NodePtr	_getSuccessor(NodePtr node) {
-			if (node->right)
-				return this->_getMinSuccessor(node->right);
-			NodePtr	temp = node->parent;
-			while (temp && node == temp->right) {
-				node = temp;
-				temp = temp->parent;
-			}
-			return temp;
-		}
 
 		NodePtr _rightRotate(NodePtr node) {
 			NodePtr	temp = node->left;
