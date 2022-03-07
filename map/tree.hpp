@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 15:16:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:11:08 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ namespace ft
 		NodePtr			find(first_type key)			{ return (_find(this->_root, key)); };
 		void			deleteNode(first_type key)		{ this->_root = _deleteNode(this->_root, key); };
 		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
-		void			printTree() const				{ _print2DUtil(this->_root, 0); };
-
+		void			printTree()						{ _print2DUtil(this->_root, 0); };
 	private:
 		int	_getHeight(NodePtr node) const {
 			if (node == NULL)
@@ -124,6 +123,17 @@ namespace ft
 				node = node->left;
 			return node;
 		};
+
+		NodePtr	_getSuccessor(NodePtr node) {
+			if (node->right)
+				return this->_getMinSuccessor(node->right);
+			NodePtr	temp = node->parent;
+			while (temp && node == temp->right) {
+				node = temp;
+				temp = temp->parent;
+			}
+			return temp;
+		}
 
 		NodePtr _rightRotate(NodePtr node) {
 			NodePtr	temp = node->left;
@@ -320,6 +330,46 @@ namespace ft
 			_print2DUtil(node->left, space);
 		};
 	};
+
+	template <class NodePtr>
+	NodePtr _getMinSuccessor(NodePtr node) {
+		while (node->left != NULL)
+			node = node->left;
+		return node;
+	};
+
+	template <class NodePtr>
+	NodePtr _getMaxPredecessor(NodePtr node) {
+		while (node->right != NULL)
+			node = node->right;
+		return node;
+	};
+
+	template <class NodePtr>
+	NodePtr	_getSuccessor(NodePtr node) {
+		if (node->right)
+			return _getMinSuccessor(node->right);
+		NodePtr	temp = node->parent;
+		while (temp && node == temp->right) {
+			node = temp;
+			temp = temp->parent;
+		}
+		return temp;
+	};
+
+	template <class NodePtr>
+	NodePtr	_getPredecessor(NodePtr node) {
+		if (node->left)
+			return _getMaxPredecessor(node->left);
+		NodePtr	temp = node->parent;
+		while (temp && node == temp->left) {
+			node = temp;
+			temp = temp->parent;
+		}
+		return temp;
+	};
 }
+
+	
 
 #endif

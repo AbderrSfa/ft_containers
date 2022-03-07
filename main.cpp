@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/04 15:06:43 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:17:42 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,18 @@ int main()
 
 
 			std::cout << it->first << " " << it->second << std::endl;
-			// mp.printTree();
+
+			++it;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			it++;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			it--;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -92,7 +103,19 @@ int main()
 
 			std::cout << it->first << " " << it->second << std::endl;
 
-			mp.printTree();
+			++it;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			it++;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			it--;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+
+			// mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
