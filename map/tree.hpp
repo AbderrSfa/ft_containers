@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/08 14:43:25 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:50:46 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,6 @@ namespace ft
 			return node->height;
 		};
 
-		int _max(int a, int b) const {
-			return (a > b) ? a : b;
-		};
-
 		int	_getBalanceFactor(NodePtr node) const {
 			if (node == NULL || node == this->_end)
 				return 0;
@@ -138,9 +134,9 @@ namespace ft
 			}
 			node->parent = temp;
 
-			node->height = _max(_getHeight(node->left),
+			node->height = std::max(_getHeight(node->left),
 				_getHeight(node->right)) + 1;
-			temp->height = _max(_getHeight(temp->left),
+			temp->height = std::max(_getHeight(temp->left),
 				_getHeight(temp->right)) + 1;
 			return temp;
 		};
@@ -162,9 +158,9 @@ namespace ft
 			}
 			node->parent = temp;
 
-			node->height = _max(_getHeight(node->left),
+			node->height = std::max(_getHeight(node->left),
 				_getHeight(node->right)) + 1;
-			temp->height = _max(_getHeight(temp->left),
+			temp->height = std::max(_getHeight(temp->left),
 				_getHeight(temp->right)) + 1;
 			return temp;
 		};
@@ -252,7 +248,7 @@ namespace ft
 			}
 			if (node == NULL)
 				return node;
-			node->height = 1 + _max(_getHeight(node->left), _getHeight(node->right));
+			node->height = 1 + std::max(_getHeight(node->left), _getHeight(node->right));
 			return _reBalance(node);
 		};
 
@@ -293,7 +289,7 @@ namespace ft
 				node->right = _addNode(node->right, node, pair, key);
 			else
 				return node;
-			node->height = 1 + _max(_getHeight(node->left), _getHeight(node->right));
+			node->height = 1 + std::max(_getHeight(node->left), _getHeight(node->right));
 			return _checkBalance(node, key);
 		};
 
