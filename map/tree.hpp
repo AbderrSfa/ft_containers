@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/07 15:40:02 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/08 12:09:16 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ namespace ft
 		typedef Allocator													allocator_type;
 
 	private:
-		typedef typename value_type::first_type	first_type;
+		typedef typename value_type::first_type								first_type;
 		typedef typename allocator_type::template rebind<Node<T> >::other	node_allocator;
 		typedef Node<value_type>											NodeType;
 		typedef NodeType*													NodePtr;
@@ -69,10 +69,11 @@ namespace ft
 		~Tree() {
 			if (this->size())
 				this->clear();
+			this->_alloc.deallocate(this->_end, 1);
 		}
 
-		iterator		begin()							{ return iterator(this->_getMin()); };
-		const_iterator	begin() const					{ return const_iterator(this->_getMin()); };
+		iterator		begin()							{ return iterator(this->_getMin(this->_root)); };
+		const_iterator	begin() const					{ return const_iterator(this->_getMin(this->_root)); };
 		iterator		end()							{ return iterator(this->end); }
 		const_iterator	end() const						{ return const_iterator(this->end); }
 
@@ -81,12 +82,16 @@ namespace ft
 		size_type		max_size() const				{ return this->_alloc.max_size(); };
 
 
-		void			insert(T pair)					{ this->_root = _addNode(this->_root, this->_root, pair, pair.first); };
+		void			insert(T pair) {
+			this->_root = _addNode(this->_root, this->_root, pair, pair.first);
+			this->_getMax(this->_root)->right = this->_end;
+		};
 		bool			search(first_type key) const	{ return (_search(this->_root, key)); };
 		NodePtr			find(first_type key)			{ return (_find(this->_root, key)); };
 		void			deleteNode(first_type key)		{ this->_root = _deleteNode(this->_root, key); };
 		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
 		void			printTree()						{ _print2DUtil(this->_root, 0); };
+
 	private:
 		int	_getHeight(NodePtr node) const {
 			if (node == NULL)
@@ -104,14 +109,13 @@ namespace ft
 			return _getHeight(node->left) - _getHeight(node->right);
 		};
 
-		NodePtr	_getMin() {
-			NodePtr	current = this->_root;
-			while (current->left != NULL)
-				current = current->left;
-			return current;
-		}
+		NodePtr _getMax(NodePtr node) {
+			while (node->right != NULL && node->right != this->_end)
+				node = node->right;
+			return node;
+		};
 
-		NodePtr _getMinSuccessor(NodePtr node) {
+		NodePtr _getMin(NodePtr node) {
 			while (node->left != NULL)
 				node = node->left;
 			return node;
@@ -209,7 +213,7 @@ namespace ft
 
 		void	_deleteTree(NodePtr node)
 		{
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 				return;
 			_deleteTree(node->left);
 			_deleteTree(node->right);
@@ -241,7 +245,7 @@ namespace ft
 					this->_CurrentSize--;
 				}
 				else {
-					NodePtr	temp = _getMinSuccessor(node->right);
+					NodePtr	temp = _getMin(node->right);
 					node->data = temp->data;
 					node->right = _deleteNode(node->right, temp->data.first);
 				}
@@ -294,7 +298,7 @@ namespace ft
 		};
 
 		void	_print2DUtil(NodePtr node, int space) const {
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 				return;
 			space += 20;
 			_print2DUtil(node->right, space);
@@ -302,7 +306,7 @@ namespace ft
 			for (int i = 10; i < space; i++)
 				std::cout << " ";
 			std::cout << "\033[32m";
-			if (node->parent)
+			if (node->parent != NULL && node->parent != this->_end)
 				std::cout << "(" << node->parent->data.first << ")<-";
 			std::cout << "\033[0m";
 			std::cout << "{" << node->data.first << " " << node->data.second << "} ";
@@ -314,14 +318,14 @@ namespace ft
 	};
 
 	template <class NodePtr>
-	NodePtr _getMinSuccessor(NodePtr node) {
+	NodePtr _getMin(NodePtr node) {
 		while (node->left != NULL)
 			node = node->left;
 		return node;
 	};
 
 	template <class NodePtr>
-	NodePtr _getMaxPredecessor(NodePtr node) {
+	NodePtr _getMax(NodePtr node) {
 		while (node->right != NULL)
 			node = node->right;
 		return node;
@@ -330,7 +334,7 @@ namespace ft
 	template <class NodePtr>
 	NodePtr	_getSuccessor(NodePtr node) {
 		if (node->right)
-			return _getMinSuccessor(node->right);
+			return _getMin(node->right);
 		NodePtr	temp = node->parent;
 		while (temp && node == temp->right) {
 			node = temp;
@@ -342,7 +346,7 @@ namespace ft
 	template <class NodePtr>
 	NodePtr	_getPredecessor(NodePtr node) {
 		if (node->left)
-			return _getMaxPredecessor(node->left);
+			return _getMax(node->left);
 		NodePtr	temp = node->parent;
 		while (temp && node == temp->left) {
 			node = temp;
@@ -351,7 +355,5 @@ namespace ft
 		return temp;
 	};
 }
-
-	
 
 #endif

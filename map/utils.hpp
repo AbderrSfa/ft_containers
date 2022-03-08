@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.hpp                                      :+:      :+:    :+:   */
+/*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:25:25 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/21 17:38:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/08 11:23:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ namespace ft
 		pair(const first_type& a, const second_type& b) : first(a), second(b) {};
 
 		pair&	operator=(const pair& pr) {
-			first = pr.first;
-			second = pr.second;
+			if (this != &pr) {
+				first = pr.first;
+				second = pr.second;
+			}
 			return *this;
 		};
 	};
@@ -72,9 +74,9 @@ namespace ft
 	};
 
 	template <class T1, class T2>
-	pair<T1, T2> make_pair(T1 x, T2 y)
+	ft::pair<T1, T2> make_pair(T1 x, T2 y)
 	{
-		return (pair<T1, T2>(x, y));
+		return (ft::pair<T1, T2>(x, y));
 	};
 
 #ifndef ENABLE_IF
