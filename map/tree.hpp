@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/08 12:09:16 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:43:25 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ namespace ft
 
 	private:
 		int	_getHeight(NodePtr node) const {
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 				return 0;
 			return node->height;
 		};
@@ -104,7 +104,7 @@ namespace ft
 		};
 
 		int	_getBalanceFactor(NodePtr node) const {
-			if (node == NULL)
+			if (node == NULL || node == this->_end)
 				return 0;
 			return _getHeight(node->left) - _getHeight(node->right);
 		};
@@ -130,7 +130,7 @@ namespace ft
 				node->left->parent = node;
 			temp->right = node;
 			temp->parent = node->parent;
-			if (node->parent) {
+			if (node->parent && node->parent != this->_end) {
 				if (node == node->parent->right)
 					node->parent->right = temp;
 				else
@@ -154,7 +154,7 @@ namespace ft
 				node->right->parent = node;
 			temp->left = node;
 			temp->parent = node->parent;
-			if (node->parent) {
+			if (node->parent && node->parent != this->_end) {
 				if (node == node->parent->right)
 					node->parent->right = temp;
 				else

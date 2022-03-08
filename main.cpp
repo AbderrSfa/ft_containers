@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/08 12:25:07 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:44:08 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,39 +82,55 @@ int main()
 			mp.insert(ft::make_pair(38, 'a'));
 			mp.insert(ft::make_pair(52, 'c'));
 			mp.insert(ft::make_pair(40, 'b'));
-			// mp.insert(ft::make_pair(25, 'd'));
-			// mp.insert(ft::make_pair(74, 'f'));
-			// mp.insert(ft::make_pair(35, 'g'));
-			// mp.insert(ft::make_pair(68, 'h'));
-			// mp.insert(ft::make_pair(61, 'e'));
-			// mp.insert(ft::make_pair(88, 'i'));
-			// mp.insert(ft::make_pair(49, 'j'));
-			// mp.insert(ft::make_pair(55, 'k'));
-			// mp.insert(ft::make_pair(65, 'l'));
-			// mp.insert(ft::make_pair(58, 'm'));
-			// mp.insert(ft::make_pair(47, 'n'));
-			// mp.insert(ft::make_pair(67, 'o'));
-			// mp.insert(ft::make_pair(11, 'p'));
-			// mp.insert(ft::make_pair(59, 'q'));
+			mp.insert(ft::make_pair(25, 'd'));
+			mp.insert(ft::make_pair(74, 'f'));
+			mp.insert(ft::make_pair(35, 'g'));
+			mp.insert(ft::make_pair(68, 'h'));
+			mp.insert(ft::make_pair(61, 'e'));
+			mp.insert(ft::make_pair(88, 'i'));
+			mp.insert(ft::make_pair(49, 'j'));
+			mp.insert(ft::make_pair(55, 'k'));
+			mp.insert(ft::make_pair(65, 'l'));
+			mp.insert(ft::make_pair(58, 'm'));
+			mp.insert(ft::make_pair(47, 'n'));
+			mp.insert(ft::make_pair(67, 'o'));
+			mp.insert(ft::make_pair(11, 'p'));
+			mp.insert(ft::make_pair(59, 'q'));
 
 			// std::cout << mp.erase(5) << std::endl;
 			
-			// ft::map<int, char>::iterator   it = mp.begin();
+			ft::map<int, char>::iterator   it = mp.begin();
 
-			// std::cout << it->first << " " << it->second << std::endl;
+			std::cout << it->first << " " << it->second << std::endl;
 
-			// ++it;
-			// std::cout << it->first << " " << it->second << std::endl;
+			++it;
+			it++;
+			++it;
+			it++;
+			++it;
+			it++;
+			++it;
+			it++;
 
-			// it++;
-			// std::cout << it->first << " " << it->second << std::endl;
+			std::cout << it->first << " " << it->second << std::endl;
 
-			// it--;
-			// std::cout << it->first << " " << it->second << std::endl;
+			it--;
+			std::cout << it->first << " " << it->second << std::endl;
 
-			// --it;
-			// std::cout << it->first << " " << it->second << std::endl;
-
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
+			--it;
+			std::cout << it->first << " " << it->second << std::endl;
 			mp.printTree();
 		}
 		catch (const std::exception &e)
