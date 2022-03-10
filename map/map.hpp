@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/10 14:16:29 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/10 16:26:15 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ namespace ft
 			   class T,
 			   class Compare = std::less<Key>,
 			   ////
-			   class Alloc = std::allocator<ft::pair< Key, T> >
+			   class Alloc = std::allocator<ft::pair<const Key, T> >
 			   ////
 			   >
 	class map
@@ -33,7 +33,7 @@ namespace ft
 			typedef Key												key_type;
 			typedef T												mapped_type;
 			////
-			typedef ft::pair< key_type, mapped_type>			value_type;
+			typedef ft::pair<const key_type, mapped_type>			value_type;
 			////
 			typedef Compare											key_compare;
 			typedef Alloc											allocator_type;
@@ -61,7 +61,19 @@ namespace ft
 			explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) {};
 
 			void	printTree(void) { this->_tree.printTree(); }
-			
+
+			iterator				begin() { return this->_tree.begin(); };
+			const_iterator			begin() const	{ return this->_tree.begin(); };
+			iterator				end()			{ return this->_tree.end(); };
+			const_iterator			end() const		{ return this->_tree.end(); };
+			bool		empty() const		{ return this->_tree.empty(); };
+			size_type	size() const		{ return this->_tree.size(); };
+			size_type	max_size() const	{ return this->_tree.max_size(); };
+			void					clear() { this->_tree.clear(); };
+			key_compare		key_comp() const { return key_compare(); };
+			size_type								count(const key_type &k) const { return _tree.search(k); };
+			allocator_type	get_allocator() const { return allocator_type(); };
+
 			// template <class InputIterator>
 			// map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
 			// map(const map& x) {};
@@ -69,10 +81,6 @@ namespace ft
 			// map& operator=(const map& x) {};
 
 			/* Iterators */
-			iterator				begin()			{ return this->_tree.begin(); };
-			const_iterator			begin() const	{ return this->_tree.begin(); };
-			iterator				end()			{ return this->_tree.end(); };
-			const_iterator			end() const		{ return this->_tree.end(); };
 			// const_iterator			begin() const	{ return const_iterator(this->_tree->root->data); };
 			// iterator				end()			{  };
 			// const_iterator			end() const		{  };
@@ -82,9 +90,6 @@ namespace ft
 			// const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
 
 			/* Capacity */
-			bool		empty() const		{ return this->_tree.empty(); };
-			size_type	size() const		{ return this->_tree.size(); };
-			size_type	max_size() const	{ return this->_tree.max_size(); };
 
 			/* Element access */
 			mapped_type	&operator[](const key_type &k)
@@ -110,10 +115,8 @@ namespace ft
 			};
 			// void					erase(iterator first, iterator last) {};
 			// void					swap(map &x) {};
-			void					clear() { this->_tree.clear(); };
 
 			/* Observers */
-			key_compare		key_comp() const { return key_compare(); };
 			// value_compare	value_comp() const {};
 
 			/* Operations */
@@ -124,7 +127,6 @@ namespace ft
 				return this->_tree.find(k);
 			};
 			const_iterator							find(const key_type &k) const {};
-			size_type								count(const key_type &k) const { return _tree.search(k); };
 			value_type								lower_bound(const key_type &k)
 			{
 				if (this->count(k))
@@ -138,7 +140,6 @@ namespace ft
 			// pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {};
 
 			/* Allocator */
-			allocator_type	get_allocator() const { return allocator_type(); };
 	};
 }
 
