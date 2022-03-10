@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/08 16:12:28 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:08:31 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ namespace ft
 		};
 
 		NodePtr _getMin(NodePtr node) {
-			while (node->left != NULL)
+			while (node->left != NULL && node != this->_end)
 				node = node->left;
 			return node;
 		};

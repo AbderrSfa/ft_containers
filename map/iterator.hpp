@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:25:18 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/08 16:13:35 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:00:34 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,11 @@ namespace ft
 
 	template <class Iterator, class NodePtr>
 	bool	operator==(const TreeIt<Iterator, NodePtr>& lhs, const TreeIt<Iterator, NodePtr>& rhs)
-	{
-		return (lhs.base() == rhs.base());
-	};
+	{ return (lhs.base() == rhs.base()); };
 
-	// template <class Iterator>
-	// bool	operator!=(const TreeIt<Iterator>& lhs, const TreeIt<Iterator>& rhs)
-	// {
-	// 	return (lhs.base() != rhs.base());
-	// };
+	template <class Iterator, class NodePtr>
+	bool	operator!=(const TreeIt<Iterator, NodePtr>& lhs, const TreeIt<Iterator, NodePtr>& rhs)
+	{ return (lhs.base() != rhs.base()); };
 }
 
 #endif
