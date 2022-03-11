@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/10 14:08:31 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/11 11:03:15 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ namespace ft
 	public:
 		Tree() {
 			this->_end = this->_alloc.allocate(1);
+			this->_end->left = NULL;
+			this->_end->right = NULL;
+			this->_end->parent = NULL;
 			this->_root = this->_end;
 			this->_CurrentSize = 0;
 		};
