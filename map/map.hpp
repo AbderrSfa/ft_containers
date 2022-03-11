@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/11 15:07:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/11 16:34:58 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ namespace ft
 		public:
 			typedef typename Tree_type::iterator					iterator;
 			typedef typename Tree_type::const_iterator				const_iterator;
+			typedef typename Tree_type::reverse_iterator			reverse_iterator;
+			typedef typename Tree_type::const_reverse_iterator		const_reverse_iterator;
 
 		private:
 			Tree_type	_tree;
@@ -62,19 +64,25 @@ namespace ft
 
 			void	printTree(void) { this->_tree.printTree(); }
 
-			iterator		begin()							{ return this->_tree.begin(); };
-			const_iterator	begin() const					{ return this->_tree.begin(); };
-			iterator		end()							{ return this->_tree.end(); };
-			const_iterator	end() const						{ return this->_tree.end(); };
-			bool			empty() const					{ return this->_tree.empty(); };
-			size_type		size() const					{ return this->_tree.size(); };
-			size_type		max_size() const				{ return this->_tree.max_size(); };
-			void			clear()							{ this->_tree.clear(); };
-			key_compare		key_comp() const				{ return key_compare(); };
-			size_type		count(const key_type &k) const	{ return _tree.search(k); };
-			allocator_type	get_allocator() const			{ return allocator_type(); };
-			iterator		find(const key_type& k)			{ return iterator(this->_tree.find(k)); };
-			const_iterator	find(const key_type &k) const	{ return const_iterator(this->_tree.find(k)); };
+			iterator				begin()							{ return this->_tree.begin(); };
+			const_iterator			begin() const					{ return this->_tree.begin(); };
+			iterator				end()							{ return this->_tree.end(); };
+			const_iterator			end() const						{ return this->_tree.end(); };
+			
+			reverse_iterator		rbegin()						{ return this->_tree.rbegin(); };
+			const_reverse_iterator	rbegin() const					{ return this->_tree.rbegin(); };
+			reverse_iterator		rend()							{ return this->_tree.rend(); };
+			const_reverse_iterator	rend() const					{ return this->_tree.rend(); };
+			
+			bool					empty() const					{ return this->_tree.empty(); };
+			size_type				size() const					{ return this->_tree.size(); };
+			size_type				max_size() const				{ return this->_tree.max_size(); };
+			void					clear()							{ this->_tree.clear(); };
+			key_compare				key_comp() const				{ return key_compare(); };
+			size_type				count(const key_type &k) const	{ return _tree.search(k); };
+			allocator_type			get_allocator() const			{ return allocator_type(); };
+			iterator				find(const key_type& k)			{ return iterator(this->_tree.find(k)); };
+			const_iterator			find(const key_type &k) const	{ return const_iterator(this->_tree.find(k)); };
 			
 			// template <class InputIterator>
 			// map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
@@ -83,10 +91,6 @@ namespace ft
 			// map& operator=(const map& x) {};
 
 			/* Iterators */
-			// reverse_iterator		rbegin()		{ return reverse_iterator(this->end()); };
-			// const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(this->end()); };
-			// reverse_iterator		rend()			{ return reverse_iterator(this->begin()); };
-			// const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->begin()); };
 
 			/* Capacity */
 
