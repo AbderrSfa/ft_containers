@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/10 16:26:15 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/11 12:00:03 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ namespace ft
 			// map& operator=(const map& x) {};
 
 			/* Iterators */
-			// const_iterator			begin() const	{ return const_iterator(this->_tree->root->data); };
-			// iterator				end()			{  };
-			// const_iterator			end() const		{  };
 			// reverse_iterator		rbegin()		{ return reverse_iterator(this->end()); };
 			// const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(this->end()); };
 			// reverse_iterator		rend()			{ return reverse_iterator(this->begin()); };
@@ -92,13 +89,13 @@ namespace ft
 			/* Capacity */
 
 			/* Element access */
-			mapped_type	&operator[](const key_type &k)
-			{
-				// return (*((this->insert(std::make_pair(k, mapped_type()))).first)).second;
-				// if (this->count(k))
-					mapped_type	&temp = this->find(k).second;
-					return temp;
-			};
+			// mapped_type	&operator[](const key_type &k)
+			// {
+			// 	return (*((this->insert(std::make_pair(k, mapped_type()))).first)).second;
+			// 	if (this->count(k))
+			// 		mapped_type	&temp = this->find(k).second;
+			// 		return temp;
+			// };
 
 			/* Modifiers */
 			void	insert(const value_type &val) { this->_tree.insert(val); };
@@ -106,13 +103,13 @@ namespace ft
 			// template <class InputIterator>
 			// void					insert(InputIterator first, InputIterator last) {};
 			// void					erase(iterator position) {};
-			size_type				erase(const key_type &k)
-			{
-				if (!this->count(k))
-					return 0;
-				this->_tree.deleteNode(k);
-				return 1;
-			};
+			// size_type				erase(const key_type &k)
+			// {
+			// 	if (!this->count(k))
+			// 		return 0;
+			// 	this->_tree.deleteNode(k);
+			// 	return 1;
+			// };
 			// void					erase(iterator first, iterator last) {};
 			// void					swap(map &x) {};
 
@@ -120,21 +117,25 @@ namespace ft
 			// value_compare	value_comp() const {};
 
 			/* Operations */
-			NodePtr								find(const key_type &k)
+			iterator	find(const key_type& k)
 			{
 				if (!this->count(k))
-					return NULL;
-				return this->_tree.find(k);
+					return this->end();
+				return iterator(this->_tree.find(k));
 			};
-			const_iterator							find(const key_type &k) const {};
-			value_type								lower_bound(const key_type &k)
-			{
-				if (this->count(k))
-					return this->_tree.find(k);
-				return value_type(0, '\0');
+			const_iterator							find(const key_type &k) const {
+				if (!this->count(k))
+					return this->end();
+				return const_iterator(this->_tree.find(k));
 			};
+			// value_type								lower_bound(const key_type &k)
+			// {
+			// 	if (this->count(k))
+			// 		return this->_tree.find(k);
+			// 	return value_type(0, '\0');
+			// };
 			// const_iterator							lower_bound(const key_type &k) const {};
-			value_type								upper_bound(const key_type &k) {};
+			// value_type								upper_bound(const key_type &k) {};
 			// const_iterator							upper_bound(const key_type &k) const {};
 			// pair<iterator, iterator>				equal_range(const key_type &k) {};
 			// pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {};
