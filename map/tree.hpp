@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/11 11:58:26 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/11 14:46:58 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ namespace ft
 			this->_getMax(this->_root)->right = this->_end;
 		};
 		bool			search(first_type key) const	{ return (_search(this->_root, key)); };
-		NodePtr			find(first_type key)			{ return (_find(this->_root, key)); };
+		NodePtr			find(first_type key) {
+			if (!this->search(key))
+				return this->_end;
+			return _find(this->_root, key);
+		};
 		void			deleteNode(first_type key)		{ this->_root = _deleteNode(this->_root, key); };
 		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
 		void			printTree()						{ _print2DUtil(this->_root, 0); };
