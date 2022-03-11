@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/11 14:47:36 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/11 15:08:11 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
-			std::map<int, char>::iterator	it = mp.find(38);
-			std::map<int, char>::iterator	ite = mp.find(34);
+			// std::map<int, char>::iterator	it = mp.find(38);
+			// std::map<int, char>::iterator	ite = mp.find(34);
 
-			std::cout << it->first << " " << it->second << std::endl;
-			std::cout << ite->first << " " << ite->second << std::endl;
+			// std::cout << it->first << " " << it->second << std::endl;
+			// std::cout << ite->first << " " << ite->second << std::endl;
 
 
 			// std::map<int, char>::iterator   it = mp.begin();
@@ -99,11 +99,11 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
-			ft::map<int, char>::iterator   it = mp.find(38);
-			ft::map<int, char>::iterator   ite = mp.find(34);
+			// ft::map<int, char>::iterator   it = mp.find(38);
+			// ft::map<int, char>::iterator   ite = mp.find(34);
 
-			std::cout << it->first << " " << it->second << std::endl;
-			std::cout << ite->first << " " << ite->second << std::endl;
+			// std::cout << it->first << " " << it->second << std::endl;
+			// std::cout << ite->first << " " << ite->second << std::endl;
 
 			// ft::map<int, char>::iterator   it = mp.begin();
 			// ft::map<int, char>::iterator   ite = mp.end();
@@ -119,7 +119,7 @@ int main()
 
 			// std::cout << (it == ite) << std::endl;
 
-			// mp.printTree();
+			mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
