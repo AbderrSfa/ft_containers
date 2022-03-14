@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/11 16:37:22 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 11:02:11 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ namespace ft
 		void			insert(T pair) {
 			this->_root = _addNode(this->_root, this->_root, pair, pair.first);
 			this->_getMax(this->_root)->right = this->_end;
+			this->_end->parent = this->_getMax(this->_root);
 		};
 		bool			search(first_type key) const	{ return (_search(this->_root, key)); };
 		NodePtr			find(first_type key) {
