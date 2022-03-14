@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/14 11:02:11 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 11:34:28 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ namespace ft
 		iterator		end()							{ return iterator(this->_end); }
 		const_iterator	end() const						{ return const_iterator(this->_end); }
 
-		reverse_iterator		rbegin()		{ return reverse_iterator(this->_end); };
-		const_reverse_iterator	rbegin() const { return const_reverse_iterator(this->_end); };
-		reverse_iterator		rend()			{ return reverse_iterator(this->_getMin(this->_root)); };
-		const_reverse_iterator	rend() const	{ return const_reverse_iterator(this->_getMin(this->_root)); };
+		reverse_iterator		rbegin()				{ return reverse_iterator(this->_end); };
+		const_reverse_iterator	rbegin() const			{ return const_reverse_iterator(this->_end); };
+		reverse_iterator		rend()					{ return reverse_iterator(this->_getMin(this->_root)); };
+		const_reverse_iterator	rend() const			{ return const_reverse_iterator(this->_getMin(this->_root)); };
 
 		bool			empty() const					{ return (this->_CurrentSize == 0); };
 		size_type		size() const					{ return this->_CurrentSize; };

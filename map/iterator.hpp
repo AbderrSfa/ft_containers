@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:25:18 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/11 16:49:25 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 11:58:37 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ namespace ft
 		RevTreeIt(const RevTreeIt<Iter, node_pointer>& _i) : _it(_i.base()) {};
 
 		node_pointer	base() const		{ return this->_it; };
-		reference		operator*() const	{ RevTreeIt temp(*this); return *++temp; };
+		reference		operator*() const	{ return _getPredecessor(this->_it)->data; };
 		RevTreeIt&		operator++()		{ this->_it = _getPredecessor(this->_it); return (*this); };
-		RevTreeIt		operator++(int)		{ RevTreeIt temp(*this); --(*this); return (temp); };
+		RevTreeIt		operator++(int)		{ RevTreeIt temp(*this); ++(*this); return (temp); };
 		RevTreeIt&		operator--()		{ this->_it = _getSuccessor(this->_it); return (*this); };
-		RevTreeIt		operator--(int)		{ RevTreeIt temp(*this); ++(*this); return (temp); };
+		RevTreeIt		operator--(int)		{ RevTreeIt temp(*this); --(*this); return (temp); };
 		pointer			operator->() const	{ return (&(operator*())); };
 	};
 
