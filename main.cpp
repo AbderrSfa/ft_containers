@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/14 14:36:53 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:33:02 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 		/*                                   */
 		/*************************************/
 
+#define ARG 35
+
 int main()
 {
 	{
@@ -30,39 +32,34 @@ int main()
 		{
 			std::cout << "========== OG ==========" << std::endl;
 			std::map<int, char> mp;
-			std::map<int, char> temp;
-
-			// temp.insert(std::make_pair(1, 'a'));
-			// temp.insert(std::make_pair(99, 'a'));
-			// temp.insert(std::make_pair(50, 'a'));
-
-
 
 			mp.insert(std::make_pair(38, 'a'));
 			mp.insert(std::make_pair(52, 'c'));
 			mp.insert(std::make_pair(40, 'b'));
 			mp.insert(std::make_pair(25, 'd'));
-			std::cout << mp[66] << std::endl;
-			// mp.insert(std::make_pair(74, 'f'));
-			// mp.insert(std::make_pair(35, 'g'));
-			// mp.insert(std::make_pair(68, 'h'));
-			// mp.insert(std::make_pair(61, 'e'));
-			// mp.insert(std::make_pair(88, 'i'));
-			// mp.insert(std::make_pair(49, 'j'));
-			// mp.insert(std::make_pair(55, 'k'));
-			// mp.insert(std::make_pair(65, 'l'));
-			// mp.insert(std::make_pair(58, 'm'));
-			// mp.insert(std::make_pair(47, 'n'));
-			// mp.insert(std::make_pair(67, 'o'));
-			// mp.insert(std::make_pair(11, 'p'));
-			// mp.insert(std::make_pair(59, 'q'));
+			mp.insert(std::make_pair(74, 'f'));
+			mp.insert(std::make_pair(35, 'g'));
+			mp.insert(std::make_pair(68, 'h'));
+			mp.insert(std::make_pair(61, 'e'));
+			mp.insert(std::make_pair(88, 'i'));
+			mp.insert(std::make_pair(49, 'j'));
+			mp.insert(std::make_pair(55, 'k'));
+			mp.insert(std::make_pair(65, 'l'));
+			mp.insert(std::make_pair(58, 'm'));
+			mp.insert(std::make_pair(47, 'n'));
+			mp.insert(std::make_pair(67, 'o'));
+			mp.insert(std::make_pair(11, 'p'));
+			mp.insert(std::make_pair(59, 'q'));
 
-			mp.insert(temp.begin(), temp.end());
-			
-			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
-			{
-				std::cout << it->first << " " << it->second << "\n";
-			}
+			std::map<int, char>::iterator	itl = mp.lower_bound(ARG);
+			std::map<int, char>::iterator	itu = mp.upper_bound(ARG);
+
+			std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
+			std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
+			// for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
+			// {
+			// 	std::cout << it->first << " " << it->second << "\n";
+			// }
 
 			// std::map<int, char>::iterator			it = mp.begin();
 			// std::map<int, char>::iterator			ite = mp.end();
@@ -83,38 +80,35 @@ int main()
 		{
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
-			ft::map<int, char> temp;
-
-			// temp.insert(ft::make_pair(1, 'a'));
-			// temp.insert(ft::make_pair(99, 'a'));
-			// temp.insert(ft::make_pair(50, 'a'));
 
 			mp.insert(ft::make_pair(38, 'a'));
 			mp.insert(ft::make_pair(52, 'c'));
 			mp.insert(ft::make_pair(40, 'b'));
 			mp.insert(ft::make_pair(25, 'd'));
-			// mp.insert(ft::make_pair(74, 'f'));
-			// mp.insert(ft::make_pair(35, 'g'));
-			// mp.insert(ft::make_pair(68, 'h'));
-			// mp.insert(ft::make_pair(61, 'e'));
-			// mp.insert(ft::make_pair(88, 'i'));
-			// mp.insert(ft::make_pair(49, 'j'));
-			// mp.insert(ft::make_pair(55, 'k'));
-			// mp.insert(ft::make_pair(65, 'l'));
-			// mp.insert(ft::make_pair(58, 'm'));
-			// mp.insert(ft::make_pair(47, 'n'));
-			// mp.insert(ft::make_pair(67, 'o'));
-			// mp.insert(ft::make_pair(11, 'p'));
-			// mp.insert(ft::make_pair(59, 'q'));
-			std::cout << mp[66] << std::endl;
+			mp.insert(ft::make_pair(74, 'f'));
+			mp.insert(ft::make_pair(35, 'g'));
+			mp.insert(ft::make_pair(68, 'h'));
+			mp.insert(ft::make_pair(61, 'e'));
+			mp.insert(ft::make_pair(88, 'i'));
+			mp.insert(ft::make_pair(49, 'j'));
+			mp.insert(ft::make_pair(55, 'k'));
+			mp.insert(ft::make_pair(65, 'l'));
+			mp.insert(ft::make_pair(58, 'm'));
+			mp.insert(ft::make_pair(47, 'n'));
+			mp.insert(ft::make_pair(67, 'o'));
+			mp.insert(ft::make_pair(11, 'p'));
+			mp.insert(ft::make_pair(59, 'q'));
 
-			mp.insert(temp.begin(), temp.end());
-			
-			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
-			{
-				std::cout << it->first << " " << it->second << "\n";
-			}
-			
+			ft::map<int, char>::iterator	itl = mp.lower_bound(ARG);
+			ft::map<int, char>::iterator	itu = mp.upper_bound(ARG);
+
+			std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
+			std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
+			// for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
+			// {
+			// 	std::cout << it->first << " " << it->second << "\n";
+			// }
+
 			// ft::map<int, char>::iterator			it = mp.begin();
 			// ft::map<int, char>::iterator			ite = mp.end();
 			// ft::map<int, char>::reverse_iterator	rit = mp.rbegin();

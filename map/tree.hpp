@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/14 11:34:28 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:37:29 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ namespace ft
 		typedef Allocator													allocator_type;
 
 	private:
-		typedef typename value_type::first_type								first_type;
+		typedef typename value_type::first_type								key_type;
 		typedef typename allocator_type::template rebind<Node<T> >::other	node_allocator;
 		typedef Node<value_type>											NodeType;
 		typedef NodeType*													NodePtr;
@@ -97,15 +97,31 @@ namespace ft
 			this->_getMax(this->_root)->right = this->_end;
 			this->_end->parent = this->_getMax(this->_root);
 		};
-		bool			search(first_type key) const	{ return (_search(this->_root, key)); };
-		NodePtr			find(first_type key) {
+		bool			search(key_type key) const	{ return (_search(this->_root, key)); };
+		NodePtr			find(key_type key) {
 			if (!this->search(key))
 				return this->_end;
 			return _find(this->_root, key);
 		};
-		void			deleteNode(first_type key)		{ this->_root = _deleteNode(this->_root, key); };
+		void			deleteNode(key_type key)		{ this->_root = _deleteNode(this->_root, key); };
 		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
 		void			printTree()						{ _print2DUtil(this->_root, 0); };
+		NodePtr		upper_bound(key_type key) {
+			NodePtr	temp = this->_root;
+			while (temp) {
+				if (key > temp->data.first) {
+					if (!temp->right)
+						return temp;
+					temp = temp->right;
+				}
+				else if (key < temp->data.first) {
+					if (!temp->left || key >= temp->left->data.first)
+						return temp;
+					temp = temp->left;
+				}
+			}
+			return temp;
+		}
 
 	private:
 		int	_getHeight(NodePtr node) const {
@@ -180,7 +196,7 @@ namespace ft
 			return temp;
 		};
 
-		NodePtr _checkBalance(NodePtr node, first_type key) {
+		NodePtr _checkBalance(NodePtr node, key_type key) {
 			int	balanceFactor = _getBalanceFactor(node);
 			if (balanceFactor > 1) {
 				if (this->_comp(key, node->left->data.first))
@@ -232,7 +248,7 @@ namespace ft
 			this->_alloc.deallocate(node, 1);
 		}
 
-		NodePtr _deleteNode(NodePtr node, first_type key) {
+		NodePtr _deleteNode(NodePtr node, key_type key) {
 			if (node == NULL || node == this->_end)
 				return node;
 			if (this->_comp(key, node->data.first))
@@ -267,7 +283,7 @@ namespace ft
 			return _reBalance(node);
 		};
 
-		NodePtr		_find(NodePtr node, first_type key) {
+		NodePtr		_find(NodePtr node, key_type key) {
 			if (node == NULL)
 				return node;
 			else if (this->_comp(key, node->data.first))
@@ -278,7 +294,7 @@ namespace ft
 				return node;
 		}
 
-		bool	_search(NodePtr node, first_type key) const {
+		bool	_search(NodePtr node, key_type key) const {
 			if (node == NULL || node == this->_end)
 				return false;
 			else if (this->_comp(key, node->data.first))
@@ -289,7 +305,7 @@ namespace ft
 				return true;
 		};
 
-		NodePtr _addNode(NodePtr node, NodePtr parent, T pair, first_type key) {
+		NodePtr _addNode(NodePtr node, NodePtr parent, T pair, key_type key) {
 			if (node == NULL || node == this->_end)
 			{
 				NodePtr	ret = this->_alloc.allocate(1);
