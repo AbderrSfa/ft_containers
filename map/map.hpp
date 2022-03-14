@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/11 16:34:58 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 14:31:42 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,11 @@ namespace ft
 				return ft::make_pair(this->find(val.first), true);
 			}
 			// iterator				insert(iterator position, const value_type &val) {};
-			// template <class InputIterator>
-			// void					insert(InputIterator first, InputIterator last) {};
+			template <class InputIterator>
+			void					insert(InputIterator first, InputIterator last) {
+				while (first != last)
+					this->insert((*first++));
+			};
 			// void					erase(iterator position) {};
 			// size_type				erase(const key_type &k)
 			// {
