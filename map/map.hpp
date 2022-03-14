@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/14 14:31:42 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 14:37:03 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,10 @@ namespace ft
 			/* Capacity */
 
 			/* Element access */
-			// mapped_type	&operator[](const key_type &k)
-			// {
-			// 	return (*((this->insert(std::make_pair(k, mapped_type()))).first)).second;
-			// 	if (this->count(k))
-			// 		mapped_type	&temp = this->find(k).second;
-			// 		return temp;
-			// };
+			mapped_type	&operator[](const key_type &k)
+			{
+				return (*((this->insert(ft::make_pair(k, mapped_type()))).first)).second;
+			};
 
 			/* Modifiers */
 			pair<iterator, bool> insert(const value_type& val) {

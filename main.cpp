@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/14 14:32:27 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/14 14:36:53 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main()
 			mp.insert(std::make_pair(52, 'c'));
 			mp.insert(std::make_pair(40, 'b'));
 			mp.insert(std::make_pair(25, 'd'));
+			std::cout << mp[66] << std::endl;
 			// mp.insert(std::make_pair(74, 'f'));
 			// mp.insert(std::make_pair(35, 'g'));
 			// mp.insert(std::make_pair(68, 'h'));
@@ -105,6 +106,7 @@ int main()
 			// mp.insert(ft::make_pair(67, 'o'));
 			// mp.insert(ft::make_pair(11, 'p'));
 			// mp.insert(ft::make_pair(59, 'q'));
+			std::cout << mp[66] << std::endl;
 
 			mp.insert(temp.begin(), temp.end());
 			
