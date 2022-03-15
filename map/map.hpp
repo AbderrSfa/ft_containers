@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 15:53:23 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 16:40:06 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ namespace ft
 			// 	return 1;
 			// };
 			// void					erase(iterator first, iterator last) {};
-			// void					swap(map &x) {};
+			void					swap(map &x)		{ this->_tree.swap(x._tree); };
 			void					clear()				{ this->_tree.clear(); };
 
 
@@ -154,7 +154,7 @@ namespace ft
 			/*																		*/
 			/************************************************************************/
 			key_compare				key_comp() const	{ return key_compare(); };
-			value_compare			value_comp() const	{};
+			// value_compare			value_comp() const	{};
 
 
 			/************************************************************************/

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 14:53:18 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 16:40:13 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,19 @@ namespace ft
 					return this->_end;
 			}
 			return temp;
+		}
+		void	swap(Tree& x) {
+			size_t	temp_size = x._size;
+			NodePtr	temp_root = x._root;
+			NodePtr	temp_end = x._end;
+
+			x._size = this->_size;
+			x._root = this->_root;
+			x._end = this->_end;
+
+			this->_size = temp_size;
+			this->_root = temp_root;
+			this->_end = temp_end;
 		}
 		
 	private:
