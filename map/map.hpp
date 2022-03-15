@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 12:06:43 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:05:31 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,12 @@ namespace ft
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
-
+			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+				: _tree(comp, alloc) {};
+			template <class InputIterator>
+			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+				: _tree(comp, alloc) { this->insert(first, last); };
+			map(const map& x) { *this = x; };
 			void	printTree(void) { this->_tree.printTree(); }
 
 			iterator				begin()							{ return this->_tree.begin(); };
@@ -84,10 +88,7 @@ namespace ft
 			iterator				find(const key_type& k)			{ return iterator(this->_tree.find(k)); };
 			const_iterator			find(const key_type& k) const	{ return const_iterator(this->_tree.find(k)); };
 			
-			// template <class InputIterator>
-			// map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) {};
-			// map(const map& x) {};
-			// ~map() {};
+			~map() { this->clear(); };
 			// map& operator=(const map& x) {};
 
 			/* Iterators */

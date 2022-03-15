@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 12:07:18 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:04:10 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,16 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
-			std::map<int, char>::iterator	itl = mp.lower_bound(ARG);
-			std::map<int, char>::iterator	itu = mp.upper_bound(ARG);
+			std::map<int, char> temp(mp.begin(), mp.end());
+			// std::map<int, char>::iterator	itl = mp.lower_bound(ARG);
+			// std::map<int, char>::iterator	itu = mp.upper_bound(ARG);
 
-			std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
-			std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
-			// for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
-			// {
-			// 	std::cout << it->first << " " << it->second << "\n";
-			// }
+			// std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
+			// std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
+			for (std::map<int, char >::iterator it = temp.begin(); it != temp.end(); ++it)
+			{
+				std::cout << it->first << " " << it->second << "\n";
+			}
 
 			// std::map<int, char>::iterator			it = mp.begin();
 			// std::map<int, char>::iterator			ite = mp.end();
@@ -99,15 +100,17 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
-			ft::map<int, char>::iterator	itl = mp.lower_bound(ARG);
-			ft::map<int, char>::iterator	itu = mp.upper_bound(ARG);
+			ft::map<int, char> temp(mp.begin(), mp.end());
 
-			std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
-			std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
-			// for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
-			// {
-			// 	std::cout << it->first << " " << it->second << "\n";
-			// }
+			// ft::map<int, char>::iterator	itl = mp.lower_bound(ARG);
+			// ft::map<int, char>::iterator	itu = mp.upper_bound(ARG);
+
+			// std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
+			// std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
+			for (ft::map<int, char >::iterator it = temp.begin(); it != temp.end(); ++it)
+			{
+				std::cout << it->first << " " << it->second << "\n";
+			}
 
 			// ft::map<int, char>::iterator			it = mp.begin();
 			// ft::map<int, char>::iterator			ite = mp.end();

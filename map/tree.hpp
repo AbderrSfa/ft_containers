@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 12:05:25 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:00:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ namespace ft
 	class Tree {
 	public:
 		typedef T															value_type;
-		typedef Compare														value_compare;
+		typedef Compare														key_compare;
 		typedef Allocator													allocator_type;
 
 	private:
@@ -58,18 +58,18 @@ namespace ft
 	private:
 		NodePtr			_root;
 		NodePtr			_end;
-		size_t			_CurrentSize;
-		value_compare	_comp;
+		size_t			_size;
+		key_compare		_comp;
 		node_allocator	_alloc;
 
 	public:
-		Tree() {
+		Tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+			: _comp(comp), _alloc(alloc), _size(0) {
 			this->_end = this->_alloc.allocate(1);
 			this->_end->left = NULL;
 			this->_end->right = NULL;
 			this->_end->parent = NULL;
 			this->_root = this->_end;
-			this->_CurrentSize = 0;
 		};
 		~Tree() {
 			if (this->size())
@@ -87,8 +87,8 @@ namespace ft
 		reverse_iterator		rend()					{ return reverse_iterator(this->_getMin(this->_root)); };
 		const_reverse_iterator	rend() const			{ return const_reverse_iterator(this->_getMin(this->_root)); };
 
-		bool			empty() const					{ return (this->_CurrentSize == 0); };
-		size_type		size() const					{ return this->_CurrentSize; };
+		bool			empty() const					{ return (this->_size == 0); };
+		size_type		size() const					{ return this->_size; };
 		size_type		max_size() const				{ return this->_alloc.max_size(); };
 
 
@@ -104,7 +104,7 @@ namespace ft
 			return _find(this->_root, key);
 		};
 		void			deleteNode(key_type key)		{ this->_root = _deleteNode(this->_root, key); };
-		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
+		void			clear()							{ _deleteTree(this->_root); this->_size = 0; };
 		void			printTree()						{ _print2DUtil(this->_root, 0); };
 
 		NodePtr		lower_bound(key_type key) {
@@ -278,7 +278,7 @@ namespace ft
 					}
 					this->_alloc.destroy(temp);
 					this->_alloc.deallocate(temp, 1);
-					this->_CurrentSize--;
+					this->_size--;
 				}
 				else {
 					NodePtr	temp = _getMin(node->right);
@@ -320,7 +320,7 @@ namespace ft
 				NodePtr	ret = this->_alloc.allocate(1);
 				this->_alloc.construct(ret, Node<T>(pair));
 				ret->parent = parent;
-				this->_CurrentSize++;
+				this->_size++;
 				return ret;
 			}
 			if (this->_comp(key, node->data.first))
