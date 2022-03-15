@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 14:15:20 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:30:25 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 		/*                                   */
 		/*************************************/
 
-#define ARG 100
+#define ARG 87
 
 int main()
 {
@@ -33,10 +33,10 @@ int main()
 			std::cout << "========== OG ==========" << std::endl;
 			std::map<int, char> mp;
 
-			mp.insert(std::make_pair(38, 'a'));
-			mp.insert(std::make_pair(52, 'c'));
-			mp.insert(std::make_pair(40, 'b'));
-			mp.insert(std::make_pair(25, 'd'));
+			// mp.insert(std::make_pair(38, 'a'));
+			// mp.insert(std::make_pair(52, 'c'));
+			// mp.insert(std::make_pair(40, 'b'));
+			// mp.insert(std::make_pair(25, 'd'));
 			// mp.insert(std::make_pair(74, 'f'));
 			// mp.insert(std::make_pair(35, 'g'));
 			// mp.insert(std::make_pair(68, 'h'));
@@ -51,20 +51,13 @@ int main()
 			// mp.insert(std::make_pair(11, 'p'));
 			// mp.insert(std::make_pair(59, 'q'));
 
-			std::map<int, char> temp;
-			temp.insert(std::make_pair(0, 'o'));
+			std::pair<std::map<int, char>::iterator, std::map<int, char>::iterator>	er = mp.equal_range(ARG);
 
-			temp = mp;
-
-			// std::map<int, char>::iterator	itl = mp.lower_bound(ARG);
-			// std::map<int, char>::iterator	itu = mp.upper_bound(ARG);
-
-			// std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
-			// std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
-			for (std::map<int, char >::iterator it = temp.begin(); it != temp.end(); ++it)
-			{
-				std::cout << it->first << " " << it->second << "\n";
-			}
+			std::cout << er.first->first << " " << er.first->second << " --- " << er.second->first << " " << er.second->second << std::endl;
+			// for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
+			// {
+			// 	std::cout << it->first << " " << it->second << "\n";
+			// }
 
 			// std::map<int, char>::iterator			it = mp.begin();
 			// std::map<int, char>::iterator			ite = mp.end();
@@ -86,10 +79,10 @@ int main()
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
 
-			mp.insert(ft::make_pair(38, 'a'));
-			mp.insert(ft::make_pair(52, 'c'));
-			mp.insert(ft::make_pair(40, 'b'));
-			mp.insert(ft::make_pair(25, 'd'));
+			// mp.insert(ft::make_pair(38, 'a'));
+			// mp.insert(ft::make_pair(52, 'c'));
+			// mp.insert(ft::make_pair(40, 'b'));
+			// mp.insert(ft::make_pair(25, 'd'));
 			// mp.insert(ft::make_pair(74, 'f'));
 			// mp.insert(ft::make_pair(35, 'g'));
 			// mp.insert(ft::make_pair(68, 'h'));
@@ -104,19 +97,13 @@ int main()
 			// mp.insert(ft::make_pair(11, 'p'));
 			// mp.insert(ft::make_pair(59, 'q'));
 
-			ft::map<int, char> temp;
-			temp.insert(ft::make_pair(0, 'd'));
+			ft::pair<ft::map<int, char>::iterator, ft::map<int, char>::iterator>	er = mp.equal_range(ARG);
 
-			temp = mp;
-			// ft::map<int, char>::iterator	itl = mp.lower_bound(ARG);
-			// ft::map<int, char>::iterator	itu = mp.upper_bound(ARG);
-
-			// std::cout << "lower: " << itl->first << " " << itl->second << std::endl;
-			// std::cout << "upper: " << itu->first << " " << itu->second << std::endl;
-			for (ft::map<int, char >::iterator it = temp.begin(); it != temp.end(); ++it)
-			{
-				std::cout << it->first << " " << it->second << "\n";
-			}
+			std::cout << er.first->first << " " << er.first->second << " --- " << er.second->first << " " << er.second->second << std::endl;
+			// for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
+			// {
+			// 	std::cout << it->first << " " << it->second << "\n";
+			// }
 
 			// ft::map<int, char>::iterator			it = mp.begin();
 			// ft::map<int, char>::iterator			ite = mp.end();

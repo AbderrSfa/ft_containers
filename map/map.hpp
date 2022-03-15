@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 14:44:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:31:34 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,12 @@ namespace ft
 			const_iterator	lower_bound(const key_type &k) const	{ return const_iterator(this->_tree.lower_bound(k)); };
 			iterator		upper_bound(const key_type &k)			{ return iterator(this->_tree.upper_bound(k)); };
 			const_iterator	upper_bound(const key_type &k) const	{ return const_iterator(this->_tree.upper_bound(k)); };
-			// pair<iterator, iterator>				equal_range(const key_type &k) {};
-			// pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {};
+			pair<iterator, iterator>	equal_range(const key_type &k) {
+				return ft::make_pair(this->lower_bound(k), this->upper_bound(k));
+			};
+			pair<const_iterator, const_iterator>	equal_range(const key_type &k) const {
+				return ft::make_pair(this->lower_bound(k), this->upper_bound(k));
+			};
 
 			/* Allocator */
 	};
