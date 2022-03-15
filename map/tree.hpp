@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/14 15:37:29 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:05:25 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,23 +106,32 @@ namespace ft
 		void			deleteNode(key_type key)		{ this->_root = _deleteNode(this->_root, key); };
 		void			clear()							{ _deleteTree(this->_root); this->_CurrentSize = 0; };
 		void			printTree()						{ _print2DUtil(this->_root, 0); };
-		NodePtr		upper_bound(key_type key) {
-			NodePtr	temp = this->_root;
-			while (temp) {
-				if (key > temp->data.first) {
-					if (!temp->right)
-						return temp;
-					temp = temp->right;
-				}
-				else if (key < temp->data.first) {
-					if (!temp->left || key >= temp->left->data.first)
-						return temp;
-					temp = temp->left;
-				}
+
+		NodePtr		lower_bound(key_type key) {
+			NodePtr	temp = this->_getMin(this->_root);
+			if (temp == NULL || temp == this->_end)
+				return this->_end;
+			while (temp->data.first <= key) {
+				if (key == temp->data.first)
+					break;
+				temp = _getSuccessor(temp);
+				if (temp == NULL || temp == this->_end)
+					return this->_end;
 			}
 			return temp;
 		}
-
+		NodePtr		upper_bound(key_type key) {
+			NodePtr	temp = this->_getMin(this->_root);
+			if (temp == NULL || temp == this->_end)
+				return this->_end;
+			while (temp->data.first <= key) {
+				temp = _getSuccessor(temp);
+				if (temp == NULL || temp == this->_end)
+					return this->_end;
+			}
+			return temp;
+		}
+		
 	private:
 		int	_getHeight(NodePtr node) const {
 			if (node == NULL || node == this->_end)
