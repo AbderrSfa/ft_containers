@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 14:00:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:53:18 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,12 @@ namespace ft
 			return _find(this->_root, key);
 		};
 		void			deleteNode(key_type key)		{ this->_root = _deleteNode(this->_root, key); };
-		void			clear()							{ _deleteTree(this->_root); this->_size = 0; };
+		void			clear() {
+			_deleteTree(this->_root);
+			this->_end->parent = NULL;
+			this->_root = this->_end;
+			this->_size = 0;
+		};
 		void			printTree()						{ _print2DUtil(this->_root, 0); };
 
 		NodePtr		lower_bound(key_type key) {
@@ -145,13 +150,13 @@ namespace ft
 			return _getHeight(node->left) - _getHeight(node->right);
 		};
 
-		NodePtr _getMax(NodePtr node) {
+		NodePtr _getMax(NodePtr node) const {
 			while (node->right != NULL && node->right != this->_end)
 				node = node->right;
 			return node;
 		};
 
-		NodePtr _getMin(NodePtr node) {
+		NodePtr _getMin(NodePtr node) const {
 			while (node->left != NULL && node != this->_end)
 				node = node->left;
 			return node;
@@ -255,6 +260,7 @@ namespace ft
 			_deleteTree(node->right);
 			this->_alloc.destroy(node);
 			this->_alloc.deallocate(node, 1);
+			node = NULL;
 		}
 
 		NodePtr _deleteNode(NodePtr node, key_type key) {
@@ -292,7 +298,7 @@ namespace ft
 			return _reBalance(node);
 		};
 
-		NodePtr		_find(NodePtr node, key_type key) {
+		NodePtr		_find(NodePtr node, key_type key) const {
 			if (node == NULL)
 				return node;
 			else if (this->_comp(key, node->data.first))

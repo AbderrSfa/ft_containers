@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 14:05:31 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:44:19 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,13 @@ namespace ft
 			const_iterator			find(const key_type& k) const	{ return const_iterator(this->_tree.find(k)); };
 			
 			~map() { this->clear(); };
-			// map& operator=(const map& x) {};
+			map& operator=(const map& x) {
+				if (this == &x)
+					return (*this);
+				this->clear();
+				this->insert(x.begin(), x.end());
+				return (*this);
+			};
 
 			/* Iterators */
 
