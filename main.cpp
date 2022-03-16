@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/16 13:51:23 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/16 15:43:25 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main()
 			mp.insert(std::make_pair(38, 'a'));
 			mp.insert(std::make_pair(52, 'c'));
 			mp.insert(std::make_pair(40, 'b'));
-			mp.insert(std::make_pair(25, 'd'));
+			// mp.insert(std::make_pair(25, 'd'));
 			// mp.insert(std::make_pair(74, 'f'));
 			// mp.insert(std::make_pair(35, 'g'));
 			// mp.insert(std::make_pair(68, 'h'));
@@ -51,6 +51,13 @@ int main()
 			// mp.insert(std::make_pair(67, 'o'));
 			// mp.insert(std::make_pair(11, 'p'));
 			// mp.insert(std::make_pair(59, 'q'));	
+
+			std::cout << mp.erase(38) << std::endl;
+
+			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
+				std::cout << it->first << " " << it->second << " | ";
+			}
+			std::cout << "\n";
 
 			// std::map<int, char>::iterator			it = mp.begin();
 			// std::map<int, char>::iterator			ite = mp.end();
@@ -77,7 +84,7 @@ int main()
 			mp.insert(ft::make_pair(52, 'c'));
 			mp.insert(ft::make_pair(40, 'b'));
 			mp.insert(ft::make_pair(25, 'd'));
-			// mp.insert(ft::make_pair(74, 'f'));
+			mp.insert(ft::make_pair(74, 'f'));
 			// mp.insert(ft::make_pair(35, 'g'));
 			// mp.insert(ft::make_pair(68, 'h'));
 			// mp.insert(ft::make_pair(61, 'e'));
@@ -91,11 +98,12 @@ int main()
 			// mp.insert(ft::make_pair(11, 'p'));
 			// mp.insert(ft::make_pair(59, 'q'));
 
-			// for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
-			// {
-			// 	std::cout << it->first << " " << it->second << "\n";
-			// }
+			std::cout << mp.erase(40) << std::endl;
 
+			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
+				std::cout << it->first << " " << it->second << " | ";
+			}
+			std::cout << "\n";
 			// ft::map<int, char>::iterator			it = mp.begin();
 			// ft::map<int, char>::iterator			ite = mp.end();
 			// ft::map<int, char>::reverse_iterator	rit = mp.rbegin();

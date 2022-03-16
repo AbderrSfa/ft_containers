@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/16 13:50:57 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/16 15:48:57 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,27 +290,51 @@ namespace ft
 			else if (this->_comp(node->data.first, key))
 				node->right = _deleteNode(node->right, key);
 			else {
-				if ((node->left == NULL) || (node->right == NULL)) {
-					NodePtr	temp = node->left ? node->left : node->right;
-					if (temp == NULL) {
-						temp = node;
-						node = NULL;
-					}
-					else {
-						NodePtr	tempParent = node->parent;
-						*node = *temp;
-						node->parent = tempParent;
-					}
-					this->_alloc.destroy(temp);
+				if (node->left == NULL) {
+					NodePtr	temp = node;
+					node = node->right;
 					this->_alloc.deallocate(temp, 1);
+					temp = NULL;
+					this->_size--;
+				}
+				else if (node->right == NULL) {
+					NodePtr	temp = node;
+					node = node->left;
+					this->_alloc.deallocate(temp, 1);
+					temp = NULL;
 					this->_size--;
 				}
 				else {
-					NodePtr	temp = _getMin(node->right);
-					node->data = temp->data;
+					NodePtr	temp = node;
+					node = _getMin(node->right);
+					node->parent = temp->parent;
+					node->left = temp->left;
+					// this->_alloc.construct(node, temp->data);
 					node->right = _deleteNode(node->right, temp->data.first);
 				}
 			}
+			// else {
+			// 	if ((node->left == NULL) || (node->right == NULL)) {
+			// 		NodePtr	temp = node->left ? node->left : node->right;
+			// 		if (temp == NULL) {
+			// 			temp = node;
+			// 			node = NULL;
+			// 		}
+			// 		else {
+			// 			NodePtr	tempParent = node->parent;
+			// 			*node = *temp;
+			// 			node->parent = tempParent;
+			// 		}
+			// 		this->_alloc.destroy(temp);
+			// 		this->_alloc.deallocate(temp, 1);
+			// 		this->_size--;
+			// 	}
+			// 	else {
+			// 		NodePtr	temp = _getMin(node->right);
+			// 		node->data = temp->data;
+			// 		node->right = _deleteNode(node->right, temp->data.first);
+			// 	}
+			// }
 			if (node == NULL)
 				return node;
 			node->height = 1 + std::max(_getHeight(node->left), _getHeight(node->right));

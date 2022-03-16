@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/16 13:35:51 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/16 13:56:46 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ namespace ft
 			   class T,
 			   class Compare = std::less<Key>,
 			   ////
-			   class Alloc = std::allocator<ft::pair<const Key, T> >
+			   class Alloc = std::allocator<ft::pair< Key, T> >
 			   ////
 			   >
 	class map
@@ -33,7 +33,7 @@ namespace ft
 		typedef Key												key_type;
 		typedef T												mapped_type;
 		////
-		typedef ft::pair<const key_type, mapped_type>			value_type;
+		typedef ft::pair< key_type, mapped_type>			value_type;
 		////
 		typedef Compare											key_compare;
 		typedef Alloc											allocator_type;
@@ -154,13 +154,13 @@ namespace ft
 				this->insert((*first++));
 		};
 		// void					erase(iterator position) {};
-		// size_type			erase(const key_type &k)
-		// {
-		// 	if (!this->count(k))
-		// 		return 0;
-		// 	this->_tree.deleteNode(k);
-		// 	return 1;
-		// };
+		size_type			erase(const key_type &k)
+		{
+			if (!this->count(k))
+				return 0;
+			this->_tree.deleteNode(k);
+			return 1;
+		};
 		// void					erase(iterator first, iterator last) {};
 		void					swap(map &x)		{ this->_tree.swap(x._tree); };
 		void					clear()				{ this->_tree.clear(); };
