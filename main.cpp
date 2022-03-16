@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/15 16:41:43 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/16 13:36:04 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int main()
 			std::map<int, char> temp;
 
 			mp.insert(std::make_pair(38, 'a'));
-			mp.insert(std::make_pair(52, 'c'));
-			mp.insert(std::make_pair(40, 'b'));
-			mp.insert(std::make_pair(25, 'd'));
+			// mp.insert(std::make_pair(52, 'c'));
+			// mp.insert(std::make_pair(40, 'b'));
+			// mp.insert(std::make_pair(25, 'd'));
 			// mp.insert(std::make_pair(74, 'f'));
 			// mp.insert(std::make_pair(35, 'g'));
 			// mp.insert(std::make_pair(68, 'h'));
@@ -65,6 +65,8 @@ int main()
 			// std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
+
+			std::cout << mp.value_comp()(std::make_pair(12, 'f'), std::make_pair(12, 'r')) << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -79,9 +81,9 @@ int main()
 			ft::map<int, char> temp;
 
 			mp.insert(ft::make_pair(38, 'a'));
-			mp.insert(ft::make_pair(52, 'c'));
-			mp.insert(ft::make_pair(40, 'b'));
-			mp.insert(ft::make_pair(25, 'd'));
+			// mp.insert(ft::make_pair(52, 'c'));
+			// mp.insert(ft::make_pair(40, 'b'));
+			// mp.insert(ft::make_pair(25, 'd'));
 			// mp.insert(ft::make_pair(74, 'f'));
 			// mp.insert(ft::make_pair(35, 'g'));
 			// mp.insert(ft::make_pair(68, 'h'));
@@ -95,6 +97,8 @@ int main()
 			// mp.insert(ft::make_pair(67, 'o'));
 			// mp.insert(ft::make_pair(11, 'p'));
 			// mp.insert(ft::make_pair(59, 'q'));
+
+			std::cout << mp.value_comp()(ft::make_pair(12, 'f'), ft::make_pair(12, 'r')) << std::endl;
 			
 			// for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it)
 			// {
@@ -110,7 +114,7 @@ int main()
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
 
-			// mp.printTree();
+			mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
