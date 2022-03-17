@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/17 17:17:36 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:34:52 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,10 @@ int main()
 			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
 			std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 
-			
+			// ERROR HERE
+			// mp.erase(40);
+			// ERROR HERE
+
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
