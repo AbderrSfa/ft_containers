@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/16 15:48:57 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/17 12:16:22 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,8 @@ namespace ft
 			{
 				NodePtr	ret = this->_alloc.allocate(1);
 				this->_alloc.construct(ret, Node<T>(pair));
-				ret->parent = parent;
+				if (parent != this->_end)
+					ret->parent = parent;
 				this->_size++;
 				return ret;
 			}
