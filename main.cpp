@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/17 16:58:01 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:17:36 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,13 @@ int main()
 			mp.insert(std::make_pair(59, 'q'));	
 
 			std::map<int, char>::iterator			it = mp.begin();
+			std::map<int, char>::iterator			ite = mp.end();
 
+			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
+			std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
+
+			// mp.erase(it, ite);
+			
 			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
@@ -102,7 +108,12 @@ int main()
 			mp.insert(ft::make_pair(59, 'q'));
 
 			ft::map<int, char>::iterator			it = mp.begin();
+			ft::map<int, char>::iterator			ite = mp.end();
 
+			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
+			std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
+
+			
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
