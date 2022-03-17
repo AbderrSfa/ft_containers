@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/17 14:33:53 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/17 16:37:12 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,8 @@ namespace ft
 			while (first != last)
 				this->insert((*first++));
 		};
-		// void					erase(iterator position) {};
-		size_type			erase(const key_type &k)
-		{
+		void					erase(iterator position) { this->erase((*position).first); };
+		size_type				erase(const key_type &k) {
 			size_type	temp_size = this->size();
 			this->_tree.deleteNode(k);
 			if (this->size() != temp_size)

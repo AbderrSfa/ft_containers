@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/17 15:31:42 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/17 16:56:17 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,8 @@ namespace ft
 				if (node->left == NULL) {
 					NodePtr	temp = node;
 					node = node->right;
+					if (node)
+						node->parent = temp->parent;
 					this->_alloc.deallocate(temp, 1);
 					temp = NULL;
 					this->_size--;
@@ -300,6 +302,8 @@ namespace ft
 				else if (node->right == NULL) {
 					NodePtr	temp = node;
 					node = node->left;
+					if (node)
+						node->parent = temp->parent;
 					this->_alloc.deallocate(temp, 1);
 					temp = NULL;
 					this->_size--;
