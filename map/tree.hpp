@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/17 12:16:22 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:31:42 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,8 +309,11 @@ namespace ft
 					node = _getMin(node->right);
 					node->parent = temp->parent;
 					node->left = temp->left;
+					temp->left->parent = node;
+					this->_alloc.deallocate(temp, 1);
+					this->_size--;
 					// this->_alloc.construct(node, temp->data);
-					node->right = _deleteNode(node->right, temp->data.first);
+					// node->right = _deleteNode(node->right, temp->data.first);
 				}
 			}
 			// else {
