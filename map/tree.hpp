@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/18 11:49:31 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/18 14:19:13 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,13 +290,14 @@ namespace ft
 			else if (this->_comp(node->data.first, key))
 				node->right = _deleteNode(node->right, key);
 			else {
-				if (node->left == NULL) {
+				if (node->left == NULL && node->right == NULL)
+					return NULL;
+				else if (node->left == NULL) {
 					NodePtr	temp = node;
 					node = node->right;
 					if (node)
 						node->parent = temp->parent;
 					this->_alloc.deallocate(temp, 1);
-					temp = NULL;
 					this->_size--;
 				}
 				else if (node->right == NULL) {
@@ -305,31 +306,12 @@ namespace ft
 					if (node)
 						node->parent = temp->parent;
 					this->_alloc.deallocate(temp, 1);
-					temp = NULL;
 					this->_size--;
 				}
 				else {
-
-
-					
-					// NodePtr	temp = node;
-					// node = _getMin(node->right);
-					// node->parent = temp->parent;
-					// if (temp->parent) {
-					// 	if (temp == temp->parent->right)
-					// 		temp->parent->right = node;
-					// 	else
-					// 		temp->parent->left = node;
-					// }
-					// node->left = temp->left;
-					// temp->left->parent = node;
-					// node->right = temp->right;
-					// temp->right->parent = node;
-					// this->_alloc.deallocate(temp, 1);
-					// this->_size--;
-					// temp = NULL;
-					// this->_alloc.construct(node, temp->data);
-					// node->right = _deleteNode(node->right, temp->data.first);
+					NodePtr	temp = this->_getMin(node->right);
+					this->_alloc.construct(node, temp->data);
+					node->right = _deleteNode(node->right, temp->data.first);
 				}
 			}
 			// else {
