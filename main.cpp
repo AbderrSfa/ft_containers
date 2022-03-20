@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/18 15:38:35 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/20 13:06:34 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
-#include "vector/vector.hpp"
+//#include "vector/vector.hpp"
 #include <stack>
-#include "stack/stack.hpp"
+//#include "stack/stack.hpp"
 #include <map>
 #include "map/map.hpp"
 
@@ -54,7 +54,7 @@ int main()
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
-			
+
 			// std::map<int, char>::iterator			it = mp.begin();
 			// std::map<int, char>::iterator			ite = mp.end();
 			// std::map<int, char>::reverse_iterator	rit = mp.rbegin();
@@ -97,12 +97,15 @@ int main()
 			// mp.insert(ft::make_pair(11, 'p'));
 			// mp.insert(ft::make_pair(59, 'q'));
 
-			
+			// mp.insert(ft::make_pair(39, 'g'));
+
+			mp.erase(35);
+
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
-			
+
 			// ft::map<int, char>::iterator			it = mp.begin();
 			// ft::map<int, char>::iterator			ite = mp.end();
 			// ft::map<int, char>::reverse_iterator	rit = mp.rbegin();
@@ -114,7 +117,7 @@ int main()
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
 			// std::cout << "rend:\t" << rite->first << " " << rite->second << std::endl;
-			// mp.printTree();
+			mp.printTree();
 		}
 		catch (const std::exception &e)
 		{

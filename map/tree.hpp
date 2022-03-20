@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/18 15:21:55 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/20 13:06:07 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace ft
 		Node*	right;
 		int		height;
 
-		Node(T obj) : data(obj), left(NULL), right(NULL), parent(NULL), height(1) {};
+		Node(T obj) : data(obj)/* , left(NULL), right(NULL), parent(NULL), height(1) */ {};
 	};
 
 	template <class T, class Compare, class Allocator>
@@ -92,7 +92,7 @@ namespace ft
 		size_type		max_size() const				{ return this->_alloc.max_size(); };
 
 
-		void			insert(T pair) {
+		void			insert(value_type pair) {
 			this->_root = _addNode(this->_root, this->_root, pair, pair.first);
 			this->_getMax(this->_root)->right = this->_end;
 			this->_end->parent = this->_getMax(this->_root);
@@ -157,6 +157,15 @@ namespace ft
 		}
 		
 	private:
+		NodePtr	_initNode(value_type data) {
+			NodePtr	node = this->_alloc.allocate(1);
+			this->_alloc.construct(node, data);
+			node->parent = NULL;
+			node->left = NULL;
+			node->right = NULL;
+			node->height = 1;
+			return node;
+		};
 		int	_getHeight(NodePtr node) const {
 			if (node == NULL || node == this->_end)
 				return 0;
@@ -364,11 +373,10 @@ namespace ft
 				return true;
 		};
 
-		NodePtr _addNode(NodePtr node, NodePtr parent, T pair, key_type key) {
+		NodePtr _addNode(NodePtr node, NodePtr parent, value_type pair, key_type key) {
 			if (node == NULL || node == this->_end)
 			{
-				NodePtr	ret = this->_alloc.allocate(1);
-				this->_alloc.construct(ret, Node<T>(pair));
+				NodePtr	ret = _initNode(pair);
 				if (parent != this->_end)
 					ret->parent = parent;
 				this->_size++;
