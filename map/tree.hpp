@@ -6,7 +6,7 @@
 /*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/20 13:06:07 by abderr_sfa       ###   ########.fr       */
+/*   Updated: 2022/03/20 16:55:58 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,13 +299,18 @@ namespace ft
 			else if (this->_comp(node->data.first, key))
 				node->right = _deleteNode(node->right, key);
 			else {
-				if (node->left == NULL && node->right == NULL)
-					return NULL;
+				if (node->left == NULL && node->right == NULL) {
+					this->_alloc.destroy(node);
+					this->_alloc.deallocate(node, 1);
+					this->_size--;
+					node = NULL;
+				}
 				else if (node->left == NULL) {
 					NodePtr	temp = node;
 					node = node->right;
 					if (node)
 						node->parent = temp->parent;
+					this->_alloc.destroy(temp);
 					this->_alloc.deallocate(temp, 1);
 					this->_size--;
 				}
@@ -314,6 +319,7 @@ namespace ft
 					node = node->left;
 					if (node)
 						node->parent = temp->parent;
+					this->_alloc.destroy(temp);
 					this->_alloc.deallocate(temp, 1);
 					this->_size--;
 				}

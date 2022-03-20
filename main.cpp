@@ -6,7 +6,7 @@
 /*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/20 13:06:34 by abderr_sfa       ###   ########.fr       */
+/*   Updated: 2022/03/20 16:53:08 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,21 @@ int main()
 			mp.insert(std::make_pair(25, 'd'));
 			mp.insert(std::make_pair(74, 'f'));
 			mp.insert(std::make_pair(35, 'g'));
-			// mp.insert(std::make_pair(68, 'h'));
-			// mp.insert(std::make_pair(61, 'e'));
-			// mp.insert(std::make_pair(88, 'i'));
-			// mp.insert(std::make_pair(49, 'j'));
-			// mp.insert(std::make_pair(55, 'k'));
-			// mp.insert(std::make_pair(65, 'l'));
-			// mp.insert(std::make_pair(58, 'm'));
-			// mp.insert(std::make_pair(47, 'n'));
-			// mp.insert(std::make_pair(67, 'o'));
-			// mp.insert(std::make_pair(11, 'p'));
-			// mp.insert(std::make_pair(59, 'q'));
+			mp.insert(std::make_pair(68, 'h'));
+			mp.insert(std::make_pair(61, 'e'));
+			mp.insert(std::make_pair(88, 'i'));
+			mp.insert(std::make_pair(49, 'j'));
+			mp.insert(std::make_pair(55, 'k'));
+			mp.insert(std::make_pair(65, 'l'));
+			mp.insert(std::make_pair(58, 'm'));
+			mp.insert(std::make_pair(47, 'n'));
+			mp.insert(std::make_pair(67, 'o'));
+			mp.insert(std::make_pair(11, 'p'));
+			mp.insert(std::make_pair(59, 'q'));
 
+			mp.erase(40);
+
+			
 			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
@@ -85,21 +88,19 @@ int main()
 			mp.insert(ft::make_pair(25, 'd'));
 			mp.insert(ft::make_pair(74, 'f'));
 			mp.insert(ft::make_pair(35, 'g'));
-			// mp.insert(ft::make_pair(68, 'h'));
-			// mp.insert(ft::make_pair(61, 'e'));
-			// mp.insert(ft::make_pair(88, 'i'));
-			// mp.insert(ft::make_pair(49, 'j'));
-			// mp.insert(ft::make_pair(55, 'k'));
-			// mp.insert(ft::make_pair(65, 'l'));
-			// mp.insert(ft::make_pair(58, 'm'));
-			// mp.insert(ft::make_pair(47, 'n'));
-			// mp.insert(ft::make_pair(67, 'o'));
-			// mp.insert(ft::make_pair(11, 'p'));
-			// mp.insert(ft::make_pair(59, 'q'));
+			mp.insert(ft::make_pair(68, 'h'));
+			mp.insert(ft::make_pair(61, 'e'));
+			mp.insert(ft::make_pair(88, 'i'));
+			mp.insert(ft::make_pair(49, 'j'));
+			mp.insert(ft::make_pair(55, 'k'));
+			mp.insert(ft::make_pair(65, 'l'));
+			mp.insert(ft::make_pair(58, 'm'));
+			mp.insert(ft::make_pair(47, 'n'));
+			mp.insert(ft::make_pair(67, 'o'));
+			mp.insert(ft::make_pair(11, 'p'));
+			mp.insert(ft::make_pair(59, 'q'));
 
-			// mp.insert(ft::make_pair(39, 'g'));
-
-			mp.erase(35);
+			mp.erase(40);
 
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
@@ -117,7 +118,7 @@ int main()
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
 			// std::cout << "rend:\t" << rite->first << " " << rite->second << std::endl;
-			mp.printTree();
+			// mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
