@@ -6,7 +6,7 @@
 /*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/20 16:55:58 by abderr_sfa       ###   ########.fr       */
+/*   Updated: 2022/03/20 18:32:46 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ namespace ft
 	private:
 		typedef typename value_type::first_type								key_type;
 		typedef typename allocator_type::template rebind<Node<T> >::other	node_allocator;
+		typedef typename node_allocator::reference							node_reference;
+		typedef typename node_allocator::const_reference					node_const_reference;
+		typedef typename node_allocator::difference_type					node_difference_type;
+		typedef typename node_allocator::pointer							node_pointer;
+		typedef typename node_allocator::const_pointer						node_const_pointer;
+		typedef typename node_allocator::size_type							node_size_type;
 		typedef Node<value_type>											NodeType;
 		typedef NodeType*													NodePtr;
 
@@ -292,6 +298,7 @@ namespace ft
 		}
 
 		NodePtr _deleteNode(NodePtr node, key_type key) {
+			// std::cout << key << "====" << node->data.first << "====" << std::endl;
 			if (node == NULL || node == this->_end)
 				return node;
 			if (this->_comp(key, node->data.first))
@@ -306,6 +313,12 @@ namespace ft
 					node = NULL;
 				}
 				else if (node->left == NULL) {
+					// NodePtr	temp = node->right;
+					// this->_alloc.destroy(node);
+					// this->_alloc.deallocate(node, 1);
+					// this->_size--;
+					// node = temp;
+
 					NodePtr	temp = node;
 					node = node->right;
 					if (node)
@@ -315,6 +328,15 @@ namespace ft
 					this->_size--;
 				}
 				else if (node->right == NULL) {
+					// NodePtr	temp = node->left;
+					// NodePtr	tempParent = node->parent;
+					// this->_alloc.construct(node, temp->data);
+					// node->parent = tempParent;
+					// this->_alloc.destroy(temp);
+					// this->_alloc.deallocate(temp, 1);
+					// this->_size--;
+					// // node = temp;
+
 					NodePtr	temp = node;
 					node = node->left;
 					if (node)
@@ -325,8 +347,10 @@ namespace ft
 				}
 				else {
 					NodePtr	temp = this->_getMin(node->right);
-					this->_alloc.construct(node, temp->data);
+					value_type	p = temp->data;
+					NodePtr	X = temp->parent;
 					node->right = _deleteNode(node->right, temp->data.first);
+					this->_alloc.construct(node, p);
 				}
 			}
 			// else {
