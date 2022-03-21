@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/18 15:37:07 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/21 11:50:13 by abderr_sfa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,15 @@ namespace ft
 			this->_tree.insert(val);
 			return ft::make_pair(this->find(val.first), true);
 		}
-		// iterator				insert(iterator position, const value_type &val) {};
+		iterator				insert(iterator position, const value_type &val) {
+			std::cout << "We sall shee\n";
+			NodePtr temp = position.base();
+			if ((!_getPredecessor(temp) || val.first > _getPredecessor(temp)->data.first) && val.first < _getSuccessor(temp)->data.first)
+				std::cout << "yoink\n";
+			else
+				std::cout << "boink\n";
+			return position;
+		};
 		template <class InputIterator>
 		void					insert(InputIterator first, InputIterator last) {
 			while (first != last)
