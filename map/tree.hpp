@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/20 18:32:46 by abderr_sfa       ###   ########.fr       */
+/*   Updated: 2022/03/22 01:39:17 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,6 @@ namespace ft
 			this->_alloc = x._alloc;
 			this->_comp = x._comp;
 		}
-		
-	private:
 		NodePtr	_initNode(value_type data) {
 			NodePtr	node = this->_alloc.allocate(1);
 			this->_alloc.construct(node, data);
@@ -172,6 +170,8 @@ namespace ft
 			node->height = 1;
 			return node;
 		};
+		
+	private:
 		int	_getHeight(NodePtr node) const {
 			if (node == NULL || node == this->_end)
 				return 0;
@@ -347,10 +347,20 @@ namespace ft
 				}
 				else {
 					NodePtr	temp = this->_getMin(node->right);
-					value_type	p = temp->data;
-					NodePtr	X = temp->parent;
+					// value_type	p = temp->data;
+					// NodePtr	X = temp->parent;
+					this->_alloc.construct(node, temp->data);
 					node->right = _deleteNode(node->right, temp->data.first);
-					this->_alloc.construct(node, p);
+
+					// nodePtr	temp = ft::treeMin(start->right);
+					// value_type p = temp->Value;
+					// nodePtr X = temp->parent;
+					// start->right = _deletehelper(start->right, temp->Value.first);
+					// temp = deletBalence(X, p.first);
+					// node_allocator(_allocator).construct(start, p);
+					// if (temp != nullptr)
+					// 	start = temp;
+
 				}
 			}
 			// else {

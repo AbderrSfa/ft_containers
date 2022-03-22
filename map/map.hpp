@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abderr_sfa <abderr_sfa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/21 11:50:13 by abderr_sfa       ###   ########.fr       */
+/*   Updated: 2022/03/22 01:26:53 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ namespace ft
 		};
 		void					erase(iterator first, iterator last) {
 			iterator	position = first;
-			while (first != last) {
+			while ((*first).first < (*last).first) {
 				position = first;
 				this->erase(position);
 				first++;
