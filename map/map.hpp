@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/22 02:10:35 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/22 08:16:23 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,10 @@ namespace ft
 		iterator				insert(iterator position, const value_type &val) {
 			std::cout << "We sall shee\n";
 			NodePtr temp = position.base();
-			if ((!_getPredecessor(temp) || val.first > _getPredecessor(temp)->data.first) && val.first < _getSuccessor(temp)->data.first)
+			NodePtr	successor = _getSuccessor(temp);
+			NodePtr	predecessor = _getPredecessor(temp);
+			if ((!predecessor || val.first > predecessor->data.first) &&
+				(successor == this->_tree._end || val.first < successor->data.first))
 				std::cout << "yoink\n";
 			else
 				std::cout << "boink\n";

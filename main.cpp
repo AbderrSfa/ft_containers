@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/22 02:11:59 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/22 08:16:58 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,14 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
-			temp = mp;
-			mp.insert(std::make_pair(99, 'q'));
-
-			std::cout << (temp >= mp) << std::endl;
 			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
 
-
-			// mp.insert(it, std::make_pair(12, 'q'));
+			std::map<int, char>::iterator			ite = mp.end();
+			ite--;
+			mp.insert(ite, std::make_pair(99, 'q'));
 			
 			// std::map<int, char>::iterator			ite = mp.end();
 			// std::map<int, char>::reverse_iterator	rit = mp.rbegin();
@@ -103,19 +100,14 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
-
-			temp = mp;
-			mp.insert(ft::make_pair(99, 'q'));
-
-			std::cout << (temp >= mp) << std::endl;
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
 
-
-			// it--;
-			// mp.insert(it, ft::make_pair(99, 'q'));
+			ft::map<int, char>::iterator			ite = mp.end();
+			ite--;
+			mp.insert(ite, ft::make_pair(80, 'q'));
 			
 			// ft::map<int, char>::iterator			ite = mp.end();
 			// ft::map<int, char>::reverse_iterator	rit = mp.rbegin();
