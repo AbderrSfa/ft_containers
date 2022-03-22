@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/22 01:19:28 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/22 02:11:59 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,10 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
-			std::map<int, char>::iterator			it = mp.begin();
+			temp = mp;
+			mp.insert(std::make_pair(99, 'q'));
 
-			it++;
-			it++;
-			it++;
-			it++;
-			std::map<int, char>::iterator			ite = it;
-			ite++;
-			ite++;
-			ite++;
-			ite++;
-
-			
-			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
-			std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
-			
-			mp.erase(it, ite);
-		
+			std::cout << (temp >= mp) << std::endl;
 			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
@@ -117,23 +103,11 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
-			ft::map<int, char>::iterator			it = mp.begin();
 
-			it++;
-			it++;
-			it++;
-			it++;
-			ft::map<int, char>::iterator			ite = it;
-			ite++;
-			ite++;
-			ite++;
-			ite++;
-			
-			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
-			std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
+			temp = mp;
+			mp.insert(ft::make_pair(99, 'q'));
 
-			mp.erase(it, ite);
-			
+			std::cout << (temp >= mp) << std::endl;
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
@@ -153,7 +127,7 @@ int main()
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
 			// std::cout << "rend:\t" << rite->first << " " << rite->second << std::endl;
-			mp.printTree();
+			// mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
