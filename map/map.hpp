@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/23 14:44:57 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/23 16:13:27 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,11 +170,11 @@ namespace ft
 			return 0;
 		};
 		void					erase(iterator first, iterator last) {
-			iterator	position = first;
-			while ((*first).first < (*last).first) {
-				position = first;
-				this->erase(position);
+			iterator	temp;
+			while (first != last) {
+				temp = first;
 				first++;
+				this->erase((*temp).first);
 			}
 		};
 		void					swap(map &x)		{ this->_tree.swap(x._tree); };

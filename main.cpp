@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/23 14:44:20 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/23 16:52:12 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,38 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
+			std::map<int, char>::iterator			first = mp.begin();
+			first++;
+			first++;
+			std::map<int, char>::iterator			last = first;
+			last++;
+			last++;
+			last++;
+			last++;
+			last++;
+			std::cout << "begin:\t" << first->first << " " << first->second << std::endl;
+			std::cout << "begin:\t" << last->first << " " << last->second << std::endl;
+
+			// for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
+			// 	std::cout << it->first << " " << it->second << " | ";
+			// }
+			// std::cout << "\n";
+
+			mp.erase(first, last);
+
+			// mp.erase(35);
+			// mp.erase(38);
+			// mp.erase(40);
+			// mp.erase(47);
+			// mp.erase(49);
+			// mp.erase(52);
+			// mp.erase(55);
+
 			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
+			
 			// std::map<int, char>::iterator			ite = mp.end();
 			// std::map<int, char>::reverse_iterator	rit = mp.rbegin();
 			// std::map<int, char>::reverse_iterator	rite = mp.rend();
@@ -75,7 +103,7 @@ int main()
 			std::cout << "========= MINE =========" << std::endl;
 			ft::map<int, char> mp;
 			ft::map<int, char> temp;
-
+			
 			mp.insert(ft::make_pair(38, 'a'));
 			mp.insert(ft::make_pair(52, 'c'));
 			mp.insert(ft::make_pair(40, 'b'));
@@ -94,10 +122,45 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
+			ft::map<int, char>::iterator			first = mp.begin();
+			first++;
+			first++;
+			ft::map<int, char>::iterator			last = first;
+			last++;
+			last++;
+			last++;
+			last++;
+			last++;
+			std::cout << "begin:\t" << first->first << " " << first->second << std::endl;
+			std::cout << "begin:\t" << last->first << " " << last->second << std::endl;
+
+			mp.erase(first, last);
+
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
+
+
+
+
+
+			
+			// mp.erase(35);
+			// mp.erase(38);
+			// mp.erase(40);
+			// mp.erase(47);
+			// mp.erase(49);
+			// mp.erase(52);
+			// mp.erase(55);
+
+			// ft::map<int, char>::iterator			yoink;
+			// while (first != last) {
+			// 	yoink = first;
+			// 	first++;
+			// 	mp.erase(yoink);
+			// }
+
 			// ft::map<int, char>::iterator			ite = mp.end();
 			// ft::map<int, char>::reverse_iterator	rit = mp.rbegin();
 			// ft::map<int, char>::reverse_iterator	rite = mp.rend();
@@ -106,7 +169,7 @@ int main()
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
 			// std::cout << "rend:\t" << rite->first << " " << rite->second << std::endl;
-			mp.printTree();
+			// mp.printTree();
 		}
 		catch (const std::exception &e)
 		{
