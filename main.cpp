@@ -6,14 +6,14 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/22 08:16:58 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:36:57 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
-//#include "vector/vector.hpp"
+#include "vector/vector.hpp"
 #include <stack>
-//#include "stack/stack.hpp"
+#include "stack/stack.hpp"
 #include <map>
 #include "map/map.hpp"
 
@@ -41,24 +41,27 @@ int main()
 			mp.insert(std::make_pair(68, 'h'));
 			mp.insert(std::make_pair(61, 'e'));
 			mp.insert(std::make_pair(88, 'i'));
-			mp.insert(std::make_pair(49, 'j'));
-			mp.insert(std::make_pair(55, 'k'));
-			mp.insert(std::make_pair(65, 'l'));
-			mp.insert(std::make_pair(58, 'm'));
-			mp.insert(std::make_pair(47, 'n'));
-			mp.insert(std::make_pair(67, 'o'));
-			mp.insert(std::make_pair(11, 'p'));
-			mp.insert(std::make_pair(59, 'q'));
+			// mp.insert(std::make_pair(49, 'j'));
+			// mp.insert(std::make_pair(55, 'k'));
+			// mp.insert(std::make_pair(65, 'l'));
+			// mp.insert(std::make_pair(58, 'm'));
+			// mp.insert(std::make_pair(47, 'n'));
+			// mp.insert(std::make_pair(67, 'o'));
+			// mp.insert(std::make_pair(11, 'p'));
+			// mp.insert(std::make_pair(59, 'q'));
 
+
+			std::map<int, char>::iterator			ite = mp.end();
+			std::map<int, char>::iterator			it;
+			
+			ite--;
+			it = mp.insert(ite, std::make_pair(89, 'q'));
+			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
+			
 			for (std::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
-
-			std::map<int, char>::iterator			ite = mp.end();
-			ite--;
-			mp.insert(ite, std::make_pair(99, 'q'));
-			
 			// std::map<int, char>::iterator			ite = mp.end();
 			// std::map<int, char>::reverse_iterator	rit = mp.rbegin();
 			// std::map<int, char>::reverse_iterator	rite = mp.rend();
@@ -91,35 +94,37 @@ int main()
 			mp.insert(ft::make_pair(68, 'h'));
 			mp.insert(ft::make_pair(61, 'e'));
 			mp.insert(ft::make_pair(88, 'i'));
-			mp.insert(ft::make_pair(49, 'j'));
-			mp.insert(ft::make_pair(55, 'k'));
-			mp.insert(ft::make_pair(65, 'l'));
-			mp.insert(ft::make_pair(58, 'm'));
-			mp.insert(ft::make_pair(47, 'n'));
-			mp.insert(ft::make_pair(67, 'o'));
-			mp.insert(ft::make_pair(11, 'p'));
-			mp.insert(ft::make_pair(59, 'q'));
+			// mp.insert(ft::make_pair(49, 'j'));
+			// mp.insert(ft::make_pair(55, 'k'));
+			// mp.insert(ft::make_pair(65, 'l'));
+			// mp.insert(ft::make_pair(58, 'm'));
+			// mp.insert(ft::make_pair(47, 'n'));
+			// mp.insert(ft::make_pair(67, 'o'));
+			// mp.insert(ft::make_pair(11, 'p'));
+			// mp.insert(ft::make_pair(59, 'q'));
 
+
+			ft::map<int, char>::iterator			ite = mp.end();
+			ft::map<int, char>::iterator			it;
+			ite--;
+			std::cout << "begin:\t" << ite->first << " " << ite->second << std::endl;
+			it = mp.insert(ite, ft::make_pair(89, 'q'));
+			std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
+
+			
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
 			}
 			std::cout << "\n";
-
-			ft::map<int, char>::iterator			ite = mp.end();
-			ite--;
-			mp.insert(ite, ft::make_pair(80, 'q'));
-			
 			// ft::map<int, char>::iterator			ite = mp.end();
 			// ft::map<int, char>::reverse_iterator	rit = mp.rbegin();
 			// ft::map<int, char>::reverse_iterator	rite = mp.rend();
 
 			// std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
-			// it++;
-			// std::cout << "begin:\t" << it->first << " " << it->second << std::endl;
 			// std::cout << "end:\t" << ite->first << " " << ite->second << std::endl;
 			// std::cout << "rbegin:\t" << rit->first << " " << rit->second << std::endl;
 			// std::cout << "rend:\t" << rite->first << " " << rite->second << std::endl;
-			// mp.printTree();
+			mp.printTree();
 		}
 		catch (const std::exception &e)
 		{

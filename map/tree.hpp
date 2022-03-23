@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/22 08:14:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/23 12:03:55 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,19 @@ namespace ft
 		size_type		size() const					{ return this->_size; };
 		size_type		max_size() const				{ return this->_alloc.max_size(); };
 
-
-		void			insert(value_type pair) {
-			this->_root = _addNode(this->_root, this->_root, pair, pair.first);
+		void			insert(value_type val) {
+			this->_root = _addNode(this->_root, this->_root, val, val.first);
 			this->_getMax(this->_root)->right = this->_end;
 			this->_end->parent = this->_getMax(this->_root);
 		};
-		bool			search(key_type key) const	{ return (_search(this->_root, key)); };
+		NodePtr			insertWithHint(NodePtr position, value_type val) {
+			NodePtr	ret = _addNode(position, position, val, val.first);
+			std::cout << "Here we go\n";
+			this->_getMax(this->_root)->right = this->_end;
+			this->_end->parent = this->_getMax(this->_root);
+			return ret;
+		};
+		bool			search(key_type key) const { return (_search(this->_root, key)); };
 		NodePtr			find(key_type key) {
 			if (!this->search(key))
 				return this->_end;
@@ -170,6 +176,9 @@ namespace ft
 			node->height = 1;
 			return node;
 		};
+		NodePtr	getEnd() const {
+			return this->_end;
+		}
 		
 	private:
 		int	_getHeight(NodePtr node) const {
@@ -413,19 +422,19 @@ namespace ft
 				return true;
 		};
 
-		NodePtr _addNode(NodePtr node, NodePtr parent, value_type pair, key_type key) {
+		NodePtr _addNode(NodePtr node, NodePtr parent, value_type val, key_type key) {
 			if (node == NULL || node == this->_end)
 			{
-				NodePtr	ret = _initNode(pair);
+				NodePtr	ret = _initNode(val);
 				if (parent != this->_end)
 					ret->parent = parent;
 				this->_size++;
 				return ret;
 			}
 			if (this->_comp(key, node->data.first))
-				node->left = _addNode(node->left, node, pair, key);
+				node->left = _addNode(node->left, node, val, key);
 			else if (this->_comp(node->data.first, key))
-				node->right = _addNode(node->right, node, pair, key);
+				node->right = _addNode(node->right, node, val, key);
 			else
 				return node;
 			node->height = 1 + std::max(_getHeight(node->left), _getHeight(node->right));
