@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:40 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/23 11:34:20 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/23 14:44:57 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,19 +147,13 @@ namespace ft
 		iterator				insert(iterator position, const value_type &val) {
 			NodePtr temp = position.base();
 			NodePtr	successor = _getSuccessor(temp);
-			NodePtr	predecessor = _getPredecessor(temp);
 			NodePtr	end = this->_tree.getEnd();
-			if ((temp != end && temp->data.first < val.first) && (successor == end || successor->data.first > val.first)) {
-				std::cout << "good\n";
-				this->_tree.insertWithHint(temp, val);
+			if ((temp != end && temp->data.first < val.first) &&
+				(successor == end || successor->data.first > val.first)) {
+				position = iterator(this->_tree.insertWithHint(temp, val));
 			}
-			else {
-				std::cout << "not good\n";
+			else
 				position = this->insert(val).first;
-			}
-				// if ((!predecessor || val.first > predecessor->data.first) &&
-				// (successor == this->_tree._end || val.first < successor->data.first))
-					// std::cout << "good\n";
 			return position;
 		};
 		template <class InputIterator>
