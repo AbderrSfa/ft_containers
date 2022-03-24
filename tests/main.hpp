@@ -4,15 +4,16 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 0//CREATE A REAL STL EXAMPLE
-	#include <map>
-	#include <stack>
-	#include <vector>
-	namespace ft = std;
+#if 0 //MINE
+// #if 1 //ORIGINAL
+#include <map>
+#include <stack>
+#include <vector>
+namespace ft = std;
 #else
-	#include "map/map.hpp"
-	#include "stack/stack.hpp"
-	#include "vector/vector.hpp"
+	// #include "../map/map.hpp"
+#include "../stack/stack.hpp"
+#include "../vector/vector.hpp"
 #endif
 #define MAX_RAM 4294967296
 #define BUFFER_SIZE 4096
