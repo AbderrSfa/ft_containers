@@ -6,16 +6,18 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:37:02 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/18 15:29:48 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 10:30:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_HPP
 # define STACK_HPP
 
+# include "../vector/vector.hpp"
+
 namespace ft
 {
-	template < class T, class Container = vector<T> >
+	template < class T, class Container = ft::vector<T> >
 	class stack
 	{
 		public:

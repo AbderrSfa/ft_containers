@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/02/24 14:24:06 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 10:35:50 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <cstdlib>
 # include <string>
+# include <iterator>
 # include "iterator.hpp"
 # include "utils.hpp"
 
