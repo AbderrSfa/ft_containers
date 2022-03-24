@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/23 16:52:12 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 11:53:31 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ int main()
 			mp.insert(std::make_pair(11, 'p'));
 			mp.insert(std::make_pair(59, 'q'));
 
+			// mp.insert(std::make_pair(10, 'a'));
+			// mp.insert(std::make_pair(5, 'a'));
+			// mp.insert(std::make_pair(15, 'a'));
+			// mp.insert(std::make_pair(2, 'a'));
+			// mp.insert(std::make_pair(17, 'a'));
+			// mp.insert(std::make_pair(7, 'a'));
+			// mp.insert(std::make_pair(13, 'a'));
+
+			
 			std::map<int, char>::iterator			first = mp.begin();
 			first++;
 			first++;
@@ -68,7 +77,8 @@ int main()
 			// std::cout << "\n";
 
 			mp.erase(first, last);
-
+			// mp.erase(61);
+			
 			// mp.erase(35);
 			// mp.erase(38);
 			// mp.erase(40);
@@ -122,6 +132,14 @@ int main()
 			mp.insert(ft::make_pair(11, 'p'));
 			mp.insert(ft::make_pair(59, 'q'));
 
+			// mp.insert(ft::make_pair(10, 'a'));
+			// mp.insert(ft::make_pair(5, 'a'));
+			// mp.insert(ft::make_pair(15, 'a'));
+			// mp.insert(ft::make_pair(2, 'a'));
+			// mp.insert(ft::make_pair(17, 'a'));
+			// mp.insert(ft::make_pair(7, 'a'));
+			// mp.insert(ft::make_pair(13, 'a'));
+			
 			ft::map<int, char>::iterator			first = mp.begin();
 			first++;
 			first++;
@@ -135,6 +153,7 @@ int main()
 			std::cout << "begin:\t" << last->first << " " << last->second << std::endl;
 
 			mp.erase(first, last);
+			// mp.erase(35);
 
 			for (ft::map<int, char >::iterator it = mp.begin(); it != mp.end(); ++it) {
 				std::cout << it->first << " " << it->second << " | ";
