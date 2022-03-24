@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/24 15:36:52 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:47:17 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ namespace ft
 
 			/* Modifiers */
 			template <class InputIterator>
-			void		assign(InputIterator first, InputIterator last)
+			void		assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
 			{
 				int n = std::distance(first, last);
 				this->clear();
