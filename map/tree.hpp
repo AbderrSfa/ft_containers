@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/24 16:08:56 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 17:35:42 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,11 @@ namespace ft
 		};
 		NodePtr			insertWithHint(NodePtr position, value_type val) {
 			NodePtr	ret = _addNode(position, position, val, val.first);
+			if (this->_root->parent)
+				this->_root = this->_root->parent;
+			_addNode(this->_root, this->_root, val, val.first);
 			this->_getMax(this->_root)->right = this->_end;
 			this->_end->parent = this->_getMax(this->_root);
-			_addNode(this->_root, this->_root, val, val.first);
 			return _getSuccessor(ret);
 		};
 		bool			search(key_type key) const { return (_search(this->_root, key)); };
