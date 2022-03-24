@@ -1,97 +1,36 @@
 #include "../vector/vector.hpp"
 #include "../stack/stack.hpp"
+#include "../map/map.hpp"
 
 int		main() {
-// ASSIGN
-	std::cout << "\e[1;31mAssign Test:\e[1;37m" << std::endl;
+	// INSERT
+	std::cout << "\e[1;31mInsert Test:\e[1;37m" << std::endl;
 	{
-		ft::vector<int> first;
-		ft::vector<int> second;
-		ft::vector<int> third;
-		first.assign(7, 100); // 7 ints with a value of 100   
-		ft::vector<int>::iterator it;
-		it = first.begin() + 1;
-		second.assign(it, first.end() - 1); // the 5 central values of first  
-		int myints[] = { 1776, 7, 4 };
-	   // third.assign(myints, myints + 3); // assigning from array.    
-		std::cout << "Size of first: " << int(first.size()) << '\n';
-		std::cout << "Size of second: " << int(second.size()) << '\n';
-		std::cout << "Size of third: " << int(third.size()) << '\n' << std::endl;
+	    ft::map<char, int> mymap; 
+	    // first insert function version (single parameter):
+	    mymap.insert(ft::pair<char, int>('a', 100));
+	    mymap.insert(ft::pair<char, int>('z', 200));  
+	    ft::pair<ft::map<char, int>::iterator, bool> ret;
+	    ret = mymap.insert(ft::pair<char, int>('z', 500));
+	    if (ret.second == false)
+	    {
+	        std::cout << "element 'z' already existed";
+	        std::cout << " with a value of " << ret.first->second << '\n';
+	    } 
+	    // second insert function version (with hint position):
+	    ft::map<char, int>::iterator it = mymap.begin();
+	    mymap.insert(it, ft::pair<char, int>('b', 300)); // max efficiency inserting
+	    // mymap.insert(it, ft::pair<char, int>('c', 400)); // no max efficiency inserting   
+	    // third insert function version (range insertion):
+	    // ft::map<char, int> anothermap;
+	    // anothermap.insert(mymap.begin(), mymap.find('c'));    
+	    std::cout << "mymap contains:\n";
+	    for (it = mymap.begin(); it != mymap.end(); ++it)
+	        std::cout << it->first << " => " << it->second << '\n'; 
+	    // std::cout << "anothermap contains:\n";
+	    // for (it = anothermap.begin(); it != anothermap.end(); ++it)
+	    //     std::cout << it->first << " => " << it->second << '\n';
+		// std::cout << std::endl;
+		mymap.printTree();
 	}
-
-	//   // SWAP(VECTOR)
-	// std::cout << "\e[1;31mVector Swap Test:\e[1;37m" << std::endl;
-	// {
-	// 	ft::vector<int> foo(3, 100); // three ints with a value of 100
-	// 	ft::vector<int> bar(5, 200); // five ints with a value of 200 
-	// 	foo.swap(bar);
-	// 	std::cout << "foo contains:";
-	// 	for (ft::vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
-	// 		std::cout << ' ' << *it;
-	// 	std::cout << '\n';
-	// 	std::cout << "bar contains:";
-	// 	for (ft::vector<int>::iterator it = bar.begin(); it != bar.end(); ++it)
-	// 		std::cout << ' ' << *it;
-	// 	std::cout << '\n';
-	// }
-	// std::cout << "\e[1;31mVector Relational Operators Test:\e[1;37m" << std::endl;
-	// {
-	// 	ft::vector<int> foo(3, 100); // three ints with a value of 100
-	// 	ft::vector<int> bar(2, 200); // two ints with a value of 200
-
-	// 	if (foo == bar)
-	// 		std::cout << "foo and bar are equal\n";
-	// 	if (foo != bar)
-	// 		std::cout << "foo and bar are not equal\n";
-	// 	if (foo < bar)
-	// 		std::cout << "foo is less than bar\n";
-	// 	if (foo > bar)
-	// 		std::cout << "foo is greater than bar\n";
-	// 	if (foo <= bar)
-	// 		std::cout << "foo is less than or equal to bar\n";
-	// 	if (foo >= bar)
-	// 		std::cout << "foo is greater than or equal to bar\n";
-	// 	std::cout << std::endl;
-	// }
-
-	//   // STACK TEST
-	// ft::vector<int> vec;
-	// ft::stack<int> mystack;
-	// ft::stack<int> mystack2;
-	// std::cout << "\e[1;31mpush Test:\e[1;37m" << std::endl;
-	// for (int i = 0; i < 5; ++i)
-	// {
-	// 	std::cout << "Pushing --> |\e[1;32m" << i << "\e[1;37m|" << " to mystack..." << std::endl;
-	// 	mystack.push(i);
-	// }
-	// std::cout << "\e[1;31mRelational operators Test:\e[1;37m" << std::endl;
-	// for (int i = 0; i < 3; ++i)
-	// {
-	// 	std::cout << "Pushing --> |\e[1;32m" << i << "\e[1;37m|" << " to mystack2..." << std::endl;
-	// 	mystack2.push(i);
-	// }
-	// if (mystack == mystack2)
-	// 	std::cout << "mystack and mystack2 are equal\n";
-	// if (mystack != mystack2)
-	// 	std::cout << "mystack and mystack2 are not equal\n";
-	// if (mystack < mystack2)
-	// 	std::cout << "mystack is less than mystack2\n";
-	// if (mystack > mystack2)
-	// 	std::cout << "mystack is greater than mystack2\n";
-	// if (mystack <= mystack2)
-	// 	std::cout << "mystack is less than or equal to mystack2\n";
-	// if (mystack >= mystack2)
-	// 	std::cout << "mystack is greater than or equal to mystack2\n";
-
-	// std::cout << "\e[1;31mSize Test:\e[1;37m" << std::endl;
-	// std::cout << "size: |\e[1;32m" << mystack.size() << "\e[1;37m|" << '\n';
-
-	// std::cout << "\e[1;31mPop Test:\e[1;37m" << std::endl;
-	// while (!mystack.empty())
-	// {
-	// 	std::cout << "Popping --> |\e[1;32m" << mystack.top() << "\e[1;37m|" << std::endl;
-	// 	mystack.pop();
-	// }
-	// std::cout << "\e[1;31mSize after Pop :\e[1;37m" << std::endl;
-	// std::cout << "size: |\e[1;32m" << mystack.size() << "\e[1;37m|" << std::endl;
 }

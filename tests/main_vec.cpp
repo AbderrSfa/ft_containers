@@ -209,22 +209,22 @@ void vector_test()
       std::cout << ' ' << myvector[i];
     std::cout << '\n' << std::endl;;
   }
-  // // ASSIGN
-  // std::cout << "\e[1;31mAssign Test:\e[1;37m" << std::endl;
-  // {
-  //   ft::vector<int> first;
-  //   ft::vector<int> second;
-  //   ft::vector<int> third;    
-  //   first.assign(7, 100); // 7 ints with a value of 100   
-  //   ft::vector<int>::iterator it;
-  //   it = first.begin() + 1;   
-  //   second.assign(it, first.end() - 1); // the 5 central values of first  
-  //   int myints[] = {1776, 7, 4};
-  //  // third.assign(myints, myints + 3); // assigning from array.    
-  //   std::cout << "Size of first: " << int(first.size()) << '\n';
-  //   std::cout << "Size of second: " << int(second.size()) << '\n';
-  //   std::cout << "Size of third: " << int(third.size()) << '\n'<< std::endl;
-  // }   
+  // ASSIGN
+  std::cout << "\e[1;31mAssign Test:\e[1;37m" << std::endl;
+  {
+    ft::vector<int> first;
+    ft::vector<int> second;
+    ft::vector<int> third;    
+    first.assign(7, 100); // 7 ints with a value of 100   
+    ft::vector<int>::iterator it;
+    it = first.begin() + 1;   
+    second.assign(it, first.end() - 1); // the 5 central values of first  
+    int myints[] = {1776, 7, 4};
+   // third.assign(myints, myints + 3); // assigning from array.    
+    std::cout << "Size of first: " << int(first.size()) << '\n';
+    std::cout << "Size of second: " << int(second.size()) << '\n';
+    std::cout << "Size of third: " << int(third.size()) << '\n'<< std::endl;
+  }   
   // PUSH_BACK
   std::cout << "\e[1;31mPush_back Test:\e[1;37m" << std::endl;
   {
@@ -271,23 +271,23 @@ void vector_test()
       std::cout << ' ' << *it;
     std::cout << '\n' << std::endl;;
   }
-  // // ERASE
-  // std::cout << "\e[1;31mErase Test:\e[1;37m" << std::endl;
+  // ERASE
+  std::cout << "\e[1;31mErase Test:\e[1;37m" << std::endl;
 
-  // {
-  //   ft::vector<int> myvector; 
-  //   // set some values (from 1 to 10)
-  //   for (int i = 1; i <= 10; i++)
-  //     myvector.push_back(i);  
-  //   // erase the 6th element
-  //   myvector.erase(myvector.begin() + 5); 
-  //   // erase the first 3 elements:
-  //   myvector.erase(myvector.begin(), myvector.begin() + 3);   
-  //   std::cout << "myvector contains:";
-  //   for (unsigned i = 0; i < myvector.size(); ++i)
-  //     std::cout << ' ' << myvector[i];
-  //   std::cout << '\n'<< std::endl;;
-  // }   
+  {
+    ft::vector<int> myvector; 
+    // set some values (from 1 to 10)
+    for (int i = 1; i <= 10; i++)
+      myvector.push_back(i);  
+    // erase the 6th element
+    myvector.erase(myvector.begin() + 5); 
+    // erase the first 3 elements:
+    myvector.erase(myvector.begin(), myvector.begin() + 3);   
+    std::cout << "myvector contains:";
+    for (unsigned i = 0; i < myvector.size(); ++i)
+      std::cout << ' ' << myvector[i];
+    std::cout << '\n'<< std::endl;;
+  }   
   // SWAP
   std::cout << "\e[1;31mSwap Test:\e[1;37m" << std::endl;
   {
@@ -344,36 +344,36 @@ void vector_test()
     myvector.get_allocator().deallocate(p, 5);
     std::cout << std::endl;
   }
-  // // SWAP(VECTOR)
-  // std::cout << "\e[1;31mVector Swap Test:\e[1;37m" << std::endl;
-  // {
-  //   ft::vector<int> foo(3, 100); // three ints with a value of 100
-  //   ft::vector<int> bar(5, 200); // five ints with a value of 200 
-  //   foo.swap(bar);    
-  //   std::cout << "foo contains:";
-  //   for (ft::vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
-  //     std::cout << ' ' << *it;
-  //   std::cout << '\n';    
-  //   std::cout << "bar contains:";
-  //   for (ft::vector<int>::iterator it = bar.begin(); it != bar.end(); ++it)
-  //     std::cout << ' ' << *it;
-  //   std::cout << '\n';
-  // }   
-  // {
-  //   ft::vector<int> foo(3, 100); // three ints with a value of 100
-  //   ft::vector<int> bar(2, 200); // two ints with a value of 200  
-  //   if (foo == bar)
-  //     std::cout << "foo and bar are equal\n";
-  //   if (foo != bar)
-  //     std::cout << "foo and bar are not equal\n";
-  //   if (foo < bar)
-  //     std::cout << "foo is less than bar\n";
-  //   if (foo > bar)
-  //     std::cout << "foo is greater than bar\n";
-  //   if (foo <= bar)
-  //     std::cout << "foo is less than or equal to bar\n";
-  //   if (foo >= bar)
-  //     std::cout << "foo is greater than or equal to bar\n";
-  // std::cout << std::endl;
-  // }
+  // SWAP(VECTOR)
+  std::cout << "\e[1;31mVector Swap Test:\e[1;37m" << std::endl;
+  {
+    ft::vector<int> foo(3, 100); // three ints with a value of 100
+    ft::vector<int> bar(5, 200); // five ints with a value of 200 
+    foo.swap(bar);    
+    std::cout << "foo contains:";
+    for (ft::vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
+      std::cout << ' ' << *it;
+    std::cout << '\n';    
+    std::cout << "bar contains:";
+    for (ft::vector<int>::iterator it = bar.begin(); it != bar.end(); ++it)
+      std::cout << ' ' << *it;
+    std::cout << '\n';
+  }   
+  {
+    ft::vector<int> foo(3, 100); // three ints with a value of 100
+    ft::vector<int> bar(2, 200); // two ints with a value of 200  
+    if (foo == bar)
+      std::cout << "foo and bar are equal\n";
+    if (foo != bar)
+      std::cout << "foo and bar are not equal\n";
+    if (foo < bar)
+      std::cout << "foo is less than bar\n";
+    if (foo > bar)
+      std::cout << "foo is greater than bar\n";
+    if (foo <= bar)
+      std::cout << "foo is less than or equal to bar\n";
+    if (foo >= bar)
+      std::cout << "foo is greater than or equal to bar\n";
+  std::cout << std::endl;
+  }
 }

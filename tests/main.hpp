@@ -11,9 +11,9 @@
 #include <vector>
 namespace ft = std;
 #else
-	// #include "../map/map.hpp"
-#include "../stack/stack.hpp"
-#include "../vector/vector.hpp"
+	#include "../map/map.hpp"
+	#include "../stack/stack.hpp"
+	#include "../vector/vector.hpp"
 #endif
 #define MAX_RAM 4294967296
 #define BUFFER_SIZE 4096
