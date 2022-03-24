@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/24 10:35:50 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:22:16 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ namespace ft
 				difference_type index = position - this->begin();
 				allocator_type().destroy(this->_m_data + index);
 				for (size_t i = index; i < (this->size() - 1); i++)
-					this->_m_data[index] = this->_m_data[index + 1];
+					this->_m_data[i] = this->_m_data[i + 1];
 				this->_size--;
 				return position;
 			};
