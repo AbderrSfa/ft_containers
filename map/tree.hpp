@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/24 11:57:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/24 16:08:56 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ namespace ft
 		bool			empty() const					{ return (this->_size == 0); };
 		size_type		size() const					{ return this->_size; };
 		size_type		max_size() const				{ return this->_alloc.max_size(); };
-
+		
+		node_allocator	get_allocator() const			{ return this->_alloc; };
+		
 		void			insert(value_type val) {
 			this->_root = _addNode(this->_root, this->_root, val, val.first);
 			this->_getMax(this->_root)->right = this->_end;
