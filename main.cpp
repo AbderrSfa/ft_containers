@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/26 10:24:59 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 11:31:00 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,23 @@ int main()
 		{
 			std::cout << "========== OG ==========" << std::endl;
 			std::vector<int>	vec2(10, 0);
-			std::vector<int>	vec(5, 1);
+			std::vector<int>	vec;
 
-			for (int i = 0; i < vec.size(); i++)
+			vec.push_back(1);
+			vec.push_back(2);
+			vec.push_back(3);
+			vec.push_back(4);
+			vec.push_back(5);
+
+
+			std::vector<int>::iterator	it = vec.begin();
+			vec.insert(it + 2, 5);
+			
+			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
 			std::cout << std::endl;
 
-			for (int i = 0; i < vec2.size(); i++)
+			for (size_t i = 0; i < vec2.size(); i++)
 				std::cout << vec2.at(i) << ' ';
 			std::cout << std::endl;
 
@@ -143,11 +153,11 @@ int main()
 
 			swap(vec, vec2);
 
-			for (int i = 0; i < vec.size(); i++)
+			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
 			std::cout << std::endl;
 
-			for (int i = 0; i < vec2.size(); i++)
+			for (size_t i = 0; i < vec2.size(); i++)
 				std::cout << vec2.at(i) << ' ';
 			std::cout << std::endl;
 
@@ -164,27 +174,35 @@ int main()
 		{
 			std::cout << "========= MINE =========" << std::endl;
 			ft::vector<int>	vec2(10, 0);
-			ft::vector<int>	vec(5, 1);
+			ft::vector<int>	vec;
 
-			for (int i = 0; i < vec.size(); i++)
+			vec.push_back(1);
+			vec.push_back(2);
+			vec.push_back(3);
+			vec.push_back(4);
+			vec.push_back(5);
+
+			ft::vector<int>::iterator	it = vec.begin();
+			vec.insert(it + 2, 5);
+
+			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
 			std::cout << std::endl;
 
-			for (int i = 0; i < vec2.size(); i++)
+			for (size_t i = 0; i < vec2.size(); i++)
 				std::cout << vec2.at(i) << ' ';
 			std::cout << std::endl;
 
 			std::cout << "vec: " << vec.size() << " " << vec.capacity() << std::endl;
 			std::cout << "vec2: " << vec2.size() << " " << vec2.capacity() << std::endl;
 
-
 			swap(vec, vec2);
 
-			for (int i = 0; i < vec.size(); i++)
+			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
 			std::cout << std::endl;
 
-			for (int i = 0; i < vec2.size(); i++)
+			for (size_t i = 0; i < vec2.size(); i++)
 				std::cout << vec2.at(i) << ' ';
 			std::cout << std::endl;
 

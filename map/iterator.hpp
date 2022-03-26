@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:25:18 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/18 15:21:47 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 11:32:56 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ namespace ft
 		typedef typename iterator_traits<T>::reference			reference;
 		typedef typename iterator_traits<T>::pointer			pointer;
 		typedef NodePtr											node_pointer;
-		// typedef Node<T>* 										node_pointer;
 	private:
 		node_pointer	_it;
 
