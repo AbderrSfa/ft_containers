@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/24 15:47:17 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 10:24:47 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <iostream>
 # include <cstdlib>
 # include <string>
-# include <iterator>
 # include "iterator.hpp"
 # include "utils.hpp"
 
@@ -44,7 +43,6 @@ namespace ft
 			size_type	_size;
 			size_type	_capacity;
 
-		protected:
 			void	_range_check(size_type n) const
 			{
 				if (n >= this->size())

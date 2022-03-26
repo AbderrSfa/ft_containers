@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 0 //MINE
-// #if 1 //ORIGINAL
+// #if 0 //MINE
+#if 1 //ORIGINAL
 #include <map>
 #include <stack>
 #include <vector>

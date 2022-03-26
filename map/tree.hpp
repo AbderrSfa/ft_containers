@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/24 17:35:42 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 10:27:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace ft
 		Node*	right;
 		int		height;
 
-		Node(T obj) : data(obj)/* , left(NULL), right(NULL), parent(NULL), height(1) */ {};
+		Node(T obj) : data(obj) {};
 	};
 
 	template <class T, class Compare, class Allocator>
@@ -83,22 +83,34 @@ namespace ft
 			this->_alloc.deallocate(this->_end, 1);
 		}
 
-		iterator		begin()							{ return iterator(this->_getMin(this->_root)); };
-		const_iterator	begin() const					{ return const_iterator(this->_getMin(this->_root)); };
-		iterator		end()							{ return iterator(this->_end); }
-		const_iterator	end() const						{ return const_iterator(this->_end); }
+		iterator				begin()					{ return iterator(this->_getMin(this->_root)); };
+		const_iterator			begin() const			{ return const_iterator(this->_getMin(this->_root)); };
+		iterator				end()					{ return iterator(this->_end); }
+		const_iterator			end() const				{ return const_iterator(this->_end); }
 
 		reverse_iterator		rbegin()				{ return reverse_iterator(this->_end); };
 		const_reverse_iterator	rbegin() const			{ return const_reverse_iterator(this->_end); };
 		reverse_iterator		rend()					{ return reverse_iterator(this->_getMin(this->_root)); };
 		const_reverse_iterator	rend() const			{ return const_reverse_iterator(this->_getMin(this->_root)); };
 
-		bool			empty() const					{ return (this->_size == 0); };
-		size_type		size() const					{ return this->_size; };
-		size_type		max_size() const				{ return this->_alloc.max_size(); };
+		bool					empty() const			{ return (this->_size == 0); };
+		size_type				size() const			{ return this->_size; };
+		size_type				max_size() const		{ return this->_alloc.max_size(); };
 		
-		node_allocator	get_allocator() const			{ return this->_alloc; };
+		node_allocator			get_allocator() const	{ return this->_alloc; };
 		
+		NodePtr	_initNode(value_type data) {
+			NodePtr	node = this->_alloc.allocate(1);
+			this->_alloc.construct(node, data);
+			node->parent = NULL;
+			node->left = NULL;
+			node->right = NULL;
+			node->height = 1;
+			return node;
+		};
+		NodePtr	getEnd() const {
+			return this->_end;
+		}
 		void			insert(value_type val) {
 			this->_root = _addNode(this->_root, this->_root, val, val.first);
 			this->_getMax(this->_root)->right = this->_end;
@@ -126,7 +138,6 @@ namespace ft
 			this->_root = this->_end;
 			this->_size = 0;
 		};
-		void			printTree()						{ _print2DUtil(this->_root, 0); };
 
 		NodePtr		lower_bound(key_type key) {
 			NodePtr	temp = this->_getMin(this->_root);
@@ -170,18 +181,6 @@ namespace ft
 			this->_end = temp_end;
 			this->_alloc = x._alloc;
 			this->_comp = x._comp;
-		}
-		NodePtr	_initNode(value_type data) {
-			NodePtr	node = this->_alloc.allocate(1);
-			this->_alloc.construct(node, data);
-			node->parent = NULL;
-			node->left = NULL;
-			node->right = NULL;
-			node->height = 1;
-			return node;
-		};
-		NodePtr	getEnd() const {
-			return this->_end;
 		}
 		
 	private:
@@ -407,25 +406,6 @@ namespace ft
 				return node;
 			node->height = 1 + std::max(_getHeight(node->left), _getHeight(node->right));
 			return _checkBalance(node, key);
-		};
-
-		void	_print2DUtil(NodePtr node, int space) const {
-			if (node == NULL || node == this->_end)
-				return;
-			space += 20;
-			_print2DUtil(node->right, space);
-			std::cout << std::endl;
-			for (int i = 10; i < space; i++)
-				std::cout << " ";
-			std::cout << "\033[32m";
-			if (node->parent != NULL && node->parent != this->_end)
-				std::cout << "(" << node->parent->data.first << ")<-";
-			std::cout << "\033[0m";
-			std::cout << "{" << node->data.first << " " << node->data.second << "} ";
-			std::cout << "\033[32m";
-			std::cout << node->height << "\n";
-			std::cout << "\033[0m";
-			_print2DUtil(node->left, space);
 		};
 	};
 
