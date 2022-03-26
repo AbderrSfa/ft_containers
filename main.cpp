@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:36:37 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/26 11:31:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 11:53:46 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,9 @@ int main()
 			vec.push_back(4);
 			vec.push_back(5);
 
-
 			std::vector<int>::iterator	it = vec.begin();
-			vec.insert(it + 2, 5);
+			std::cout << *it << std::endl;
+
 			
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
@@ -152,6 +152,7 @@ int main()
 
 
 			swap(vec, vec2);
+			std::cout << *it << std::endl;
 
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
@@ -183,8 +184,8 @@ int main()
 			vec.push_back(5);
 
 			ft::vector<int>::iterator	it = vec.begin();
-			vec.insert(it + 2, 5);
-
+			std::cout << *it << std::endl;
+			
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
 			std::cout << std::endl;
@@ -197,6 +198,8 @@ int main()
 			std::cout << "vec2: " << vec2.size() << " " << vec2.capacity() << std::endl;
 
 			swap(vec, vec2);
+
+			std::cout << *it << std::endl;
 
 			for (size_t i = 0; i < vec.size(); i++)
 				std::cout << vec.at(i) << ' ';
