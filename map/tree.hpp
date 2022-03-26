@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:41:28 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/26 10:27:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 10:33:40 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ namespace ft
 	public:
 		NodePtr			_end;
 		Tree(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-			: _comp(comp), _alloc(alloc), _size(0) {
+			: _size(0), _comp(comp), _alloc(alloc) {
 			this->_end = this->_alloc.allocate(1);
 			this->_end->left = NULL;
 			this->_end->right = NULL;
@@ -179,8 +179,8 @@ namespace ft
 			this->_size = temp_size;
 			this->_root = temp_root;
 			this->_end = temp_end;
-			this->_alloc = x._alloc;
-			this->_comp = x._comp;
+			this->_alloc = temp_alloc;
+			this->_comp = temp_comp;
 		}
 		
 	private:

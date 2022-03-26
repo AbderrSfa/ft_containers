@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 05:15:06 by asfaihi           #+#    #+#             */
-/*   Updated: 2022/03/26 10:24:47 by asfaihi          ###   ########.fr       */
+/*   Updated: 2022/03/26 10:43:12 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ namespace ft
 			typedef vectorRevIt<const_iterator>					const_reverse_iterator;
 
 		private:
-			value_type*	_m_data;
-			size_type	_size;
-			size_type	_capacity;
+			allocator_type	_alloc;
+			value_type*		_m_data;
+			size_type		_size;
+			size_type		_capacity;
 
 			void	_range_check(size_type n) const
 			{
@@ -57,57 +58,57 @@ namespace ft
 			};
 			value_type*	_reallocate(size_type n)
 			{
-				value_type *tmp = allocator_type().allocate(n);
+				value_type *tmp = this->_alloc.allocate(n);
 				for (size_t i = 0; i < this->size(); i++)
-					allocator_type().construct(tmp + i, this->_m_data[i]);
+					this->_alloc.construct(tmp + i, this->_m_data[i]);
 				for (size_t i = 0; i < this->size(); i++)
-					allocator_type().destroy(this->_m_data + i);
+					this->_alloc.destroy(this->_m_data + i);
 				if (this->_m_data)
-					allocator_type().deallocate(this->_m_data, this->capacity());
+					this->_alloc.deallocate(this->_m_data, this->capacity());
 				return tmp;
 			};
 			void	_erase_end_elements(size_type n)
 			{
 				for (size_t i = n; i < this->size(); i++)
-					allocator_type().destroy(this->_m_data + i);
+					this->_alloc.destroy(this->_m_data + i);
 			};
 			void	_append_elements(size_type n, value_type val)
 			{
 				for (size_t i = this->size(); i < n; i++)
-					allocator_type().construct(this->_m_data + i, val);
+					this->_alloc.construct(this->_m_data + i, val);
 			};
 			void	_fill_vector_elements(size_type n, value_type val)
 			{
 				for (size_t i = 0; i < n; i++)
-					allocator_type().construct(this->_m_data + i, val);
+					this->_alloc.construct(this->_m_data + i, val);
 			};
 			template <class InputIterator>
 			void	_fill_vector_elements(InputIterator first, InputIterator last)
 			{
 				int i = 0;
 				for (InputIterator it = first; it != last; it++)
-					allocator_type().construct(this->_m_data + i++, *it);
+					this->_alloc.construct(this->_m_data + i++, *it);
 			};
 
 		public:
 			/* Constructors - Destructor - Assignment operator */
-			explicit vector(const allocator_type& alloc = allocator_type()) : _m_data(), _size(0), _capacity(0) {};
-			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _m_data(), _size(n), _capacity(n)
+			explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _m_data(), _size(0), _capacity(0) {};
+			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _m_data(), _size(n), _capacity(n)
 			{
 				if (n > this->max_size())
 					throw std::length_error("cannot create ft::vector larger than max_size()");
 				if (n)
 				{
-					this->_m_data = allocator_type().allocate(n);
+					this->_m_data = this->_alloc.allocate(n);
 					_fill_vector_elements(n, val);
 				}
 			};
 			template <class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
-				: _m_data(), _size(0), _capacity(0)
+				: _alloc(alloc), _m_data(), _size(0), _capacity(0)
 			{
 				int n = std::distance(first, last);
-				this->_m_data = allocator_type().allocate(n);
+				this->_m_data = this->_alloc.allocate(n);
 				_fill_vector_elements(first, last);
 				this->_size = n;
 				this->_capacity = n;
@@ -117,9 +118,9 @@ namespace ft
 			~vector()
 			{
 				for (size_t i = 0; i < this->size(); i++)
-					allocator_type().destroy(this->_m_data + i);
+					this->_alloc.destroy(this->_m_data + i);
 				if (this->capacity())
-					allocator_type().deallocate(this->_m_data, this->capacity());
+					this->_alloc.deallocate(this->_m_data, this->capacity());
 			};
 
 			vector& operator=(const vector& x)
@@ -129,9 +130,8 @@ namespace ft
 				this->clear();
 				if (x.size() > this->capacity())
 					this->reserve(x.size());
-				int i = 0;
 				for (size_t i = 0; i < x.size(); i++)
-					allocator_type().construct(this->_m_data + i, x[i]);
+					this->_alloc.construct(this->_m_data + i, x[i]);
 				this->_size = x.size();
 				return (*this);
 			};
@@ -148,7 +148,7 @@ namespace ft
 
 			/* Capacity */
 			size_type	size() const		{ return this->_size; };
-			size_type	max_size() const	{ return allocator_type().max_size(); };
+			size_type	max_size() const	{ return this->_alloc.max_size(); };
 			void		resize (size_type n, value_type val = value_type())
 			{
 				if (n < this->size())
@@ -193,7 +193,7 @@ namespace ft
 			template <class InputIterator>
 			void		assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = true)
 			{
-				int n = std::distance(first, last);
+				size_type n = std::distance(first, last);
 				this->clear();
 				if (n > this->capacity())
 					this->reserve(n);
@@ -212,12 +212,12 @@ namespace ft
 			{
 				if ((this->size() + 1) > this->capacity())
 					(this->capacity() > 0) ? this->reserve(this->capacity() * 2) : this->reserve(1);
-				allocator_type().construct(this->_m_data + this->size(), val);
+				this->_alloc.construct(this->_m_data + this->size(), val);
 				this->_size++;
 			};
 			void		pop_back()
 			{
-				allocator_type().destroy(this->_m_data + (this->size() - 1));
+				this->_alloc.destroy(this->_m_data + (this->size() - 1));
 				this->_size--;
 			};
 			iterator	insert(iterator position, const value_type &val)
@@ -279,7 +279,7 @@ namespace ft
 					diff--;
 				}
 				it++;
-				for (size_t i = 0; i < n; i++)
+				for (difference_type i = 0; i < n; i++)
 				{
 					*it = *(first + i);
 					it++;
@@ -289,7 +289,7 @@ namespace ft
 			iterator	erase(iterator position)
 			{
 				difference_type index = position - this->begin();
-				allocator_type().destroy(this->_m_data + index);
+				this->_alloc.destroy(this->_m_data + index);
 				for (size_t i = index; i < (this->size() - 1); i++)
 					this->_m_data[i] = this->_m_data[i + 1];
 				this->_size--;
@@ -299,9 +299,9 @@ namespace ft
 			{
 				difference_type index = first - this->begin();
 				difference_type n = last - first;
-				for (size_t i = 0; i < n; i++)
+				for (difference_type i = 0; i < n; i++)
 				{
-					allocator_type().destroy(this->_m_data + index);
+					this->_alloc.destroy(this->_m_data + index);
 					index++;
 				}
 				for (size_t i = index; i < this->size(); i++)
@@ -320,7 +320,7 @@ namespace ft
 			void		clear()
 			{
 				for (size_t i = 0; i < this->size(); i++)
-					allocator_type().destroy(this->_m_data + i);
+					this->_alloc.destroy(this->_m_data + i);
 				this->_size = 0;
 			};
 
