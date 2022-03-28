@@ -6,7 +6,7 @@
 #    By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/13 11:24:13 by asfaihi           #+#    #+#              #
-#    Updated: 2022/03/23 11:36:44 by asfaihi          ###   ########.fr        #
+#    Updated: 2022/03/28 13:39:10 by asfaihi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME): $(OBJECT)
 	clang++ $(OBJECT) -o $(NAME)
 
 %.o:%.cpp $(VEC_HEADERS) $(STACK_HEADERS) $(MAP_HEADERS)
-	clang++ $(CPP_STANDARD) -c $<
+	clang++ $(FLAGS) $(CPP_STANDARD) -c $<
 
 clean:
 	/bin/rm -f $(OBJECT)
